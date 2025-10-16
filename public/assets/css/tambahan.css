@@ -1,0 +1,74 @@
+/* Custom styling for Sidebar Brand Text */
+.sidebar-brand-text {
+    font-size: 18px;
+    line-height: 1.3;
+    font-weight: 600;
+    margin: 5px 0;
+    font-family: 'VAG Rounded BT', sans-serif; /* Menetapkan font utama */
+    color: #CDDC29; /* Warna teks */
+}
+
+/* Custom styling for Index Menu */
+.index-menu .menu-link {
+    font-size: 16px;
+    color: #ffffff; /* Warna teks menu */
+    text-decoration: none;
+    padding: 8px 0;
+    font-family: 'Segoe UI', sans-serif; /* Menetapkan font sekunder */
+}
+
+.index-menu .menu-link:hover {
+    text-decoration: underline;
+    color: #CDDC29; /* Warna saat hover */
+}
+
+/* Custom background for sidebar */
+.bg-gradient-primary {
+    background-color: #00B9AD !important; /* Warna latar belakang utama */
+    /* backgroundWarna hitam */
+    background-image: none !important; /* Hapus gradasi */
+}
+
+/* Custom styling for sidebar brand heading */
+.sidebar-brand-heading {
+    background-color: #000000; /* Warna latar belakang untuk heading */
+    padding: 10px; /* Padding untuk heading */
+}
+
+/* Additional styling for sidebar items */
+.sidebar .menu-link.active {
+    background-color: #60C0D0; /* Warna latar belakang saat aktif */
+    color: #000000; /* Warna teks saat aktif */
+    font-weight: bold; /* Menebalkan teks saat aktif */
+}
+
+/* Custom styling for table borders */
+table {
+    border-collapse: collapse; /* Menggabungkan border tabel */
+    width: 100%; /* Lebar tabel */
+}
+
+table, th, td {
+    border: 1px solid #686969; /* Warna border */
+}
+
+th {
+    background-color: #00B9AD; /* Warna latar belakang header tabel */
+    color: #ffffff; /* Warna teks header tabel */
+}
+
+/* Custom styling for radio buttons */
+input[type="radio"] {
+    accent-color: #CDDC29; /* Warna untuk radio button */
+}
+
+/* Additional styling for watermarks */
+.watermark {
+    position: absolute; /* Mengatur posisi watermark */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.1; /* Transparansi watermark */
+    z-index: -1; /* Menempatkan watermark di belakang elemen lain */
+}

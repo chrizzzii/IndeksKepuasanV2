@@ -1,0 +1,285 @@
+body {
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: 'VAG Rounded BT', 'Segoe UI', sans-serif; /* Consistent font */
+}
+
+/* Background for the page */
+body::before {
+    content: "";
+    background-image: url('assets/img/bglogin.png'); /* Set your background image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.05; /* Light opacity for subtle watermark effect */
+    z-index: -1;
+}
+.container {
+    max-width: 1200px; /* Maksimal lebar kontainer */
+    margin: 0 auto; /* Untuk memusatkan kontainer */
+    padding: 20px; /* Padding di dalam kontainer */
+}
+/* Kontainer Utama */
+.container-fluid {
+    max-width: 1200px; /* Lebar maksimal kontainer */
+    margin: 0 auto; /* Posisikan di tengah */
+    padding: 20px; /* Jarak di dalam kontainer */
+}
+/* Header H1 Styling */
+h1.h3.mb-4.text-gray-800, h1 {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 50px;
+    font-weight: 800;
+    color: #00B9AD;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-bottom: 2px solid #00B9AD;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.h4 {
+    font-size: 35px; /* Increase size for data display */
+    font-family: 'VAG Rounded BT', sans-serif; /* Primary font */
+    line-height: 1.2; /* Reduce line spacing */
+}
+
+.h5 {
+    font-size: 50px; /* Increase size for data display */
+    font-family: 'VAG Rounded BT', sans-serif; /* Primary font */
+    color: #60C0D0; /* Use soft contrast color */
+    line-height: 1.2; /* Reduce line spacing */
+}
+/* Total Alumni Data Section Styling, tulisan indeks data keseluruhan*/
+.text-xs {
+    font-size: 25px; /* Larger size for improved visibility */
+    font-family: 'Segoe UI', sans-serif; /* Use secondary font */
+}
+
+.font-weight-bold {
+    font-weight: 700; /* Enhanced boldness */
+}
+
+.text-primary {
+    color: #CDDC29; /* Use secondary color for contrast */
+}
+
+
+/* Card Styling */
+.card {
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    background-color: #ffffff;
+    border: 2px solid #00B9AD;
+    margin: 15px 0; /* Margin vertikal untuk card */
+    transition: transform 0.3s, box-shadow 0.3s; /* Animasi saat hover */
+
+
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.card-header {
+    background-color: #00B9AD;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Styling untuk Judul Card */
+.card-title {
+    font-size: 40px; /* Mengikuti gaya h4 dari referensi */
+    font-family: 'Segoe UI'; /* Font utama sesuai referensi */
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+}
+
+/* Teks dalam Card */
+.card-text {
+    font-size: 40px; /* Ukuran font mengikuti h5 dari referensi */
+    font-family: 'VAG Rounded BT', sans-serif;
+    font-weight: bold;
+    color: #60C0D0; /* Warna sesuai referensi */
+}
+.card-body {
+    color: #000;
+}
+#myBarChart {
+    display: block; /* Membuat canvas sebagai blok untuk rata tengah */
+    margin:  auto; /* Jarak atas dan bawah, rata tengah */
+    border-radius: 10px; /* Sudut melengkung */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Bayangan kotak */
+    background-color: white; /* Latar belakang putih untuk canvas */
+    padding: 20px; /* Jarak dalam */
+    /* width: 90%; Card akan mengambil 90% dari lebar layar  || Labels kurang terlihat */
+    width: 100%;
+    min-width: 300px; /* Lebar minimal card pada layar kecil */
+
+}
+
+.chart-pie {
+    position: relative;
+    width: 100%; /* Lebar grafik 100% dari parent */
+    height: 0; /* Tinggi awal 0 untuk kontrol responsif */
+    padding-bottom: 100%; /* Mengatur rasio aspek 1:1 untuk lingkaran */
+}
+
+.chart-pie canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Lebar 100% untuk canvas */
+    height: 100%; /* Tinggi 100% untuk canvas */
+}
+
+
+.text-gray-800 {
+    color: #686969; /* Stronger gray for clarity */
+}
+
+.mb-1 {
+    margin-bottom: 10px; /* Tighter spacing */
+}
+
+/* Table styling */
+table {
+    table-layout: auto;
+    border-collapse: collapse;
+    width: 80%;
+    margin-top: 20px;
+    margin-right:  auto;
+    margin-left:  auto;
+    font-size: 30px;
+    text-indent: 0px;
+    text-spacing-trim: 0;
+    background-color: #fff; /* Latar belakang putih */
+    border: 2px solid #00B9AD; /* Border dengan warna primer */
+}
+
+.table th {
+    word-wrap: break-all; /* Membuat teks otomatis membungkus jika terlalu panjang */
+    white-space: normal; /* Memastikan teks tidak berada dalam satu baris */
+    border: 3px solid #686969;
+    padding: 8px;
+    background-color: #60C0D0;
+    color: white;
+     text-align: center;
+     font-family: 'VAG Rounded BT', sans-serif; /* Font isi tabel sesuai permintaan */
+    font-size: 20px; /* Ukuran font yang cukup besar agar mudah dibaca */
+    vertical-align: middle; /* Konten di tengah secara vertikal */
+}
+/*bagian isi teks*/
+.table td
+ {
+    word-wrap: break-all; /* Membuat teks otomatis membungkus jika terlalu panjang */
+    white-space: normal; /* Memastikan teks tidak berada dalam satu baris */
+    border: 3px solid #686969;
+    color: #000000;
+    padding: 8px;
+    text-align: left;
+}
+.table th {
+    table-layout: auto;
+    word-wrap: break-all; /* Membuat teks otomatis membungkus jika terlalu panjang */
+    white-space: normal;
+    background-color: #60C0D0;
+    color: white;
+    font-weight: 700; /* Teks tebal untuk header */
+    letter-spacing: 1px; /* Spasi huruf header */
+    text-transform: uppercase; /* Huruf besar untuk header */
+}
+
+
+th:nth-child(1), td:nth-child(1) {
+    width: 32%; /* Kolom No, lebih kecil */
+}
+
+th:nth-child(2), td:nth-child(2) {
+    width: 53%; /* Kolom Uraian, lebih besar */
+}
+
+th:nth-child(3), td:nth-child(3) {
+    width: 15%; /* Kolom Tingkat Kepuasan */
+}
+
+
+/* Header Text */
+.h3.mb-4.text-gray-800 {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    color: #00B9AD;
+}
+
+/* Footer Styling */
+footer.bg-white {
+    background-color: #CDDC29;
+    color: white;
+    text-align: center;
+    font-size: 12px;
+}
+
+/*Nilai mutu layanan*/
+/* Row Styling */
+.row.text-center {
+    margin: 20px 0;
+}
+
+
+/* Responsiveness */
+@media (max-width: 768px) {
+        .col-md-4 {
+            flex: 0 0 100%; /* Mengubah kolom menjadi 100% lebar di layar kecil */
+            max-width: 100%;
+        }
+    .container {
+        flex-direction: column;
+        gap: 15px;
+        height: auto;
+    }
+    .row.no-gutters {
+        margin-right: 0;
+        margin-left: 0;
+    }
+    .card {
+        width: 100%; /* Card mengambil lebar penuh di layar kecil */
+        margin-bottom: 15px; /* Jarak antara kartu pada layar kecil */
+    }
+
+    table {
+        display: block;
+        overflow-x: auto; /* Mengizinkan pengguliran pada sumbu horizontal */
+        white-space: nowrap; /* Menghindari teks pecah baris di dalam tabel */
+    }
+
+    #myBarChart {
+        width: 95%; /* Lebar 95% untuk layar kecil */
+    }
+
+    input[type="text"],
+    select,
+    textarea,
+    button {
+        width: 100%; /* Pastikan form dan tombol mengambil lebar penuh */
+        font-size: 14px; /* Mengurangi ukuran font agar lebih rapi */
+    }
+
+    /* Tambahkan responsivitas untuk heading dan label */
+    h1 {
+        font-size: 20px; /* Menyesuaikan ukuran font untuk layar kecil */
+    }
+}

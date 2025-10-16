@@ -1,0 +1,221 @@
+/* Global settings */
+body {
+
+    background-image: url('assets/img/Logokemenkes.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: 'VAG Rounded BT', 'Segoe UI', sans-serif; /* Consistent font */
+    color: #686969; /* Default text color */
+}
+
+body::before {
+    content: url('assets/img/poltekkes.jpg');
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.1; /* Adjust transparency */
+    pointer-events: none;
+}
+
+/* Container styling */
+.container {
+    background-image: url('assets/img/Logokemenkes.png');
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Watermark styling */
+.watermark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2; /* Control the transparency of the watermark */
+    z-index: -1; /* Send the watermark to the background */
+    background-image: url('assets/img/Logokemenkes.png');
+    background-size: cover; /* Adjust the watermark to cover the entire container */
+  }
+
+/* Heading styling */
+h1 {
+    text-align: center;
+    font-weight: bold;
+    color: #00B9AD;
+    font-size: 24px;
+}
+
+/* Label styling */
+label {
+    font-weight: bold;
+    color: #686969;
+    margin-top: 10px;
+}
+
+/* Input and Select styling */
+input[type="text"],
+select,
+textarea {
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 2px solid #60C0D0;
+    padding: 10px;
+    width: 100%;
+    font-size: 16px;
+}
+
+input[type="text"]:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #00B9AD;
+    box-shadow: 0 0 5px rgba(0, 185, 173, 0.5);
+}
+
+/* Button styling */
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #CDDC29;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #00B9AD;
+    box-shadow: 0 5px 15px rgba(0, 185, 173, 0.3);
+}
+
+/* Table styling */
+table {
+    table-layout: auto;
+    border-collapse: collapse;
+    margin-top: 10px;
+    margin-right:  auto;
+    margin-left:  auto;
+    font-size: 25px;
+    text-indent: 0px;
+    text-spacing-trim: 0;
+}
+th {
+    word-wrap: break-all; /* Membuat teks otomatis membungkus jika terlalu panjang */
+    white-space: normal; /* Memastikan teks tidak berada dalam satu baris */
+    border: 3px solid #686969;
+    padding: 8px;
+    background-color: #60C0D0;
+    color: white;
+     text-align: center;
+
+}
+td
+ {
+    word-wrap: break-all; /* Membuat teks otomatis membungkus jika terlalu panjang */
+    white-space: normal; /* Memastikan teks tidak berada dalam satu baris */
+    border: 3px solid #686969;
+    color: #000000;
+    padding: 8px;
+    text-align: left;
+}
+
+th:nth-child(1), td:nth-child(1) {
+    width: 5%; /* Kolom No, lebih kecil */
+}
+
+th:nth-child(2), td:nth-child(2) {
+    width: 70%; /* Kolom Uraian, lebih besar */
+}
+
+th:nth-child(3), td:nth-child(3) {
+    width: 25%; /* Kolom Tingkat Kepuasan */
+}
+
+/* Custom radio button styling */
+input[type="radio"] {
+    accent-color: #00B9AD;
+}
+
+/* Custom checkboxes */
+input[type="checkbox"] {
+    accent-color: #60C0D0;
+}
+
+/* Styling for select elements */
+.form-control-user {
+    border-color: #00B9AD;
+    box-shadow: 0 0 5px rgba(0, 185, 173, 0.5);
+    border-radius: 5px;
+}
+
+.form-control-user:focus {
+    border-color: #00B9AD;
+    box-shadow: 0 0 5px rgba(0, 185, 173, 0.5);
+}
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        gap: 15px;
+        height: auto;
+    }
+
+    .card {
+        width: 100%; /* Card mengambil lebar penuh di layar kecil */
+    }
+
+    table {
+        display: block;
+        overflow-x: auto; /* Mengizinkan pengguliran pada sumbu horizontal */
+        white-space: nowrap; /* Menghindari teks pecah baris di dalam tabel */
+    }
+    input[type="text"],
+    select,
+    textarea,
+    button {
+        width: 100%; /* Pastikan form dan tombol mengambil lebar penuh */
+        font-size: 14px; /* Mengurangi ukuran font agar lebih rapi */
+    }
+
+    /* Tambahkan responsivitas untuk heading dan label */
+    h1 {
+        font-size: 20px; /* Menyesuaikan ukuran font untuk layar kecil */
+    }
+}
+
+/* Container untuk tabel yang memungkinkan scrolling horizontal */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Memperbaiki pengguliran di perangkat mobile */
+}
+
+/* Penyesuaian untuk tabel di layar kecil */
+@media (max-width: 768px) {
+    .table-responsive table {
+        white-space: nowrap; /* Menghindari teks terpotong di layar kecil */
+    }
+
+    th, td {
+        font-size: 14px; /* Sesuaikan ukuran font untuk layar kecil */
+        padding: 6px; /* Kurangi padding untuk layar kecil */
+    }
+}
+
+/* Penyesuaian pada tabel di layar lebih besar */
+@media (min-width: 768px) {
+    th, td {
+        font-size: 25px; /* Ukuran font lebih besar di layar besar */
+    }
+}
+
+
