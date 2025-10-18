@@ -14,6 +14,7 @@ use App\Exports\DosenExport;
 use App\Exports\MahasiswaExport;
 use App\Exports\MasyarakatExport;
 use App\Exports\TendikExport;
+use App\Exports\OrangtuaExport;
 use App\Exports\PenggunalulusanExport;
 
 
@@ -55,6 +56,8 @@ Route::group(['prefix' => 'register'], function () {
     Route::post('masyarakat', [\App\Http\Controllers\Register\MasyarakatController::class, 'store'])->name('register.store.masyarakat');
     Route::get('mitra', [\App\Http\Controllers\Register\MitraController::class, 'registerForm'])->name('register.mitra');
     Route::post('mitra', [\App\Http\Controllers\Register\MitraController::class, 'store'])->name('register.store.mitra');
+    Route::get('orangtua', [\App\Http\Controllers\Register\OrangtuaController::class, 'registerForm'])->name('register.orangtua');
+    Route::post('orangtua', [\App\Http\Controllers\Register\OrangtuaController::class, 'store'])->name('register.store.orangtua');
 });
 
 
@@ -66,6 +69,7 @@ Route::get('indexmitra', [\App\Http\Controllers\Admin\IndexMitraController::clas
 Route::get('indextendik', [\App\Http\Controllers\Admin\IndexTendikController::class, 'indextendik']);
 Route::get('indexmasyarakat', [\App\Http\Controllers\Admin\IndexMasyarakatController::class, 'indexmasyarakat']);
 Route::get('indexpengguna', [\App\Http\Controllers\Admin\IndexPenggunaController::class, 'indexpengguna']);
+Route::get('indexorangtua', [\App\Http\Controllers\Admin\IndexOrangtuaController::class, 'indexorangtua']);
 
 
 Route::get('dataalumni', [\App\Http\Controllers\Admin\DataAlumniController::class, 'dataalumni']);
@@ -75,7 +79,7 @@ Route::get('datamitra', [\App\Http\Controllers\Admin\DataMitraController::class,
 Route::get('datatendik', [\App\Http\Controllers\Admin\DataTendikController::class, 'datatendik']);
 Route::get('datamasyarakat', [\App\Http\Controllers\Admin\DataMasyarakatController::class, 'datamasyarakat']);
 Route::get('datapengguna', [\App\Http\Controllers\Admin\DataPenggunaController::class, 'datapengguna']);
-
+Route::get('dataorangtua', [\App\Http\Controllers\Admin\DataOrangtuaController::class, 'dataorangtua']);
 
 
 Route::get('formalumni', [\App\Http\Controllers\Admin\FormAlumniController::class, 'formalumni']);
@@ -99,6 +103,9 @@ Route::post('/submit-formmasyarakat', [\App\Http\Controllers\Admin\FormMasyaraka
 
 Route::get('formpenggunalulusan', [\App\Http\Controllers\Admin\FormPenggunalulusanController::class, 'formpenggunalulusan']);
 Route::post('/submit-formpenggunalulusan', [\App\Http\Controllers\Admin\FormPenggunalulusanController::class, 'store'])->name('form.storepenggunalulusan');
+
+Route::get('formorangtua', [\App\Http\Controllers\Admin\FormOrangtuaController::class, 'formorangtua']);
+Route::post('/submit-formorangtua', [\App\Http\Controllers\Admin\FormOrangtuaController::class, 'store'])->name('form.storeorangtua');
 
 //Forgot Password
 Route::get('forgot-password', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
@@ -139,6 +146,11 @@ Route::get('/export-penggunalulusan', function () {
     $export = new PenggunalulusanExport();
     return $export->export();
 })->name('export.penggunalulusan');
+
+Route::get('/export-orangtua', function () {
+    $export = new OrangtuaExport();
+    return $export->export();
+})->name('export.orangtua');
 
 Route::get('/export-dosen', function () {
     $export = new DosenExport();

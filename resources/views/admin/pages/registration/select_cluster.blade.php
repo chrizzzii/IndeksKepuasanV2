@@ -55,6 +55,7 @@
                                                 <option value="dosen">Dosen</option>
                                                 <!-- <option value="masyarakat">Masyarakat</option> -->
                                                 <option value="mitra">Mitra</option>
+                                                <option value="orangtua">Orang Tua</option>
                                             </select>
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block" style=" margin-bottom: 10px;">Pilih</button>
