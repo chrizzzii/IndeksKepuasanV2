@@ -9,7 +9,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ asset('assets/css/from.css') }}" rel="stylesheet">
-
+    <script src="{{ asset('js/validasi/validasi-mitra.js') }}"></script>
+    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+    <script src="{{ asset('assets/js/sb-admin-2.min.js') }}"></script>
 </head>
 
 <body>
@@ -17,46 +20,51 @@
     <div class="row">
         <div class="container">
             <div class="container-fluid">
-                <!-- Page Heading -->
                 <h1 class="h3 mb-4 text-gray-800">Form Mitra</h1>
                 @yield('content')
             </div>
 
-
             <form method="POST" action="{{ route('form.storemitra') }}">
                 @csrf
-                <label for="nama">Nama / Name <span class="text-danger">*</span></label>
+                <label for="nama">Nama / Name <span class="text-danger">*</span> <span><small id="nama-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <input type="text" class="form-control form-control-user" id="nama" name="nama"
                     placeholder="Nama"
                     required>
 
-                <label for="nama">Jabatan / Position <span class="text-danger">*</span></label>
+                <label for="jabatan">Jabatan / Position <span class="text-danger">*</span> <span><small id="jabatan-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <input type="text" class="form-control form-control-user" id="jabatan" name="jabatan"
                     placeholder="Jabatan / Bagian (Position)"
                     required>
 
-                <label for="nama">Nama Instansi / Agency Name <span class="text-danger">*</span></label>
+                <label for="nama_instansi">Nama Instansi / Agency Name <span class="text-danger">*</span> <span><small id="nama_instansi-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <input type="text" class="form-control form-control-user" id="nama_instansi" name="nama_instansi"
                     placeholder="Nama Instansi / Institusi (Name of Institution/Company)"
                     required>
 
-                <label for="nama">Alamat / Address <span class="text-danger">*</span></label>
+                <label for="alamat">Alamat / Address <span class="text-danger">*</span> <span><small id="alamat-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <input type="text" class="form-control form-control-user" id="alamat" name="alamat"
                     placeholder="Alamat (Address)"
                     required>
 
-                <label for="nama">Email <span class="text-danger">*</span></label>
+                <label for="email">Email <span class="text-danger">*</span> <span><small id="email-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <input type="text" class="form-control form-control-user" id="email" name="email"
                     placeholder="Email"
                     required>
 
-                <label for="nama">Nomor Telepon / Phone Number <span class="text-danger">*</span></label>
+                <label for="nomor_telepon">Nomor Telepon / Phone Number <span class="text-danger">*</span> <span><small id="nomor_telepon-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <input type="text" class="form-control form-control-user" id="nomor_telepon" name="nomor_telepon"
                     placeholder="Nomor Telepon"
                     required>
 
-                <label for="nama">Bidang Kerjasama / Field of Cooperation <span
-                        class="text-danger">*</span></label>
+                <label for="bidang_kerjasama">Bidang Kerjasama / Field of Cooperation <span
+                        class="text-danger">*</span> <span><small id="bidang_kerjasama-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <select class="form-control form-control-user" id="bidang_kerjasama" name="bidang_kerjasama"
                     onchange="checkBidangKerjasama(this)" required>
                     <option value="" disabled selected>Bidang Kerjasama (Field of Cooperation)</option>
@@ -124,13 +132,15 @@
                     };
                 </script>
 
-                <label for="nama">Kota / City <span class="text-danger">*</span></label>
+                <label for="kota">Kota / City <span class="text-danger">*</span> <span><small id="kota-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <input type="text" class="form-control form-control-user" id="kota" name="kota"
                     placeholder="Kota"
                     required>
 
                 <label for="tanggal">Tanggal/Bulan/Tahun (Date/Month/Year) <span
-                        class="text-danger">*</span></label>
+                        class="text-danger">*</span> <span><small id="tanggal-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <input type="date" class="form-control form-control-user" id="tanggal" name="tanggal"
                     placeholder="Tanggal"
                     required>
@@ -208,8 +218,9 @@
 
                 <hr>
 
-                <label for="nama">Rencana Tindak Lanjut/Rekomendasi (Follow-up Plan/Recommendations) <span
-                        class="text-danger">*</span></label>
+                <label for="rencana">Rencana Tindak Lanjut/Rekomendasi (Follow-up Plan/Recommendations) <span
+                        class="text-danger">*</span> <span><small id="rencana-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <select class="form-control form-control-user" id="rencana" name="rencana" required>
                     <option value="" disabled selected>Rencana Tindak Lanjut/Rekomendasi (Continuation
                         Plan/Recommendation) </option>
@@ -222,7 +233,8 @@
                         Perjanjian Kerjasama perlu dibuat adendum (The Cooperation Agreement needs to be added)</option>
                 </select>
 
-                <label for="saranmasukkan">Saran dan Masukan</label>
+                <label for="saranmasukkan">Saran dan Masukan</label> <span><small id="saranmasukkan-count" class="text-muted">0 / 255 karakter</small></span> <span><small id="saranmasukkan-error" class="invalid-feedback" style="display:none;"></small>
+                </span>
                 <textarea class="form-control form-control-user" id="saranmasukkan" name="saranmasukkan"
                     placeholder="Saran dan Masukan"></textarea>
 
@@ -234,12 +246,6 @@
     </div>
     </div>
 </body>
-
-</script>
-<script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
-<script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-<script src="{{ asset('assets/js/sb-admin-2.min.js') }}"></script>
 
 @include('admin.layouts.footer')
 @endsection

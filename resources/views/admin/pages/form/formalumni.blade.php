@@ -9,8 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ asset('assets/css/from.css') }}" rel="stylesheet">
-
-    <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/validasi/validasi-alumni.js') }}"></script>
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('assets/js/sb-admin-2.min.js') }}"></script>
@@ -28,20 +27,23 @@
                 <h1 class="h3 mb-4 text-gray-800">Form Survei Alumni</h1>
                 @yield('content')
             </div>
-            <form method="POST" action="{{ route('form.storealumni') }}">
+            <form method="POST" action="{{ route('form.storealumni') }}" novalidate>
                 @csrf
                 <input type="hidden" name="alumni_id" value="{{ session('user_id') }}">
 
-                <label for="nama">Nama <span class="text-danger">*</span></label>
+                <label for="nama">Nama <span class="text-danger">*</span> <span><small id="nama-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <input type="text" class="form-control form-control-user" id="nama" name="nama"
                     placeholder="Nama" required>
 
-                <label for="usia">Usia <span class="text-danger">*</span></label>
-                <input type="text" class="form-control form-control-user" id="usia" name="usia"
-                    placeholder="Usia" required>
+                <label for="usia">Usia <span class="text-danger">*</span> <span><small id="usia-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
+                <input type="number" class="form-control form-control-user" id="usia" name="usia"
+                    placeholder="Usia" required min="16" max="100">
 
 
-                <label for="jeniskelamin">Jenis Kelamin <span class="text-danger">*</span></label>
+                <label for="jeniskelamin">Jenis Kelamin <span class="text-danger">*</span> <span><small id="jeniskelamin-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <select class="form-control form-control-user" id="jeniskelamin" name="jeniskelamin" required>
                     <option value="" disabled selected>Pilih Jenis Kelamin</option>
                     <option value="Laki-laki">
@@ -50,20 +52,24 @@
                         Perempuan</option>
                 </select>
 
-                <label for="alamat">Alamat <span class="text-danger">*</span></label>
+                <label for="alamat">Alamat <span class="text-danger">*</span> <span><small id="alamat-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <input type="text" class="form-control form-control-user" id="alamat" name="alamat"
                     placeholder="Alamat" required>
 
-                <label for="nomor_telepon">Nomor Telepon <span class="text-danger">*</span></label>
+                <label for="nomor_telepon">Nomor Telepon <span class="text-danger">*</span> <span><small id="nomor_telepon-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <input type="text" class="form-control form-control-user" id="nomor_telepon" name="nomor_telepon"
                     placeholder="Nomor Telepon" required>
 
-                <label for="saranmasukkan">Saran dan Masukan</label>
+                <label for="saranmasukkan">Saran dan Masukan</label> <span><small id="saranmasukkan-count" class="text-muted">0 / 255 karakter</small></span> <span><small id="saranmasukkan-error" class="invalid-feedback" style="display:none;"></small>
+                </span>
                 <textarea class="form-control form-control-user" id="saranmasukkan" name="saranmasukkan"
                     placeholder="Saran dan Masukan"></textarea>
 
 
-                <label for="nama">Program Studi <span class="text-danger">*</span></label>
+                <label for="prodi">Program Studi <span class="text-danger">*</span> <span><small id="prodi-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <select class="form-control form-control-user" id="prodi" name="prodi" required>
                     <option value="" disabled selected>Pilih Program Studi
                     </option>
@@ -79,11 +85,13 @@
                 </select>
 
 
-                <label for="nama">Tahun Lulus <span class="text-danger">*</span></label>
+                <label for="tahun_lulus">Tahun Lulus <span class="text-danger">*</span> <span><small id="tahun_lulus-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <input type="text" class="form-control form-control-user" id="tahun_lulus" name="tahun_lulus"
                     placeholder="Tahun Lulus" required>
 
-                <label for="nama">Status Pekerjaan <span class="text-danger">*</span></label>
+                <label for="pekerjaan">Status Pekerjaan <span class="text-danger">*</span> <span><small id="pekerjaan-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <select class="form-control form-control-user" id="pekerjaan" name="pekerjaan" required>
                     <option value="" disabled selected>Pilih status pekerjaan</option>
                     <option value="Bekerja">Bekerja
@@ -94,14 +102,16 @@
                         Belum Bekerja</option>
                 </select>
 
-                <label for="nama">Kesesuaian Pekerjaan dengan Prodi <span class="text-danger">*</span></label>
+                <label for="kesesuaian">Kesesuaian Pekerjaan dengan Prodi <span class="text-danger">*</span> <span><small id="kesesuaian-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <select class="form-control form-control-user" id="kesesuaian" name="kesesuaian" required>
                     <option value="" disabled selected>Kesesuaian pekerjaan dengan Prodi</option>
                     <option value="Sesuai">Sesuai</option>
                     <option value="Tidak Sesuai">Tidak Sesuai</option>
                 </select>
 
-                <label for="nama">Waktu Memperoleh Pekerjaan Pertama <span class="text-danger">*</span></label>
+                <label for="waktu">Waktu Memperoleh Pekerjaan Pertama <span class="text-danger">*</span> <span><small id="waktu-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <select class="form-control form-control-user" id="waktu" name="waktu" required>
                     <option value="" disabled selected>Waktu memperoleh pekerjaan pertama</option>
                     <option value="Sebelum lulus">
@@ -118,7 +128,8 @@
                     </option>
                 </select>
 
-                <label for="nama">Instansi Tempat Bekerja <span class="text-danger">*</span></label>
+                <label for="instansi">Instansi Tempat Bekerja <span class="text-danger">*</span> <span><small id="instansi-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <select class="form-control form-control-user" id="instansi" name="instansi" required>
                     <option value="" disabled selected>Instansi tempat bekerja</option>
                     <option value="Puskesmas">Puskesmas
@@ -132,12 +143,14 @@
                     </option>
                 </select>
 
-                <label for="Nama Instansi">Nama Instansi <span class="text-danger">*</span></label>
+                <label for="tempat_kerja">Nama Instansi <span class="text-danger">*</span> <span><small id="tempat_kerja-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <input type="text" class="form-control form-control-user" id="tempat_kerja"
                     name="tempat_kerja" placeholder="Nama Instansi" required>
 
 
-                <label for="nama">Penghasilan/Bulan <span class="text-danger">*</span></label>
+                <label for="penghasilan">Penghasilan/Bulan <span class="text-danger">*</span> <span><small id="penghasilan-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <select class="form-control form-control-user" id="penghasilan" name="penghasilan" required>
                     <option value="" disabled selected>Penghasilan/Bulan</option>
                     <option value="< 2 juta">
@@ -152,7 +165,8 @@
                         juta</option>
                 </select>
 
-                <label for="nama">Cara Mendapatkan Pekerjaan <span class="text-danger">*</span></label>
+                <label for="cara">Cara Mendapatkan Pekerjaan <span class="text-danger">*</span> <span><small id="cara-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <select class="form-control form-control-user" id="cara" name="cara" required>
                     <option value="" disabled selected>Cara mendapatkan pekerjaan</option>
                     <option value="Melamar ke instansi">Melamar ke instansi
@@ -175,8 +189,9 @@
                         sendiri/lainnya</option>
                 </select>
 
-                <label for="nama">Jika Melanjutkan Studi dengan Biaya <span
-                        class="text-danger">*</span></label>
+                <label for="studi_lanjut">Jika Melanjutkan Studi dengan Biaya <span
+                        class="text-danger">*</span> <span><small id="studi_lanjut-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <select class="form-control form-control-user" id="studi_lanjut" name="studi_lanjut" required>
                     <option value="" disabled selected>Jika Studi lanjut</option>
                     <option value="Biaya sendiri">Biaya sendiri</option>

@@ -10,8 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ asset('assets/css/from.css') }}" rel="stylesheet">
-
-    <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/validasi/validasi-tendik.js') }}"></script>
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('assets/js/sb-admin-2.min.js') }}"></script>
@@ -22,7 +21,6 @@
 
     <div class="row">
         <div class="container-fluid">
-            <!-- Page Heading -->
             <div class="text-center">
                 <h1 class="h3 mb-4 text-gray-800">
                     Form Tenaga Kependidikan
@@ -36,22 +34,26 @@
                 @csrf
                 <input type="hidden" name="tendik" value="{{ session('user_id') }}">
 
-                <label for="nama">Nama <span class="text-danger">*</span></label>
+                <label for="nama">Nama <span class="text-danger">*</span> <span><small id="nama-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <input type="text" class="form-control form-control-user" id="nama" name="nama"
                     placeholder="Nama" required>
 
-                <label for="nama">Nomor Identitas Pegawai Negeri Sipil</label>
+                <label for="nip">Nomor Identitas Pegawai Negeri Sipil <span><small id="nip-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <input type="text" class="form-control form-control-user" id="nip" name="nip"
                     placeholder="Nomor Identitas Pegawai Negeri Sipil">
 
-                <label for="usia">Usia (Tahun) <span class="text-danger">*</span></label>
+                <label for="usia">Usia (Tahun) <span class="text-danger">*</span> <span><small id="usia-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <input type="number" class="form-control form-control-user" id="usia" name="usia"
                     placeholder="Usia" required>
 
 
-                <label for="jeniskelamin">Jenis Kelamin <span class="text-danger">*</span></label>
+                <label for="jeniskelamin">Jenis Kelamin <span class="text-danger">*</span> <span><small id="jeniskelamin-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <select class="form-control form-control-user" id="jeniskelamin" name="jeniskelamin" required>
-                    <option value="" disabled>Pilih Jenis
+                    <option value="" disabled selected>Pilih Jenis
                         Kelamin</option>
                     <option value="Laki-laki">
                         Laki-laki</option>
@@ -59,21 +61,25 @@
                         Perempuan</option>
                 </select>
 
-                <label for="alamat">Alamat <span class="text-danger">*</span></label>
+                <label for="alamat">Alamat <span class="text-danger">*</span> <span><small id="alamat-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <input type="text" class="form-control form-control-user" id="alamat" name="alamat"
                     placeholder="Alamat" required>
 
-                <label for="nomor_telepon">Nomor Telepon <span class="text-danger">*</span></label>
+                <label for="nomor_telepon">Nomor Telepon <span class="text-danger">*</span> <span><small id="nomor_telepon-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <input type="number" class="form-control form-control-user" id="nomor_telepon" name="nomor_telepon"
                     placeholder="Nomor Telepon" required>
 
-                <label for="saranmasukkan">Saran dan Masukan</label>
+                <label for="saranmasukkan">Saran dan Masukan</label> <span><small id="saranmasukkan-count" class="text-muted">0 / 255 karakter</small></span> <span><small id="saranmasukkan-error" class="invalid-feedback" style="display:none;"></small>
+                </span>
                 <textarea class="form-control form-control-user" id="saranmasukkan" name="saranmasukkan"
                     placeholder="Saran dan Masukan"></textarea>
 
-                <label for="nama">Program Studi <span class="text-danger">*</span></label>
+                <label for="prodi">Program Studi <span class="text-danger">*</span> <span><small id="prodi-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <select class="form-control form-control-user" id="prodi" name="prodi" required>
-                    <option value="" disabled>Pilih Program Studi
+                    <option value="" disabled selected>Pilih Program Studi
                     </option>
                     @foreach ($programStudi as $jurusan => $prodis)
                     <optgroup label="{{ $jurusan }}">

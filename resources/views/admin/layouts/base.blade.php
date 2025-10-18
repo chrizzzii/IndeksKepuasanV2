@@ -34,27 +34,22 @@
 
         .topbar {
             background-image: url('{{ asset(' assets/img/poltekkesheader.png') }}');
-            /* Ganti dengan nama gambar Anda */
             background-size: cover;
-            /* Menutupi seluruh area */
             background-position: center;
-            /* Posisi gambar di tengah */
             background-repeat: no-repeat;
-            /* Tidak mengulangi gambar */
             color: white;
-            /* Mengatur warna teks agar terlihat jelas pada background */
         }
 
         .topbar .dropdown-item {
             color: white;
-            /* Atur warna teks item dropdown */
         }
 
         .topbar .dropdown-item:hover {
             background-color: rgba(0, 0, 0, 0.5);
-            /* Warna latar belakang saat hover */
         }
     </style>
+
+    <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
 
     @stack('styles') <!-- Untuk menambahkan CSS khusus di halaman lain -->
 

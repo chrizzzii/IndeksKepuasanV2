@@ -9,8 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ asset('assets/css/from.css') }}" rel="stylesheet">
-
-    <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/validasi/validasi-penggunalulusan.js') }}"></script>
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('assets/js/sb-admin-2.min.js') }}"></script>
@@ -39,17 +38,20 @@
                 <div style="background-color: #f0f0f0; padding: 10px; font-weight: bold;">
                     A. IDENTITAS PENILAI
                 </div>
-                <label for="nama">Nama <span class="text-danger">*</span></label>
+                <label for="nama">Nama <span class="text-danger">*</span> <span><small id="nama_identitaspenilai-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <input type="text" class="form-control form-control-user" id="nama_identitaspenilai"
                     name="nama_identitaspenilai" placeholder="Nama"
                     required>
 
-                <label for="nama">Usia (Tahun) <span class="text-danger">*</span></label>
+                <label for="usia_identitaspenilai">Usia (Tahun) <span class="text-danger">*</span> <span><small id="usia_identitaspenilai-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <input type="number" class="form-control form-control-user" id="usia_identitaspenilai"
                     name="usia_identitaspenilai" placeholder="Usia"
                     required>
 
-                <label for="nama">Jenis Kelamin <span class="text-danger">*</span></label>
+                <label for="jeniskelamin_identitaspenilai">Jenis Kelamin <span class="text-danger">*</span> <span><small id="jeniskelamin_identitaspenilai-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <select class="form-control form-control-user" id="jeniskelamin_identitaspenilai"
                     name="jeniskelamin_identitaspenilai" required>
                     <option value="" disabled selected>Jenis Kelamin</option>
@@ -59,23 +61,28 @@
                         Perempuan</option>
                 </select>
 
-                <label for="alamat">Alamat <span class="text-danger">*</span></label>
+                <label for="alamat_identitaspenilai">Alamat <span class="text-danger">*</span> <span><small id="alamat_identitaspenilai-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <input type="text" class="form-control form-control-user" id="alamat_identitaspenilai"
                     name="alamat_identitaspenilai" placeholder="Alamat" required>
 
-                <label for="nama">Kontak Person (HP/WA) <span class="text-danger">*</span></label>
+                <label for="kontak_identitaspenilai">Kontak Person (HP/WA) <span class="text-danger">*</span> <span><small id="kontak_identitaspenilai-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <input type="number" class="form-control form-control-user" id="kontak_identitaspenilai"
                     name="kontak_identitaspenilai" placeholder="Kontak Person (Email/HP/Wa)" required>
 
-                <label for="nama">Instansi <span class="text-danger">*</span></label>
+                <label for="instansi_identitaspenilai">Instansi <span class="text-danger">*</span> <span><small id="instansi_identitaspenilai-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <input type="text" class="form-control form-control-user" id="instansi_identitaspenilai"
                     name="instansi_identitaspenilai" placeholder="Instansi" required>
 
-                <label for="nama">Jabatan <span class="text-danger">*</span></label>
+                <label for="jabatan_identitaspenilai">Jabatan <span class="text-danger">*</span> <span><small id="jabatan_identitaspenilai-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <input type="text" class="form-control form-control-user" id="jabatan_identitaspenilai"
                     name="jabatan_identitaspenilai" placeholder="Jabatan" required>
 
-                <label for="nama">Lama Bekerja Dengan Lulusan(Tahun) <span class="text-danger">*</span></label>
+                <label for="lamabekerjadenganlulusan">Lama Bekerja Dengan Lulusan(Tahun) <span class="text-danger">*</span> <span><small id="lamabekerjadenganlulusan-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <input type="number" class="form-control form-control-user" id="lamabekerjadenganlulusan"
                     name="lamabekerjadenganlulusan" placeholder="Lama Bekerja Dengan Lulusan(Tahun)" required>
                 <br>
@@ -83,11 +90,13 @@
                 <div style="background-color: #f0f0f0; padding: 10px; font-weight: bold;">
                     B. IDENTITAS LULUSAN YANG DINILAI
                 </div>
-                <label for="nama">Nama <span class="text-danger">*</span></label>
+                <label for="nama_identitaslulusan">Nama <span class="text-danger">*</span> <span><small id="nama_identitaslulusan-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <input type="text" class="form-control form-control-user" id="nama_identitaslulusan"
                     name="nama_identitaslulusan" placeholder="Nama" required>
 
-                <label for="nama">Jenis Kelamin <span class="text-danger">*</span></label>
+                <label for="jeniskelamin_identitaslulusan">Jenis Kelamin <span class="text-danger">*</span> <span><small id="jeniskelamin_identitaslulusan-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <select class="form-control form-control-user" id="jeniskelamin_identitaslulusan"
                     name="jeniskelamin_identitaslulusan" required>
                     <option value="" disabled selected>Jenis Kelamin</option>
@@ -97,11 +106,13 @@
                         Perempuan</option>
                 </select>
 
-                <label for="nama">Jabatan <span class="text-danger">*</span></label>
+                <label for="jabatan_identitaslulusan">Jabatan <span class="text-danger">*</span> <span><small id="jabatan_identitaslulusan-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <input type="text" class="form-control form-control-user" id="jabatan_identitaslulusan"
                     name="jabatan_identitaslulusan" placeholder="Jabatan" required>
 
-                <label for="nama">Latar Belakang Pendidikan <span class="text-danger">*</span></label>
+                <label for="latarbelakang_identitaslulusan">Latar Belakang Pendidikan <span class="text-danger">*</span> <span><small id="latarbelakang_identitaslulusan-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <select class="form-control form-control-user" id="latarbelakang_identitaslulusan"
                     name="latarbelakang_identitaslulusan" required>
                     <option value="" disabled selected>Latar Belakang Pendidikan</option>
@@ -117,16 +128,19 @@
                     </option>
                 </select>
 
-                <label for="nama">Total Lama Bekerja(Tahun) <span class="text-danger">*</span></label>
+                <label for="lamabekerja_identitaslulusan">Total Lama Bekerja(Tahun) <span class="text-danger">*</span> <span><small id="lamabekerja_identitaslulusan-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <input type="number" class="form-control form-control-user" id="lamabekerja_identitaslulusan"
                     name="lamabekerja_identitaslulusan" placeholder="Lama bekerja Lulusan :" required>
 
-                <label for="nama">Lama Bekerja di Instansi Saat Ini(Tahun) <span
-                        class="text-danger">*</span></label>
+                <label for="lamabekerjadiinstansisaatini">Lama Bekerja di Instansi Saat Ini(Tahun) <span
+                        class="text-danger">*</span> <span><small id="lamabekerjadiinstansisaatini-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
                 <input type="number" class="form-control form-control-user" id="lamabekerjadiinstansisaatini"
                     name="lamabekerjadiinstansisaatini" placeholder="Lama Bekerja di Instansi Saat Ini(Tahun)" required>
 
-                <label for="nama">Saran dan Masukan</label>
+                <label for="saranmasukkan">Saran dan Masukan</label> <span><small id="saranmasukkan-count" class="text-muted">0 / 255 karakter</small></span> <span><small id="saranmasukkan-error" class="invalid-feedback" style="display:none;"></small>
+                </span>
                 <textarea class="form-control form-control-user" id="saranmasukkan" name="saranmasukkan"
                     placeholder="Saran dan Masukan"></textarea>
                 <br>
@@ -215,6 +229,7 @@
                     </tbody>
                 </table>
 
+                <hr>
 
                 <button type="submit" class="btn btn-primary">KIRIM</button>
             </form>
