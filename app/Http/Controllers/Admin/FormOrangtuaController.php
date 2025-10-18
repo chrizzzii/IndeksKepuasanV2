@@ -29,16 +29,17 @@ class FormOrangtuaController extends Controller
         // Set nilai properti model dari request
         $orangtua->status = 1;
         $orangtua->nama = $request->input('nama');
-        $orangtua->nip = $request->input('nip');
         $orangtua->usia = $request->input('usia');
+        $orangtua->email = $request->input('email');
         $orangtua->jeniskelamin = $request->input('jeniskelamin');
+        $orangtua->pekerjaan = $request->input('pekerjaan');
         $orangtua->alamat = $request->input('alamat');
         $orangtua->nomor_telepon = $request->input('nomor_telepon');
         $orangtua->saranmasukkan = $request->input('saranmasukkan');
         $orangtua->prodi = $request->input('prodi');
 
         foreach ($request->input('pertanyaan', []) as $id => $value) {
-            $column = 'p' . ($id - 1); // ID 2 menjadi p1, ID 3 menjadi p2, dst.
+            $column = 'p' . ($id - 2); // ID 2 menjadi p1, ID 3 menjadi p2, dst.
             $columnNumber = intval(substr($column, 1)); // Mengambil angka setelah 'p' secara numerik
             if ($columnNumber >= 1 && $columnNumber <= 30) {
                 $orangtua->$column = $value;
