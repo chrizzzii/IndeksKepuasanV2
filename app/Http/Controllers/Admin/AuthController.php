@@ -109,6 +109,16 @@ class AuthController extends Controller
             return redirect('formmasyarakat'); // Ganti dengan rute yang sesuai
         }
 
+        $orangtua = DB::table('orangtua')->where('email', $nama)->first();
+
+        if ($orangtua && Hash::check($password, $orangtua->password)) {
+            Session::put('user_id', $orangtua->orangtua_id);
+            Session::put('user_role', $orangtua->role);
+            Session::put('user_name', $orangtua->nama);
+            Session::put('status', $orangtua->status);
+            return redirect('formorangtua');
+        }
+
         // Jika login gagal
         return back()->with('error', 'Login gagal. Silakan cek kembali nama dan password Anda.');
     }
@@ -147,6 +157,8 @@ class AuthController extends Controller
             case 'penggunalulusan':
                 return redirect('formpenggunalulusan');
                 // Tambahkan case untuk kluster lain sesuai kebutuhan
+            case 'orangtua':
+                return redirect('formorangtua');
             default:
                 return redirect()->back()->withErrors('Kluster tidak valid.');
         }
@@ -192,6 +204,7 @@ class AuthController extends Controller
             'mitra',
             'pengguna_lulusan',
             'tendik',
+            'orangtua',
         ];
 
         foreach ($tables as $table) {
