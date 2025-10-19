@@ -71,6 +71,10 @@
                     <textarea class="form-control form-control-user" id="saranmasukkan" name="saranmasukkan"
                         placeholder="Saran dan Masukan"></textarea>
 
+                    <label for="namamahasiswa">Nama Mahasiswa</label>
+                    <textarea class="form-control form-control-user" id="namamahasiswa" name="namamahasiswa"
+                        placeholder="Nama Mahasiswa"></textarea>
+
                 <label for="nama">Program Studi <span class="text-danger">*</span></label>
                 <select class="form-control form-control-user" id="prodi" name="prodi" required>
                     <option value="" disabled>Pilih Program Studi

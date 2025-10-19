@@ -97,6 +97,7 @@
                         <a class="collapse-item" href="/indexmitra">Indeks Mitra Kerjasama</a>
                         <a class="collapse-item" href="/indextendik">Indeks Tendik</a>
                         <a class="collapse-item" href="/indexpengguna">Indeks Pengguna Lulusan</a>
+                        <a class="collapse-item" href="/indexorangtua">Indeks Orang Tua</a>
                     </div>
                 </div>
             </li>

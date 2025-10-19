@@ -5,9 +5,9 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
+{public function up(): void
 {
-    public function up(): void
-    {
+    if (!Schema::hasTable('orangtua')) {
         Schema::create('orangtua', function (Blueprint $table) {
             $table->id('orangtua_id');
             $table->integer('status')->nullable();
@@ -23,12 +23,10 @@ return new class extends Migration
             $table->string('role')->nullable();
             $table->integer('no_responden')->nullable();
 
-            // Kolom p1–p28
-            for ($i = 1; $i <= 28; $i++) {
+            for ($i = 1; $i <= 27; $i++) {
                 $table->integer('p' . $i)->nullable();
             }
 
-            // Kolom u1–u9
             for ($i = 1; $i <= 9; $i++) {
                 $table->integer('u' . $i)->nullable();
             }
@@ -36,7 +34,7 @@ return new class extends Migration
             $table->timestamps();
         });
     }
-
+}
     public function down(): void
     {
         Schema::dropIfExists('orangtua');

@@ -25,7 +25,11 @@ class OrangTua extends Model
         'usia',
         'jeniskelamin',
         'alamat',
+        'pekerjaan',
+        'namamahasiswa',
+        'prodi',
         'nomor_telepon',
+        'email',
         'saranmasukkan',
         'p1',
         'p2',
@@ -54,7 +58,6 @@ class OrangTua extends Model
         'p25',
         'p26',
         'p27',
-        'p28',
 
     ];
 }

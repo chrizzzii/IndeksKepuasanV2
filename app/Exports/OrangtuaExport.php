@@ -24,7 +24,10 @@ class OrangtuaExport
             'usia',
             'jeniskelamin',
             'alamat',
+            'pekerjaan',
+            'namamahasiswa',
             'nomor_telepon',
+            'email',
             'saranmasukkan',
             'Program Studi', // Ganti prodi menjadi program studi
             'Pertanyaan 1', // Ganti u1 menjadi Pertanyaan 1
@@ -54,7 +57,6 @@ class OrangtuaExport
             'Pertanyaan 25', // Ganti u9 menjadi Pertanyaan 9
             'Pertanyaan 26', // Ganti u9 menjadi Pertanyaan 9
             'Pertanyaan 27', // Ganti u9 menjadi Pertanyaan 9
-            'Pertanyaan 28', // Ganti u9 menjadi Pertanyaan 9
         ];
 
         // Tambahkan kolom Pertanyaan 10 hingga Pertanyaan 35
@@ -113,7 +115,7 @@ class OrangtuaExport
         $writer = new Xlsx($spreadsheet);
 
         // Tentukan nama file yang akan diunduh
-        $fileName = 'Tenaga Kependidikan.xlsx';
+        $fileName = 'Orang Tua Mahasiswa.xlsx';
 
         // Kirim file Excel ke browser
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');

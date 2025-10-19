@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class DataOrangtuaController extends Controller
 {
-    public function datatendik ()
+    public function dataorangtua ()
     {return view('admin.pages.dashboard.dataorangtua');
     }
 

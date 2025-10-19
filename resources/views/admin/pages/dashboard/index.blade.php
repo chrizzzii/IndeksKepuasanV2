@@ -41,7 +41,7 @@
                                             @if($selectedProdi)
                                             {{ $alumniDatafilter + $tendikDatafilter + $mahasiswaDatafilter }}
                                             @else
-                                            {{ $mitraData + $alumniData + $tendikData + $mahasiswaData + $penggunalulusanData + $totalDosen }}
+                                            {{ $mitraData + $alumniData + $tendikData + $mahasiswaData + $penggunalulusanData + $totalDosen  }}
                                             @endif
                                         </div>
                                     </div>
@@ -196,7 +196,32 @@
                                         </div>
                                     </div>
 
-                                    <!-- Card 7 -->
+                                <!-- Card 7 -->
+                                 <div class="col-md-3 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Orang Tua Mahasiswa
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">@if(!$selectedProdi)
+                                                {{ $orangtuaData }}
+                                                @elseif($selectedProdi && $orangtuaDatafilter > 0)
+                                                {{ $orangtuaDatafilter }}
+                                                @elseif($selectedProdi && $orangtuaDatafilter <= 0)
+                                                    0
+                                                    @endif
+                                                    </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-users fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                                    <!-- Card 8 -->
                                     <div class="col-md-3 mb-4">
                                         @if($selectedProdi)
                                         <a href="{{ url('dashboard') }}" class="card border-left-primary shadow h-100 py-2">
@@ -249,6 +274,9 @@
                                             </a>
                                             <a href="{{ route('export.dosen') }}" class="btn btn-success mx-2 mb-2">
                                                 <i class="fas fa-file-excel"></i> Download Data Dosen
+                                            </a>
+                                            <a href="{{ route('export.orangtua') }}" class="btn btn-success mx-2 mb-2">
+                                                <i class="fas fa-file-excel"></i> Download Data Orang Tua Mahasiswa
                                             </a>
                                         </div>
                                     </div>
@@ -405,399 +433,204 @@
                         <br>
 
                         <div class="container">
-                            <div class="card shadow-lg p-4 mb-5 bg-white rounded">
-                                <h1>NILAI IKM BERDASARKAN RESPONDEN</h1>
-                                <div class="row">
-                                    <!-- Pie Chart for Mitra -->
-                                    <div class="col-md-4">
-                                        <div class="card-body">
-                                            <div class="chart-pie pt-4 pb-2">
-                                                <canvas id="myPieChart"></canvas>
-                                            </div>
-                                            <div class="mt-4 text-center small">
-                                                @php
-                                                // Classify the mitraavg
-                                                if ($mitraavg >= 3.5324 && $mitraavg <= 4) {
-                                                    $mitraavggrade='Sangat Baik' ;
-                                                    } elseif ($mitraavg>= 3.0644 && $mitraavg <= 3.532) {
-                                                        $mitraavggrade='Baik' ;
-                                                        } elseif ($mitraavg>= 2.6 && $mitraavg <= 3.064) {
-                                                            $mitraavggrade='Kurang Baik' ;
-                                                            } elseif ($mitraavg>= 1.0 && $mitraavg <= 2.5996) {
-                                                                $mitraavggrade='Tidak Baik' ;
-                                                                } else {
-                                                                $mitraavggrade='Invalid' ;
-                                                                }
-                                                                @endphp
-                                                                <span class="mr-2">
-                                                                <i class="fas fa-circle text-primary"></i> {{ $mitraavggrade }}
-                                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="card shadow-lg p-4 mb-5 bg-white rounded">
+                            <h1 class="text-center mb-4">NILAI IKM BERDASARKAN RESPONDEN</h1>
 
-                                    <!-- Pie Chart for Alumni -->
-                                    <div class="col-md-4">
-                                        <div class="card-body">
-                                            <div class="chart-pie pt-4 pb-2">
-                                                <canvas id="alumniPieChart"></canvas>
-                                            </div>
-                                            <div class="mt-4 text-center small">
-                                                @php
-                                                // Classify the alumniavg
-                                                if ($alumniavg >= 3.5324 && $alumniavg <= 4) {
-                                                    $alumniavggrade='Sangat Baik' ;
-                                                    } elseif ($alumniavg>= 3.0644 && $alumniavg <= 3.532) {
-                                                        $alumniavggrade='Baik' ;
-                                                        } elseif ($alumniavg>= 2.6 && $alumniavg <= 3.064) {
-                                                            $alumniavggrade='Kurang Baik' ;
-                                                            } elseif ($alumniavg>= 1.0 && $alumniavg <= 2.5996) {
-                                                                $alumniavggrade='Tidak Baik' ;
-                                                                } else {
-                                                                $alumniavggrade='Invalid' ;
-                                                                }
-                                                                @endphp
-                                                                <span class="mr-2">
-                                                                <i class="fas fa-circle text-primary"></i> {{ $alumniavggrade }}
-                                                                </span>
-                                            </div>
+                            <!-- Baris 1 -->
+                            <div class="row text-center">
+                                <div class="col-md-4">
+                                    <div class="card-body">
+                                        <div class="chart-pie pt-4 pb-2">
+                                            <canvas id="myPieChart"></canvas>
                                         </div>
-                                    </div>
-
-                                    <!-- Pie Chart for Tendik -->
-                                    <div class="col-md-4">
-                                        <div class="card-body">
-                                            <div class="chart-pie pt-4 pb-2">
-                                                <canvas id="tendikPieChart"></canvas>
-                                            </div>
-                                            <div class="mt-4 text-center small">
-                                                @php
-                                                // Classify the tendikavg
-                                                if ($tendikavg >= 3.5324 && $tendikavg <= 4) {
-                                                    $tendikavggrade='Sangat Baik' ;
-                                                    } elseif ($tendikavg>= 3.0644 && $tendikavg <= 3.532) {
-                                                        $tendikavggrade='Baik' ;
-                                                        } elseif ($tendikavg>= 2.6 && $tendikavg <= 3.064) {
-                                                            $tendikavggrade='Kurang Baik' ;
-                                                            } elseif ($tendikavg>= 1.0 && $tendikavg <= 2.5996) {
-                                                                $tendikavggrade='Tidak Baik' ;
-                                                                } else {
-                                                                $tendikavggrade='Invalid' ;
-                                                                }
-                                                                @endphp
-                                                                <span class="mr-2">
-                                                                <i class="fas fa-circle text-primary"></i> {{ $tendikavggrade }}
-                                                                </span>
-                                            </div>
+                                        <div class="mt-3 small">
+                                            <i class="fas fa-circle text-primary"></i>
+                                            {{ $mitraavg >= 3.5324 ? 'Sangat Baik' : ($mitraavg >= 3.0644 ? 'Baik' : ($mitraavg >= 2.6 ? 'Kurang Baik' : 'Tidak Baik')) }}
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <!-- Pie Chart for Mahasiswa -->
-                                    <div class="col-md-4">
-                                        <div class="card-body">
-                                            <div class="chart-pie pt-4 pb-2">
-                                                <canvas id="mahasiswaPieChart"></canvas>
-                                            </div>
-                                            <div class="mt-4 text-center small">
-                                                @php
-                                                // Classify the mahasiswaavg
-                                                if ($mahasiswaavg >= 3.5324 && $mahasiswaavg <= 4) {
-                                                    $mahasiswaavggrade='Sangat Baik' ;
-                                                    } elseif ($mahasiswaavg>= 3.0644 && $mahasiswaavg <= 3.532) {
-                                                        $mahasiswaavggrade='Baik' ;
-                                                        } elseif ($mahasiswaavg>= 2.6 && $mahasiswaavg <= 3.064) {
-                                                            $mahasiswaavggrade='Kurang Baik' ;
-                                                            } elseif ($mahasiswaavg>= 1.0 && $mahasiswaavg <= 2.5996) {
-                                                                $mahasiswaavggrade='Tidak Baik' ;
-                                                                } else {
-                                                                $mahasiswaavggrade='Invalid' ;
-                                                                }
-                                                                @endphp
-                                                                <span class="mr-2">
-                                                                <i class="fas fa-circle text-primary"></i> {{ $mahasiswaavggrade }}
-                                                                </span>
-                                            </div>
+                                <div class="col-md-4">
+                                    <div class="card-body">
+                                        <div class="chart-pie pt-4 pb-2">
+                                            <canvas id="alumniPieChart"></canvas>
                                         </div>
-                                    </div>
-
-                                    <!-- Pie Chart for Pengguna Lulusan -->
-                                    <div class="col-md-4">
-                                        <div class="card-body">
-                                            <div class="chart-pie pt-4 pb-2">
-                                                <canvas id="penggunaLulusanPieChart"></canvas>
-                                            </div>
-                                            <div class="mt-4 text-center small">
-                                                @php
-                                                // Classify the penggunalulusanavg
-                                                if ($penggunalulusanavg >= 3.5324 && $penggunalulusanavg <= 4) {
-                                                    $penggunalulusanavggrade='Sangat Baik' ;
-                                                    } elseif ($penggunalulusanavg>= 3.0644 && $penggunalulusanavg <= 3.532) {
-                                                        $penggunalulusanavggrade='Baik' ;
-                                                        } elseif ($penggunalulusanavg>= 2.6 && $penggunalulusanavg <= 3.064) {
-                                                            $penggunalulusanavggrade='Kurang Baik' ;
-                                                            } elseif ($penggunalulusanavg>= 1.0 && $penggunalulusanavg <= 2.5996) {
-                                                                $penggunalulusanavggrade='Tidak Baik' ;
-                                                                } else {
-                                                                $penggunalulusanavggrade='Invalid' ;
-                                                                }
-                                                                @endphp
-                                                                <span class="mr-2">
-                                                                <i class="fas fa-circle text-primary"></i> {{ $penggunalulusanavggrade }}
-                                                                </span>
-                                            </div>
+                                        <div class="mt-3 small">
+                                            <i class="fas fa-circle text-primary"></i>
+                                            {{ $alumniavg >= 3.5324 ? 'Sangat Baik' : ($alumniavg >= 3.0644 ? 'Baik' : ($alumniavg >= 2.6 ? 'Kurang Baik' : 'Tidak Baik')) }}
                                         </div>
-                                    </div>
-
-                                    <!-- Pie Chart for Dosen -->
-                                    <div class="col-md-4">
-                                        <div class="card-body">
-                                            <div class="chart-pie pt-4 pb-2">
-                                                <canvas id="dosenPieChart"></canvas>
-                                            </div>
-                                            <div class="mt-4 text-center small">
-                                                @php
-                                                // Classify the dosenavg
-                                                if ($dosenavg >= 3.5324 && $dosenavg <= 4) {
-                                                    $dosenavggrade='Sangat Baik' ;
-                                                    } elseif ($dosenavg>= 3.0644 && $dosenavg <= 3.532) {
-                                                        $dosenavggrade='Baik' ;
-                                                        } elseif ($dosenavg>= 2.6 && $dosenavg <= 3.064) {
-                                                            $dosenavggrade='Kurang Baik' ;
-                                                            } elseif ($dosenavg>= 1.0 && $dosenavg <= 2.5996) {
-                                                                $dosenavggrade='Tidak Baik' ;
-                                                                } else {
-                                                                $dosenavggrade='Invalid' ;
-                                                                }
-                                                                @endphp
-                                                                <span class="mr-2">
-                                                                <i class="fas fa-circle text-primary"></i> {{ $dosenavggrade }}
-                                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div>
-
-
                                     </div>
                                 </div>
 
-                                <script>
-                                    // Pie chart scripts for each respondent
-                                    var ctx = document.getElementById("myPieChart");
-                                    var myPieChart = new Chart(ctx, {
-                                        type: 'doughnut',
-                                        data: {
-                                            labels: ["Mitra"],
-                                            datasets: [{
-                                                data: [JSON.parse('{{ json_encode($mitraavg) }}'), JSON.parse(
-                                                    '{{ json_encode(4 - $mitraavg) }}')],
-                                                backgroundColor: ['#00B9AD', '#CDDC29'], // Primary colors
-                                                hoverBackgroundColor: ['#2CD1C5', '#E0E96D'], // Lighter shades
-
-                                                hoverBorderColor: "rgba(234, 236, 244, 1)"
-                                            }],
-                                        },
-                                        options: {
-                                            maintainAspectRatio: false,
-                                            tooltips: {
-                                                backgroundColor: "rgb(255,255,255)",
-                                                bodyFontColor: "#858796",
-                                                borderColor: '#dddfeb',
-                                                borderWidth: 1,
-                                                xPadding: 15,
-                                                yPadding: 15,
-                                                displayColors: false,
-                                                caretPadding: 10,
-                                            },
-                                            legend: {
-                                                display: false
-                                            },
-                                            cutoutPercentage: 80,
-                                        },
-                                    });
-
-                                    // Repeat similar script initialization for other charts with their respective variables: alumniPieChart, tendikPieChart, mahasiswaPieChart, penggunaLulusanPieChart, dosenPieChart
-                                </script>
-
-                                <script>
-                                    // Pie Chart for Alumni
-                                    var ctxAlumni = document.getElementById("alumniPieChart");
-                                    var alumniPieChart = new Chart(ctxAlumni, {
-                                        type: 'doughnut',
-                                        data: {
-                                            labels: ["Alumni"],
-                                            datasets: [{
-                                                data: [JSON.parse('{{ json_encode($alumniavg) }}'), JSON.parse(
-                                                    '{{ json_encode(4 - $alumniavg) }}')],
-                                                backgroundColor: ['#4e73df', '#36b9cc'],
-                                                hoverBackgroundColor: ['#2e59d9', '#2c9faf'],
-                                                hoverBorderColor: "rgba(234, 236, 244, 1)",
-                                            }],
-                                        },
-                                        options: {
-                                            maintainAspectRatio: false,
-                                            tooltips: {
-                                                backgroundColor: "rgb(255,255,255)",
-                                                bodyFontColor: "#858796",
-                                                borderColor: '#dddfeb',
-                                                borderWidth: 1,
-                                                xPadding: 15,
-                                                yPadding: 15,
-                                                displayColors: false,
-                                                caretPadding: 10,
-                                            },
-                                            legend: {
-                                                display: false
-                                            },
-                                            cutoutPercentage: 80,
-                                        },
-                                    });
-                                </script>
-
-                                <script>
-                                    // Pie Chart for Tendik
-                                    var ctxTendik = document.getElementById("tendikPieChart");
-                                    var tendikPieChart = new Chart(ctxTendik, {
-                                        type: 'doughnut',
-                                        data: {
-                                            labels: ["Tenaga Kependidikan"],
-                                            datasets: [{
-                                                data: [JSON.parse('{{ json_encode($tendikavg) }}'), JSON.parse(
-                                                    '{{ json_encode(4 - $tendikavg) }}')],
-                                                backgroundColor: ['#00B9AD', '#CDDC29'], // Primary colors
-                                                hoverBackgroundColor: ['#2CD1C5', '#E0E96D'], // Lighter shades
-
-                                                hoverBorderColor: "rgba(234, 236, 244, 1)",
-                                            }],
-                                        },
-                                        options: {
-                                            maintainAspectRatio: false,
-                                            tooltips: {
-                                                backgroundColor: "rgb(255,255,255)",
-                                                bodyFontColor: "#858796",
-                                                borderColor: '#dddfeb',
-                                                borderWidth: 1,
-                                                xPadding: 15,
-                                                yPadding: 15,
-                                                displayColors: false,
-                                                caretPadding: 10,
-                                            },
-                                            legend: {
-                                                display: false
-                                            },
-                                            cutoutPercentage: 80,
-                                        },
-                                    });
-                                </script>
-
-                                <script>
-                                    // Pie Chart for Mahasiswa
-                                    var ctxMahasiswa = document.getElementById("mahasiswaPieChart");
-                                    var mahasiswaPieChart = new Chart(ctxMahasiswa, {
-                                        type: 'doughnut',
-                                        data: {
-                                            labels: ["Mahasiswa"],
-                                            datasets: [{
-                                                data: [JSON.parse('{{ json_encode($mahasiswaavg) }}'), JSON.parse(
-                                                    '{{ json_encode(4 - $mahasiswaavg) }}')],
-                                                backgroundColor: ['#4e73df', '#36b9cc'],
-                                                hoverBackgroundColor: ['#2e59d9', '#2c9faf'],
-                                                hoverBorderColor: "rgba(234, 236, 244, 1)",
-                                            }],
-                                        },
-                                        options: {
-                                            maintainAspectRatio: false,
-                                            tooltips: {
-                                                backgroundColor: "rgb(255,255,255)",
-                                                bodyFontColor: "#858796",
-                                                borderColor: '#dddfeb',
-                                                borderWidth: 1,
-                                                xPadding: 15,
-                                                yPadding: 15,
-                                                displayColors: false,
-                                                caretPadding: 10,
-                                            },
-                                            legend: {
-                                                display: false
-                                            },
-                                            cutoutPercentage: 80,
-                                        },
-                                    });
-                                </script>
-
-                                <script>
-                                    // Pie Chart for Pengguna Lulusan
-                                    var ctxPenggunaLulusan = document.getElementById("penggunaLulusanPieChart");
-                                    var penggunaLulusanPieChart = new Chart(ctxPenggunaLulusan, {
-                                        type: 'doughnut',
-                                        data: {
-                                            labels: ["Pengguna Lulusan"],
-                                            datasets: [{
-                                                data: [JSON.parse('{{ json_encode($penggunalulusanavg) }}'), JSON.parse(
-                                                    '{{ json_encode(4 - $penggunalulusanavg) }}')],
-                                                backgroundColor: ['#00B9AD', '#CDDC29'], // Primary colors
-                                                hoverBackgroundColor: ['#2CD1C5', '#E0E96D'], // Lighter shades
-
-                                                hoverBorderColor: "rgba(234, 236, 244, 1)",
-                                            }],
-                                        },
-                                        options: {
-                                            maintainAspectRatio: false,
-                                            tooltips: {
-                                                backgroundColor: "rgb(255,255,255)",
-                                                bodyFontColor: "#858796",
-                                                borderColor: '#dddfeb',
-                                                borderWidth: 1,
-                                                xPadding: 15,
-                                                yPadding: 15,
-                                                displayColors: false,
-                                                caretPadding: 10,
-                                            },
-                                            legend: {
-                                                display: false
-                                            },
-                                            cutoutPercentage: 80,
-                                        },
-                                    });
-                                </script>
-
-                                <script>
-                                    // Pie Chart for Dosen
-                                    var ctxDosen = document.getElementById("dosenPieChart");
-                                    var dosenPieChart = new Chart(ctxDosen, {
-                                        type: 'doughnut',
-                                        data: {
-                                            labels: ["Dosen"],
-                                            datasets: [{
-                                                data: [JSON.parse('{{ json_encode($dosenavg) }}'), JSON.parse(
-                                                    '{{ json_encode(4 - $dosenavg) }}')],
-                                                backgroundColor: ['#4e73df', '#36b9cc'],
-                                                hoverBackgroundColor: ['#2e59d9', '#2c9faf'],
-                                                hoverBorderColor: "rgba(234, 236, 244, 1)",
-                                            }],
-                                        },
-                                        options: {
-                                            maintainAspectRatio: false,
-                                            tooltips: {
-                                                backgroundColor: "rgb(255,255,255)",
-                                                bodyFontColor: "#858796",
-                                                borderColor: '#dddfeb',
-                                                borderWidth: 1,
-                                                xPadding: 15,
-                                                yPadding: 15,
-                                                displayColors: false,
-                                                caretPadding: 10,
-                                            },
-                                            legend: {
-                                                display: false
-                                            },
-                                            cutoutPercentage: 80,
-                                        },
-                                    });
-                                </script>
+                                <div class="col-md-4">
+                                    <div class="card-body">
+                                        <div class="chart-pie pt-4 pb-2">
+                                            <canvas id="tendikPieChart"></canvas>
+                                        </div>
+                                        <div class="mt-3 small">
+                                            <i class="fas fa-circle text-primary"></i>
+                                            {{ $tendikavg >= 3.5324 ? 'Sangat Baik' : ($tendikavg >= 3.0644 ? 'Baik' : ($tendikavg >= 2.6 ? 'Kurang Baik' : 'Tidak Baik')) }}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
+                            <!-- Baris 2 -->
+                            <div class="row text-center mt-4">
+                                <div class="col-md-4">
+                                    <div class="card-body">
+                                        <div class="chart-pie pt-4 pb-2">
+                                            <canvas id="mahasiswaPieChart"></canvas>
+                                        </div>
+                                        <div class="mt-3 small">
+                                            <i class="fas fa-circle text-primary"></i>
+                                            {{ $mahasiswaavg >= 3.5324 ? 'Sangat Baik' : ($mahasiswaavg >= 3.0644 ? 'Baik' : ($mahasiswaavg >= 2.6 ? 'Kurang Baik' : 'Tidak Baik')) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="card-body">
+                                        <div class="chart-pie pt-4 pb-2">
+                                            <canvas id="penggunaLulusanPieChart"></canvas>
+                                        </div>
+                                        <div class="mt-3 small">
+                                            <i class="fas fa-circle text-primary"></i>
+                                            {{ $penggunalulusanavg >= 3.5324 ? 'Sangat Baik' : ($penggunalulusanavg >= 3.0644 ? 'Baik' : ($penggunalulusanavg >= 2.6 ? 'Kurang Baik' : 'Tidak Baik')) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="card-body">
+                                        <div class="chart-pie pt-4 pb-2">
+                                            <canvas id="dosenPieChart"></canvas>
+                                        </div>
+                                        <div class="mt-3 small">
+                                            <i class="fas fa-circle text-primary"></i>
+                                            {{ $dosenavg >= 3.5324 ? 'Sangat Baik' : ($dosenavg >= 3.0644 ? 'Baik' : ($dosenavg >= 2.6 ? 'Kurang Baik' : 'Tidak Baik')) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Baris 3 (Orang Tua di tengah) -->
+                            <div class="row text-center mt-4 justify-content-center">
+                                <div class="col-md-4">
+                                    <div class="card-body">
+                                        <div class="chart-pie pt-4 pb-2">
+                                            <canvas id="orangtuaPieChart"></canvas>
+                                        </div>
+                                        <div class="mt-3 small">
+                                            <i class="fas fa-circle text-primary"></i>
+                                            {{ $orangtuaavg >= 3.5324 ? 'Sangat Baik' : ($orangtuaavg >= 3.0644 ? 'Baik' : ($orangtuaavg >= 2.6 ? 'Kurang Baik' : 'Tidak Baik')) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CSS untuk merapikan ukuran chart -->
+                    <style>
+                    .chart-pie {
+                        position: relative;
+                        height: 220px;
+                        width: 220px;
+                        margin: auto;
+                    }
+                    </style>
+
+                    <!-- Script Chart.js (cukup satu blok) -->
+                    <script>
+                    // Definisikan chart + warna unik untuk setiap responden
+                    const charts = [
+                        {
+                            id: "myPieChart",
+                            label: "Mitra",
+                            value: {{ $mitraavg ?? 0 }},
+                            colors: ['#00B9AD', '#CDDC29'], // hijau toska + kuning
+                            hover: ['#2CD1C5', '#E0E96D']
+                        },
+                        {
+                            id: "alumniPieChart",
+                            label: "Alumni",
+                            value: {{ $alumniavg ?? 0 }},
+                            colors: ['#4e73df', '#36b9cc'], // biru tua + biru muda
+                            hover: ['#2e59d9', '#2c9faf']
+                        },
+                        {
+                            id: "tendikPieChart",
+                            label: "Tenaga Kependidikan",
+                            value: {{ $tendikavg ?? 0 }},
+                            colors: ['#f6c23e', '#e74a3b'], // kuning + merah
+                            hover: ['#f8d25a', '#ff6b5c']
+                        },
+                        {
+                            id: "mahasiswaPieChart",
+                            label: "Mahasiswa",
+                            value: {{ $mahasiswaavg ?? 0 }},
+                            colors: ['#36b9cc', '#1cc88a'], // biru muda + hijau muda
+                            hover: ['#2c9faf', '#17a673']
+                        },
+                        {
+                            id: "penggunaLulusanPieChart",
+                            label: "Pengguna Lulusan",
+                            value: {{ $penggunalulusanavg ?? 0 }},
+                            colors: ['#ff9f40', '#ffcd56'], // oranye + kuning lembut
+                            hover: ['#ffb366', '#ffe082']
+                        },
+                        {
+                            id: "dosenPieChart",
+                            label: "Dosen",
+                            value: {{ $dosenavg ?? 0 }},
+                            colors: ['#9966ff', '#c9cbcf'], // ungu + abu muda
+                            hover: ['#b48aff', '#e0e0e0']
+                        },
+                        {
+                            id: "orangtuaPieChart",
+                            label: "Orang Tua Mahasiswa",
+                            value: {{ $orangtuaavg ?? 0 }},
+                            colors: ['#e83e8c', '#f6c23e'], // pink + kuning
+                            hover: ['#ff5fa8', '#f8d25a']
+                        },
+                    ];
+
+                    charts.forEach(chart => {
+                        const ctx = document.getElementById(chart.id);
+                        if (ctx) {
+                            new Chart(ctx, {
+                                type: 'doughnut',
+                                data: {
+                                    labels: [chart.label],
+                                    datasets: [{
+                                        data: [chart.value, 4 - chart.value],
+                                        backgroundColor: chart.colors,
+                                        hoverBackgroundColor: chart.hover,
+                                        hoverBorderColor: "rgba(234, 236, 244, 1)"
+                                    }]
+                                },
+                                options: {
+                                    maintainAspectRatio: false,
+                                    tooltips: {
+                                        backgroundColor: "rgb(255,255,255)",
+                                        bodyFontColor: "#858796",
+                                        borderColor: '#dddfeb',
+                                        borderWidth: 1,
+                                        xPadding: 15,
+                                        yPadding: 15,
+                                        displayColors: false,
+                                        caretPadding: 10
+                                    },
+                                    legend: { display: false },
+                                    cutoutPercentage: 80
+                                }
+                            });
+                        }
+                    });
+                </script>
+
+
 
                         </div>
                         <!-- End of Container Fluid -->
