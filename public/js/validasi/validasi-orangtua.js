@@ -3,13 +3,14 @@ $(document).ready(function () {
 
     const fields = [
         { id: '#nama', pesan: 'Nama wajib diisi.' },
-        { id: '#nip', pesan: 'Nomor Identitas Pegawai Negeri Sipil harus berupa 18 digit angka.' },
         { id: '#usia', pesan: 'Usia wajib diisi.' },
         { id: '#jeniskelamin', pesan: 'Pilih jenis kelamin.' },
         { id: '#alamat', pesan: 'Alamat wajib diisi.' },
+        { id: '#pekerjaan', pesan: 'Pekerjaan wajib diisi.' },
         { id: '#nomor_telepon', pesan: 'Nomor telepon wajib diisi.' },
-        { id: '#saranmasukkan', pesan: '| Saran dan masukan maksimal 255 karakter. |' },
+        { id: '#namamahasiswa', pesan: 'Nama wajib diisi.' },
         { id: '#prodi', pesan: 'Pilih program studi.' },
+        { id: '#saranmasukkan', pesan: '| Saran dan masukan maksimal 255 karakter. |' },
     ];
 
     fields.forEach(({ id, pesan }) => {
@@ -27,11 +28,6 @@ $(document).ready(function () {
             }
         });
     });
-
-    $('#nip').on('input', function () {
-        this.value = this.value.replace(/\D/g, '');
-    });
-
 
     $('#saranmasukkan').on('input', function () {
         const val = $(this).val();
@@ -59,48 +55,28 @@ $(document).ready(function () {
             return val.length <= 255;
         }
 
-        if (!val) {
-            // Semua field lain tetap harus diisi, kecuali NIP
-            if (id === '#nip') return true; // NIP kosong dianggap valid
-            return false;
-        }
+        if (!val) return false;
 
         switch (id) {
             case '#usia':
                 return /^[0-9]+$/.test(val) && val >= 16;
 
-            case '#nip':
-                if (val === '') return true; // NIP kosong valid
-                return /^[0-9]{18}$/.test(val);
-
             case '#nomor_telepon':
                 return /^[0-9]{10,13}$/.test(val);
+
+            case '#saran':
+                return val.length <= 255;
 
             default:
                 return true;
         }
     }
 
-
     function tampilkanError(id, pesan) {
         let errorId = id + '-error';
         let pesanAkhir = pesan;
         const val = $(id).val()?.trim();
 
-        if (id === '#nip') {
-            if (val === '') {
-                sembunyikanError(id); // kosong = valid
-                return;
-            }
-            if (!/^[0-9]{18}$/.test(val)) {
-                pesanAkhir = 'Nomor Identitas Pegawai Negeri Sipil harus berupa 18 digit angka.';
-            } else {
-                sembunyikanError(id);
-                return;
-            }
-        }
-
-        // Bagian lain tetap sama
         if (id === '#usia') {
             if (!val) pesanAkhir = 'Usia wajib diisi.';
             else pesanAkhir = 'Usia minimal 16 tahun.';
@@ -111,15 +87,17 @@ $(document).ready(function () {
             else pesanAkhir = 'Nomor telepon hanya boleh angka (10–13 digit).';
         }
 
+        if (id === '#tahun_lulus') {
+            if (!val) pesanAkhir = 'Tahun lulus wajib diisi.';
+            else pesanAkhir = 'Tahun lulus tidak valid.';
+        }
+
         if ($(errorId).length === 0) {
             $(id).after(`<small class="text-danger" id="${errorId.substring(1)}">${pesanAkhir}</small>`);
         }
-
         $(id).addClass('is-invalid');
         $(errorId).show().text(pesanAkhir);
     }
-
-
 
     function sembunyikanError(id) {
         let errorId = id + '-error';

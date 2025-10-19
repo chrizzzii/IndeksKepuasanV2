@@ -13,6 +13,7 @@ $(document).ready(function () {
         { id: '#pekerjaan', pesan: 'Pilih status pekerjaan.' },
         { id: '#kesesuaian', pesan: 'Pilih kesesuaian pekerjaan dengan prodi.' },
         { id: '#waktu', pesan: 'Pilih waktu memperoleh pekerjaan pertama.' },
+        { id: '#jenistempatkerja', pesan: 'Pilih Jenis tempat Kerja.' },
         { id: '#instansi', pesan: 'Pilih instansi tempat bekerja.' },
         { id: '#tempat_kerja', pesan: 'Nama instansi wajib diisi.' },
         { id: '#penghasilan', pesan: 'Pilih penghasilan per bulan.' },

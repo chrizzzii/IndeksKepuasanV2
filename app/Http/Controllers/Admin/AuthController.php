@@ -128,25 +128,72 @@ class AuthController extends Controller
         return view('admin.pages.registration.select_cluster'); // Tampilkan halaman pemilihan kluster
     }
 
-    // Bagian untuk registrasi
     public function submitCluster(Request $request)
     {
-        $cluster = $request->input('cluster'); // Mengambil kluster yang dipilih
-        Session::put('selected_cluster', $request->input('cluster'));
+        $cluster = $request->input('cluster');
+        $email = $request->input('email');
+        Session::put('selected_cluster', $cluster);
+
+        $tables = [
+            'alumni' => 'alumni',
+            'orangtua' => 'orangtua',
+            'mahasiswa' => 'mahasiswa',
+            'tendik' => 'tendik',
+            'dosen' => 'dosen',
+            'mitra' => 'mitra',
+            'penggunalulusan' => 'pengguna_lulusan',
+        ];
+
+        if (!array_key_exists($cluster, $tables)) {
+            return redirect()->back()->withErrors('Peran tidak valid.');
+        }
+
+        $tableName = $tables[$cluster];
+        $data = DB::table($tableName)->where('email', $email)->first();
+
         switch ($cluster) {
             case 'alumni':
-                return redirect('formalumni');
-            case 'mahasiswa':
-                return redirect('formmahasiswa');
+                if ($data) {
+                    return redirect('formalumni')->with('dataAlumni', $data);
+                }
+                return redirect('formalumni')->withInput();
+
             case 'tendik':
-                return redirect('formtendik');
+                if ($data) {
+                    return redirect('formtendik')->with('dataTendik', $data);
+                }
+                return redirect('formtendik')->withInput();
+
+            case 'orangtua':
+                if ($data) {
+                    return redirect('formorangtua')->with('dataOrangtua', $data);
+                }
+                return redirect('formorangtua')->withInput();
+
+            case 'mahasiswa':
+                if ($data) {
+                    return redirect('formmahasiswa')->with('dataMahasiswa', $data);
+                }
+                return redirect('formmahasiswa')->withInput();
+
             case 'dosen':
-                return redirect('formdosen');
+                if ($data) {
+                    return redirect('formdosen')->with('dataDosen', $data);
+                }
+                return redirect('formdosen')->withInput();
+
             case 'mitra':
-                return redirect('formmitra');
+                if ($data) {
+                    return redirect('formmitra')->with('dataMitra', $data);
+                }
+                return redirect('formmitra')->withInput();
+
             case 'penggunalulusan':
-                return redirect('formpenggunalulusan');
-                // Tambahkan case untuk kluster lain sesuai kebutuhan
+                if ($data) {
+                    return redirect('formpenggunalulusan')->with('dataPenggunaLulusan', $data);
+                }
+                return redirect('formpenggunalulusan')->withInput();
+
             default:
                 return redirect()->back()->withErrors('Kluster tidak valid.');
         }

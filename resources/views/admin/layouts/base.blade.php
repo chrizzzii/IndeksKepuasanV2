@@ -93,6 +93,7 @@
                         <a class="collapse-item" href="dashboard">Indeks Keseluruhan</a>
                         <a class="collapse-item" href="/indexalumni">Indeks Alumni</a>
                         <a class="collapse-item" href="/indexdosen">Indeks Dosen</a>
+                        <a class="collapse-item" href="/indexorangtua">Indeks Orang Tua / Wali</a>
                         <a class="collapse-item" href="/indexmahasiswa">Indeks Mahasiswa</a>
                         <a class="collapse-item" href="/indexmitra">Indeks Mitra Kerjasama</a>
                         <a class="collapse-item" href="/indextendik">Indeks Tendik</a>

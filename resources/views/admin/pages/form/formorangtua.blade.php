@@ -2,67 +2,65 @@
 <html lang="en">
 @extends('admin.layouts.base')
 
-@section('title', 'Form Survei Mahasiswa')
+@section('title', 'Form Survei Orangtua')
 @section('content')
+
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ asset('assets/css/from.css') }}" rel="stylesheet">
-    <script src="{{ asset('js/validasi/validasi-mahasiswa.js') }}"></script>
+    <script src="{{ asset('js/validasi/validasi-orangtua.js') }}"></script>
+    <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('assets/js/sb-admin-2.min.js') }}"></script>
+
 </head>
 
 <body>
     @php
-    $dataMahasiswa = session('dataMahasiswa');
+    $dataOrangtua = session('dataOrangtua');
     @endphp
     <div class="row">
-
+        <div class="container-fluid">
+            <!-- Page Heading -->
+            <div class="text-center">
+                <h1 class="h3 mb-4 text-gray-800">
+                    Form Orang Tua
+                </h1>
+            </div>
+            @yield('content')
+        </div>
 
         <div class="container">
-            <div class="container-fluid">
-                <!-- Page Heading -->
-                <div class="text-center">
-                    <h1 class="h3 mb-4 text-gray-800">Form Mahasiswa</h1>
-                </div>
-                @yield('content')
-            </div>
-            <form method="POST" action="{{ route('form.storemahasiswa') }}">
+            <form method="POST" action="{{ route('form.storeorangtua') }}">
                 @csrf
-                <input type="hidden" name="mahasiswa" value="{{ session('user_id') }}">
-                <input type="hidden" name="email" value="{{ old('email', optional($dataMahasiswa)->email) }}">
+                <input type="hidden" name="orangtua" value="{{ session('user_id') }}">
+                <input type="hidden" name="email" value="{{ old('email', optional($dataOrangtua)->email) }}">
 
-                <label for="nama">Nama <span class="text-danger">*</span> <span><small id="nama-error" class="invalid-feedback" style="display:none;"></small>
+                <label for="nama">Nama Orang Tua<span class="text-danger">*</span> <span><small id="nama-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <input type="text" class="form-control form-control-user" id="nama" name="nama"
-                    placeholder="Nama" value="{{ old('nama', optional($dataMahasiswa)->nama) }}" required>
+                    placeholder="Nama Orang Tua" value="{{ old('nama', optional($dataOrangtua)->nama) }}" required>
 
-                <label for="nim">Nomor Induk Mahasiswa <span class="text-danger">*</span> <span><small id="nim-error" class="invalid-feedback" style="display:none;"></small>
-                    </span></label>
-                <input type="text" class="form-control form-control-user" id="nim" name="nim"
-                    placeholder="Nomor Induk Mahasiswa" value="{{ old('nim', optional($dataMahasiswa)->nim) }}" required>
-
-                <label for="usia">Usia (Tahun) <span class="text-danger">*</span> <span><small id="usia-error" class="invalid-feedback" style="display:none;"></small>
+                <label for="usia">Usia <span class="text-danger">*</span> <span><small id="usia-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <input type="number" class="form-control form-control-user" id="usia" name="usia"
-                    placeholder="Usia" value="{{ old('usia', optional($dataMahasiswa)->usia) }}" required>
-
+                    placeholder="Usia" value="{{ old('usia', optional($dataOrangtua)->usia) }}" required>
 
                 <label for="jeniskelamin">Jenis Kelamin <span class="text-danger">*</span> <span><small id="jeniskelamin-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <select class="form-control form-control-user" id="jeniskelamin" name="jeniskelamin" required>
-                    <option value="" disabled {{ old('jeniskelamin', optional($dataMahasiswa)->jeniskelamin) ? '' : 'selected' }}>
+                    <option value="" disabled selected {{ old('jeniskelamin', optional($dataOrangtua)->jeniskelamin) ? '' : 'selected' }}>
                         Pilih Jenis Kelamin
                     </option>
                     <option value="Laki-laki"
-                        {{ old('jeniskelamin', optional($dataMahasiswa)->jeniskelamin) == 'Laki-laki' ? 'selected' : '' }}>
+                        {{ old('jeniskelamin', optional($dataOrangtua)->jeniskelamin) == 'Laki-laki' ? 'selected' : '' }}>
                         Laki-laki
                     </option>
                     <option value="Perempuan"
-                        {{ old('jeniskelamin', optional($dataMahasiswa)->jeniskelamin) == 'Perempuan' ? 'selected' : '' }}>
+                        {{ old('jeniskelamin', optional($dataOrangtua)->jeniskelamin) == 'Perempuan' ? 'selected' : '' }}>
                         Perempuan
                     </option>
                 </select>
@@ -70,30 +68,34 @@
                 <label for="alamat">Alamat <span class="text-danger">*</span> <span><small id="alamat-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <input type="text" class="form-control form-control-user" id="alamat" name="alamat"
-                    placeholder="Alamat" value="{{ old('alamat', optional($dataMahasiswa)->alamat) }}" required>
+                    placeholder="Alamat" value="{{ old('alamat', optional($dataOrangtua)->alamat) }}" required>
+
+                <label for="pekerjaan">Pekerjaan <span class="text-danger">*</span> <span><small id="pekerjaan-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
+                <input type="text" class="form-control form-control-user" id="pekerjaan" name="pekerjaan"
+                    placeholder="Pekerjaan" value="{{ old('pekerjaan', optional($dataOrangtua)->pekerjaan) }}" required>
 
                 <label for="nomor_telepon">Nomor Telepon <span class="text-danger">*</span> <span><small id="nomor_telepon-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <input type="number" class="form-control form-control-user" id="nomor_telepon" name="nomor_telepon"
-                    placeholder="Nomor Telepon" value="{{ old('nomor_telepon', optional($dataMahasiswa)->nomor_telepon) }}" required>
+                    placeholder="Nomor Telepon" value="{{ old('nomor_telepon', optional($dataOrangtua)->nomor_telepon) }}" required>
 
-                <label for="saranmasukkan">Saran dan Masukan</label> <span><small id="saranmasukkan-count" class="text-muted">0 / 255 karakter</small></span> <span><small id="saranmasukkan-error" class="invalid-feedback" style="display:none;"></small>
-                </span>
-                <textarea class="form-control form-control-user" id="saranmasukkan" name="saranmasukkan"
-                    placeholder="Saran dan Masukan" value="{{ old('saranmasukkan', optional($dataMahasiswa)->saranmasukkan) }}"></textarea>
-
+                <label for="namamahasiswa">Nama Mahasiswa <span class="text-danger">*</span> <span><small id="namamahasiswa-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
+                <input type="text" class="form-control form-control-user" id="namamahasiswa" name="namamahasiswa"
+                    placeholder="Nama Mahasiswa" value="{{ old('namamahasiswa', optional($dataOrangtua)->namamahasiswa) }}" required>
 
                 <label for="prodi">Program Studi <span class="text-danger">*</span> <span><small id="prodi-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <select class="form-control form-control-user" id="prodi" name="prodi" required>
-                    <option value="" disabled {{ old('prodi', optional($dataMahasiswa)->prodi) ? '' : 'selected' }}>
+                    <option value="" disabled {{ old('prodi', optional($dataOrangtua)->prodi) ? '' : 'selected' }}>
                         Pilih Program Studi
                     </option>
                     @foreach ($programStudi as $jurusan => $prodis)
                     <optgroup label="{{ $jurusan }}">
                         @foreach ($prodis as $prodi)
                         <option value="{{ $prodi }}"
-                            {{ old('prodi', optional($dataMahasiswa)->prodi) == $prodi ? 'selected' : '' }}>
+                            {{ old('prodi', optional($dataOrangtua)->prodi) == $prodi ? 'selected' : '' }}>
                             {{ $prodi }}
                         </option>
                         @endforeach
@@ -101,7 +103,21 @@
                     @endforeach
                 </select>
 
-                <br />
+
+                <label for="saranmasukkan">Saran dan Masukan</label>
+                <span>
+                    <small id="saranmasukkan-count" class="text-muted">0 / 255 karakter</small>
+                </span>
+                <span>
+                    <small id="saranmasukkan-error" class="invalid-feedback" style="display:none;"></small>
+                </span>
+
+                <textarea class="form-control form-control-user" id="saranmasukkan" name="saranmasukkan"
+                    placeholder="Saran dan Masukan">{{ old('saranmasukkan', optional($dataOrangtua)->saranmasukkan) }}</textarea>
+
+
+                <br>
+
                 <img src="{{ asset('assets/img/ikm.png') }}" class="img-hr" alt="Pembatas HR1"
                     style="width: 100%; height: auto;">
                 <h4 style="color: black; text-align: left;">Keterangan Menilai:</h4>
@@ -146,6 +162,7 @@
                     </tbody>
                 </table>
 
+
                 <table></table>
                 <img src="{{ asset('assets/img/skl.png') }}" class="img-hr" alt="Pembatas HR2"
                     style="width: 100%; height: auto;">
@@ -161,7 +178,8 @@
                     </thead>
                     <tbody>
                         @php $no = 1; @endphp <!-- Variabel untuk nomor urut -->
-                        @foreach ($pertanyaanMahasiswa as $pertanyaan)
+                        @foreach ($pertanyaanOrangtua as $pertanyaan)
+                        @if ($pertanyaan->pertanyaan_id >= 2)
                         <tr>
                             <td>{{ $no++ }}</td> <!-- Nomor urut -->
                             <td>{{ $pertanyaan->pertanyaan }}</td> <!-- Uraian pertanyaan -->
@@ -181,13 +199,17 @@
                                 @endforeach
                             </td>
                         </tr>
+                        @endif
                         @endforeach
                     </tbody>
                 </table>
-                <hr>
+
+
+
+                <br>
+
                 <button type="submit" class="btn btn-primary">KIRIM</button>
             </form>
-
         </div>
     </div>
     </div>
@@ -222,7 +244,7 @@
 
 </body>
 
-@include('admin.layouts.footer')
+
 
 @endsection
 

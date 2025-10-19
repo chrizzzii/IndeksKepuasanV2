@@ -18,7 +18,9 @@
 </head>
 
 <body>
-
+    @php
+    $dataTendik = session('dataTendik');
+    @endphp
     <div class="row">
         <div class="container-fluid">
             <div class="text-center">
@@ -33,65 +35,70 @@
             <form method="POST" action="{{ route('form.storetendik') }}">
                 @csrf
                 <input type="hidden" name="tendik" value="{{ session('user_id') }}">
+                <input type="hidden" name="email" value="{{ old('email', optional($dataTendik)->email) }}">
 
                 <label for="nama">Nama <span class="text-danger">*</span> <span><small id="nama-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <input type="text" class="form-control form-control-user" id="nama" name="nama"
-                    placeholder="Nama" required>
+                    placeholder="Nama" value="{{ old('nama', optional($dataTendik)->nama) }}" required>
 
                 <label for="nip">Nomor Identitas Pegawai Negeri Sipil <span><small id="nip-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <input type="text" class="form-control form-control-user" id="nip" name="nip"
-                    placeholder="Nomor Identitas Pegawai Negeri Sipil">
+                    placeholder="Nomor Identitas Pegawai Negeri Sipil" value="{{ old('nip', optional($dataTendik)->nip) }}">
 
                 <label for="usia">Usia (Tahun) <span class="text-danger">*</span> <span><small id="usia-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <input type="number" class="form-control form-control-user" id="usia" name="usia"
-                    placeholder="Usia" required>
+                    placeholder="Usia" value="{{ old('usia', optional($dataTendik)->usia) }}" required>
 
 
                 <label for="jeniskelamin">Jenis Kelamin <span class="text-danger">*</span> <span><small id="jeniskelamin-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <select class="form-control form-control-user" id="jeniskelamin" name="jeniskelamin" required>
-                    <option value="" disabled selected>Pilih Jenis
-                        Kelamin</option>
-                    <option value="Laki-laki">
-                        Laki-laki</option>
-                    <option value="Perempuan">
-                        Perempuan</option>
+                    <option value="" disabled {{ old('jeniskelamin', optional($dataTendik)->jeniskelamin) ? '' : 'selected' }}>Pilih Jenis Kelamin</option>
+                    <option value="Laki-laki" {{ old('jeniskelamin', optional($dataTendik)->jeniskelamin) == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
+                    <option value="Perempuan" {{ old('jeniskelamin', optional($dataTendik)->jeniskelamin) == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
                 </select>
+
 
                 <label for="alamat">Alamat <span class="text-danger">*</span> <span><small id="alamat-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <input type="text" class="form-control form-control-user" id="alamat" name="alamat"
-                    placeholder="Alamat" required>
+                    placeholder="Alamat"
+                    value="{{ old('alamat', optional($dataTendik)->alamat) }}"
+                    required>
+
 
                 <label for="nomor_telepon">Nomor Telepon <span class="text-danger">*</span> <span><small id="nomor_telepon-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <input type="number" class="form-control form-control-user" id="nomor_telepon" name="nomor_telepon"
-                    placeholder="Nomor Telepon" required>
+                    placeholder="Nomor Telepon"
+                    value="{{ old('nomor_telepon', optional($dataTendik)->nomor_telepon) }}"
+                    required>
+
 
                 <label for="saranmasukkan">Saran dan Masukan</label> <span><small id="saranmasukkan-count" class="text-muted">0 / 255 karakter</small></span> <span><small id="saranmasukkan-error" class="invalid-feedback" style="display:none;"></small>
                 </span>
                 <textarea class="form-control form-control-user" id="saranmasukkan" name="saranmasukkan"
-                    placeholder="Saran dan Masukan"></textarea>
+                    placeholder="Saran dan Masukan">{{ old('saranmasukkan', optional($dataTendik)->saranmasukkan) }}</textarea>
 
                 <label for="prodi">Program Studi <span class="text-danger">*</span> <span><small id="prodi-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <select class="form-control form-control-user" id="prodi" name="prodi" required>
-                    <option value="" disabled selected>Pilih Program Studi
-                    </option>
+                    <option value="" disabled {{ old('prodi', optional($dataTendik)->prodi) ? '' : 'selected' }}>Pilih Program Studi</option>
                     @foreach ($programStudi as $jurusan => $prodis)
                     <optgroup label="{{ $jurusan }}">
                         @foreach ($prodis as $prodi)
                         <option value="{{ $prodi }}"
-                            {{ isset($tendik->prodi) && $tendik->prodi == $prodi ? 'selected' : '' }}>
+                            {{ old('prodi', optional($dataTendik)->prodi) == $prodi ? 'selected' : '' }}>
                             {{ $prodi }}
                         </option>
                         @endforeach
                     </optgroup>
                     @endforeach
                 </select>
+
 
                 <br>
 

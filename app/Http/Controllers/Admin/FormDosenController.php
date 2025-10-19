@@ -16,17 +16,46 @@ class FormDosenController extends Controller
         $pertanyaanMasyarakat = PertanyaanMasyarakat::all();
 
         $programStudi = config('programstudi');  // Mengambil data dari config/jurusan.php
-      {
-            return view('admin.pages.form.formdosen', compact('programStudi', 'pertanyaanDosen', 'pertanyaanMasyarakat',));
+
+        $responses = [];
+        $responsesu = [];
+
+        // Ambil email dari session
+        $email = session('dataDosen');
+
+        if ($email) {
+            // Jawaban p1–p38
+            for ($i = 1; $i <= 38; $i++) {
+                $responses[$i] = $email->{'p' . $i};
+            }
+
+            // Jawaban u1–u9
+            for ($i = 1; $i <= 9; $i++) {
+                $responsesu[$i] = $email->{'u' . $i};
+            }
         }
+
+        return view('admin.pages.form.formdosen', compact(
+            'programStudi',
+            'pertanyaanDosen',
+            'pertanyaanMasyarakat',
+            'responses',
+            'responsesu',
+        ));
     }
 
     public function store(Request $request)
     {
-            $dosen = new Dosen();
+        // Ambil data dosen dari session
+        $email = $request->input('email');
 
-        // Set nilai properti model dari request
-        $dosen->status = 1;
+        // Jika data sudah ada, update. Jika belum, buat baru.
+        $dosen = Dosen::where('email', $email)->first();
+        if (!$dosen) {
+            $dosen = new Dosen();
+            $dosen->status = 1;
+        }
+
         $dosen->nama = $request->input('nama');
         $dosen->nip = $request->input('nip');
         $dosen->usia = $request->input('usia');
@@ -34,6 +63,7 @@ class FormDosenController extends Controller
         $dosen->alamat = $request->input('alamat');
         $dosen->nomor_telepon = $request->input('nomor_telepon');
         $dosen->saranmasukkan = $request->input('saranmasukkan');
+        $dosen->email = $email;
 
         $dosen->prodi = $request->input('prodi');
         $dosen->prodi2 = $request->input('prodi2');
@@ -59,7 +89,7 @@ class FormDosenController extends Controller
         // Simpan model ke database
         $dosen->save();
 
-        // Redirect atau tampilkan pesan sukses
-        return redirect()->back()->with('success', 'Your response has been recorded!');
+        $message = $dosen->wasRecentlyCreated ? 'Data dosen berhasil ditambahkan!' : 'Data dosen berhasil diperbarui!';
+        return redirect()->back()->with('success', $message);
     }
 }

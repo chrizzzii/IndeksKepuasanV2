@@ -49,7 +49,9 @@
 </head>
 
 <body>
-
+    @php
+    $dataDosen = session('dataDosen');
+    @endphp
     <div class="row">
         <div class="container">
             <div class="container-fluid">
@@ -63,63 +65,74 @@
             <form method="POST" action="{{ route('form.storedosen') }}">
                 @csrf
                 <input type="hidden" name="dosen" value="{{ session('user_id') }}">
+                <input type="hidden" name="email" value="{{ old('email', optional($dataDosen)->email) }}">
+
 
                 <label for="nama">Nama <span class="text-danger">*</span> <span><small id="nama-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <input type="text" class="form-control form-control-user" id="nama" name="nama"
-                    placeholder="Nama" required>
+                    placeholder="Nama" value="{{ old('nama', optional($dataDosen)->nama) }}" required>
 
                 <label for="nip">Nomor Identitas Pegawai Negeri Sipil <span class="text-danger">*</span> <span><small id="nip-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
-                <input type="text" class="form-control form-control-user" id="nip" name="nip" placeholder="Nomor Identitas Pegawai Negeri Sipil" required>
+                <input type="text" class="form-control form-control-user" id="nip" name="nip" placeholder="Nomor Identitas Pegawai Negeri Sipil" value="{{ old('nip', optional($dataDosen)->nip) }}" required>
 
                 <label for="usia">Usia (Tahun) <span class="text-danger">*</span> <span><small id="usia-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <input type="number" class="form-control form-control-user" id="usia" name="usia"
-                    placeholder="Usia" required>
+                    placeholder="Usia" value="{{ old('usia', optional($dataDosen)->usia) }}" required>
 
 
                 <label for="jeniskelamin">Jenis Kelamin <span class="text-danger">*</span> <span><small id="jeniskelamin-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <select class="form-control form-control-user" id="jeniskelamin" name="jeniskelamin" required>
-                    <option value="" disabled selected>Pilih Jenis
-                        Kelamin</option>
-                    <option value="Laki-laki">
-                        Laki-laki</option>
-                    <option value="Perempuan">
-                        Perempuan</option>
+                    <option value="" disabled {{ old('jeniskelamin', optional($dataDosen)->jeniskelamin) ? '' : 'selected' }}>
+                        Pilih Jenis Kelamin
+                    </option>
+                    <option value="Laki-laki"
+                        {{ old('jeniskelamin', optional($dataDosen)->jeniskelamin) == 'Laki-laki' ? 'selected' : '' }}>
+                        Laki-laki
+                    </option>
+                    <option value="Perempuan"
+                        {{ old('jeniskelamin', optional($dataDosen)->jeniskelamin) == 'Perempuan' ? 'selected' : '' }}>
+                        Perempuan
+                    </option>
                 </select>
 
                 <label for="alamat">Alamat <span class="text-danger">*</span> <span><small id="alamat-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <input type="text" class="form-control form-control-user" id="alamat" name="alamat"
-                    placeholder="Alamat" required>
+                    placeholder="Alamat" value="{{ old('alamat', optional($dataDosen)->alamat) }}" required>
 
                 <label for="nomor_telepon">Nomor Telepon <span class="text-danger">*</span> <span><small id="nomor_telepon-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <input type="number" class="form-control form-control-user" id="nomor_telepon" name="nomor_telepon"
-                    placeholder="Nomor Telepon" required>
+                    placeholder="Nomor Telepon" value="{{ old('nomor_telepon', optional($dataDosen)->nomor_telepon) }}" required>
 
                 <label for="saranmasukkan">Saran dan Masukan</label> <span><small id="saranmasukkan-count" class="text-muted">0 / 255 karakter</small></span> <span><small id="saranmasukkan-error" class="invalid-feedback" style="display:none;"></small>
                 </span>
                 <textarea class="form-control form-control-user" id="saranmasukkan" name="saranmasukkan"
-                    placeholder="Saran dan Masukan"></textarea>
+                    placeholder="Saran dan Masukan" value="{{ old('saranmasukkan', optional($dataDosen)->saranmasukkan) }}"></textarea>
 
                 <!--PRODI 1-->
                 <label for="prodi">Program Studi <span class="text-danger">*</span> <span><small id="prodi-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <select class="form-control form-control-user" id="prodi" name="prodi" required>
-                    <option value="" disabled selected>Pilih Program Studi</option>
+                    <option value="" disabled {{ old('prodi', optional($dataDosen)->prodi) ? '' : 'selected' }}>
+                        Pilih Program Studi
+                    </option>
                     @foreach ($programStudi as $jurusan => $prodis)
                     <optgroup label="{{ $jurusan }}">
                         @foreach ($prodis as $prodi)
-                        <option value="{{ $prodi }}" {{ isset($dosen->prodi) && $dosen->prodi == $prodi ? 'selected' : '' }}>
+                        <option value="{{ $prodi }}"
+                            {{ old('prodi', optional($dataDosen)->prodi) == $prodi ? 'selected' : '' }}>
                             {{ $prodi }}
                         </option>
                         @endforeach
                     </optgroup>
                     @endforeach
                 </select>
+
 
                 <!-- Checkbox untuk menambah program studi -->
                 <div class="form-check">
@@ -132,12 +145,12 @@
                     <!--PRODI 2-->
                     <label for="prodi2">Program Studi ke-2</label>
                     <select class="form-control form-control-user" id="prodi2" name="prodi2">
-                        <option value="" disabled>Pilih Program Studi</option>
-                        <option value="">Kosongkan bagian ini</option> <!-- Opsi tidak memilih -->
+                        <option value="" disabled {{ old('prodi2', optional($dataDosen)->prodi2) ? '' : 'selected' }}>Pilih Program Studi</option>
+                        <option value="">Kosongkan bagian ini</option>
                         @foreach ($programStudi as $jurusan => $prodis)
                         <optgroup label="{{ $jurusan }}">
                             @foreach ($prodis as $prodi)
-                            <option value="{{ $prodi }}" {{ isset($dosen->prodi2) && $dosen->prodi2 == $prodi ? 'selected' : '' }}>
+                            <option value="{{ $prodi }}" {{ old('prodi2', optional($dataDosen)->prodi2) == $prodi ? 'selected' : '' }}>
                                 {{ $prodi }}
                             </option>
                             @endforeach
@@ -148,12 +161,12 @@
                     <!--PRODI 3-->
                     <label for="prodi3">Program Studi ke-3</label>
                     <select class="form-control form-control-user" id="prodi3" name="prodi3">
-                        <option value="" disabled>Pilih Program Studi</option>
-                        <option value="">Kosongkan bagian ini</option> <!-- Opsi tidak memilih -->
+                        <option value="" disabled {{ old('prodi3', optional($dataDosen)->prodi3) ? '' : 'selected' }}>Pilih Program Studi</option>
+                        <option value="">Kosongkan bagian ini</option>
                         @foreach ($programStudi as $jurusan => $prodis)
                         <optgroup label="{{ $jurusan }}">
                             @foreach ($prodis as $prodi)
-                            <option value="{{ $prodi }}" {{ isset($dosen->prodi3) && $dosen->prodi3 == $prodi ? 'selected' : '' }}>
+                            <option value="{{ $prodi }}" {{ old('prodi3', optional($dataDosen)->prodi3) == $prodi ? 'selected' : '' }}>
                                 {{ $prodi }}
                             </option>
                             @endforeach
@@ -164,12 +177,12 @@
                     <!--PRODI 4-->
                     <label for="prodi4">Program Studi ke-4</label>
                     <select class="form-control form-control-user" id="prodi4" name="prodi4">
-                        <option value="" disabled>Pilih Program Studi</option>
-                        <option value="">Kosongkan bagian ini</option> <!-- Opsi tidak memilih -->
+                        <option value="" disabled {{ old('prodi4', optional($dataDosen)->prodi4) ? '' : 'selected' }}>Pilih Program Studi</option>
+                        <option value="">Kosongkan bagian ini</option>
                         @foreach ($programStudi as $jurusan => $prodis)
                         <optgroup label="{{ $jurusan }}">
                             @foreach ($prodis as $prodi)
-                            <option value="{{ $prodi }}" {{ isset($dosen->prodi4) && $dosen->prodi4 == $prodi ? 'selected' : '' }}>
+                            <option value="{{ $prodi }}" {{ old('prodi4', optional($dataDosen)->prodi4) == $prodi ? 'selected' : '' }}>
                                 {{ $prodi }}
                             </option>
                             @endforeach
@@ -180,12 +193,12 @@
                     <!--PRODI 5-->
                     <label for="prodi5">Program Studi ke-5</label>
                     <select class="form-control form-control-user" id="prodi5" name="prodi5">
-                        <option value="" disabled>Pilih Program Studi</option>
-                        <option value="">Kosongkan bagian ini</option> <!-- Opsi tidak memilih -->
+                        <option value="" disabled {{ old('prodi5', optional($dataDosen)->prodi5) ? '' : 'selected' }}>Pilih Program Studi</option>
+                        <option value="">Kosongkan bagian ini</option>
                         @foreach ($programStudi as $jurusan => $prodis)
                         <optgroup label="{{ $jurusan }}">
                             @foreach ($prodis as $prodi)
-                            <option value="{{ $prodi }}" {{ isset($dosen->prodi5) && $dosen->prodi5 == $prodi ? 'selected' : '' }}>
+                            <option value="{{ $prodi }}" {{ old('prodi5', optional($dataDosen)->prodi5) == $prodi ? 'selected' : '' }}>
                                 {{ $prodi }}
                             </option>
                             @endforeach

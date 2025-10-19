@@ -17,7 +17,9 @@
 </head>
 
 <body>
-
+    @php
+    $dataPenggunaLulusan = session('dataPenggunaLulusan');
+    @endphp
     <div class="row">
 
 
@@ -34,57 +36,65 @@
             <form method="POST" action="{{ route('form.storepenggunalulusan') }}">
                 @csrf
                 <input type="hidden" name="penggunalulusan" value="{{ session('user_id') }}">
+                <input type="hidden" name="email" value="{{ old('email', optional($dataPenggunaLulusan)->email) }}">
 
                 <div style="background-color: #f0f0f0; padding: 10px; font-weight: bold;">
                     A. IDENTITAS PENILAI
                 </div>
-                <label for="nama">Nama <span class="text-danger">*</span> <span><small id="nama_identitaspenilai-error" class="invalid-feedback" style="display:none;"></small>
+                <label for="nama_identitaspenilai">Nama <span class="text-danger">*</span> <span><small id="nama_identitaspenilai-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <input type="text" class="form-control form-control-user" id="nama_identitaspenilai"
-                    name="nama_identitaspenilai" placeholder="Nama"
+                    name="nama_identitaspenilai" placeholder="Nama" value="{{ old('nama_identitaspenilai', optional($dataPenggunaLulusan)->nama_identitaspenilai) }}"
                     required>
 
                 <label for="usia_identitaspenilai">Usia (Tahun) <span class="text-danger">*</span> <span><small id="usia_identitaspenilai-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <input type="number" class="form-control form-control-user" id="usia_identitaspenilai"
-                    name="usia_identitaspenilai" placeholder="Usia"
+                    name="usia_identitaspenilai" placeholder="Usia" value="{{ old('usia_identitaspenilai', optional($dataPenggunaLulusan)->usia_identitaspenilai) }}"
                     required>
 
                 <label for="jeniskelamin_identitaspenilai">Jenis Kelamin <span class="text-danger">*</span> <span><small id="jeniskelamin_identitaspenilai-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <select class="form-control form-control-user" id="jeniskelamin_identitaspenilai"
                     name="jeniskelamin_identitaspenilai" required>
-                    <option value="" disabled selected>Jenis Kelamin</option>
-                    <option value="Laki-laki">
-                        Laki-laki</option>
-                    <option value="Perempuan">
-                        Perempuan</option>
+                    <option value="" disabled {{ old('jeniskelamin_identitaspenilai', optional($dataPenggunaLulusan)->jeniskelamin_identitaspenilai) ? '' : 'selected' }}>
+                        Jenis Kelamin
+                    </option>
+                    <option value="Laki-laki"
+                        {{ old('jeniskelamin_identitaspenilai', optional($dataPenggunaLulusan)->jeniskelamin_identitaspenilai) == 'Laki-laki' ? 'selected' : '' }}>
+                        Laki-laki
+                    </option>
+                    <option value="Perempuan"
+                        {{ old('jeniskelamin_identitaspenilai', optional($dataPenggunaLulusan)->jeniskelamin_identitaspenilai) == 'Perempuan' ? 'selected' : '' }}>
+                        Perempuan
+                    </option>
                 </select>
+
 
                 <label for="alamat_identitaspenilai">Alamat <span class="text-danger">*</span> <span><small id="alamat_identitaspenilai-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <input type="text" class="form-control form-control-user" id="alamat_identitaspenilai"
-                    name="alamat_identitaspenilai" placeholder="Alamat" required>
+                    name="alamat_identitaspenilai" placeholder="Alamat" value="{{ old('alamat_identitaspenilai', optional($dataPenggunaLulusan)->alamat_identitaspenilai) }}" required>
 
                 <label for="kontak_identitaspenilai">Kontak Person (HP/WA) <span class="text-danger">*</span> <span><small id="kontak_identitaspenilai-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <input type="number" class="form-control form-control-user" id="kontak_identitaspenilai"
-                    name="kontak_identitaspenilai" placeholder="Kontak Person (Email/HP/Wa)" required>
+                    name="kontak_identitaspenilai" placeholder="Kontak Person (Email/HP/Wa)" value="{{ old('kontak_identitaspenilai', optional($dataPenggunaLulusan)->kontak_identitaspenilai) }}" required>
 
                 <label for="instansi_identitaspenilai">Instansi <span class="text-danger">*</span> <span><small id="instansi_identitaspenilai-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <input type="text" class="form-control form-control-user" id="instansi_identitaspenilai"
-                    name="instansi_identitaspenilai" placeholder="Instansi" required>
+                    name="instansi_identitaspenilai" placeholder="Instansi" value="{{ old('instansi_identitaspenilai', optional($dataPenggunaLulusan)->instansi_identitaspenilai) }}" required>
 
                 <label for="jabatan_identitaspenilai">Jabatan <span class="text-danger">*</span> <span><small id="jabatan_identitaspenilai-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <input type="text" class="form-control form-control-user" id="jabatan_identitaspenilai"
-                    name="jabatan_identitaspenilai" placeholder="Jabatan" required>
+                    name="jabatan_identitaspenilai" placeholder="Jabatan" value="{{ old('jabatan_identitaspenilai', optional($dataPenggunaLulusan)->jabatan_identitaspenilai) }}" required>
 
                 <label for="lamabekerjadenganlulusan">Lama Bekerja Dengan Lulusan(Tahun) <span class="text-danger">*</span> <span><small id="lamabekerjadenganlulusan-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <input type="number" class="form-control form-control-user" id="lamabekerjadenganlulusan"
-                    name="lamabekerjadenganlulusan" placeholder="Lama Bekerja Dengan Lulusan(Tahun)" required>
+                    name="lamabekerjadenganlulusan" placeholder="Lama Bekerja Dengan Lulusan(Tahun)" value="{{ old('lamabekerjadenganlulusan', optional($dataPenggunaLulusan)->lamabekerjadenganlulusan) }}" required>
                 <br>
 
                 <div style="background-color: #f0f0f0; padding: 10px; font-weight: bold;">
@@ -93,56 +103,78 @@
                 <label for="nama_identitaslulusan">Nama <span class="text-danger">*</span> <span><small id="nama_identitaslulusan-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <input type="text" class="form-control form-control-user" id="nama_identitaslulusan"
-                    name="nama_identitaslulusan" placeholder="Nama" required>
+                    name="nama_identitaslulusan" placeholder="Nama" value="{{ old('nama_identitaslulusan', optional($dataPenggunaLulusan)->nama_identitaslulusan) }}" required>
 
                 <label for="jeniskelamin_identitaslulusan">Jenis Kelamin <span class="text-danger">*</span> <span><small id="jeniskelamin_identitaslulusan-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <select class="form-control form-control-user" id="jeniskelamin_identitaslulusan"
                     name="jeniskelamin_identitaslulusan" required>
-                    <option value="" disabled selected>Jenis Kelamin</option>
-                    <option value="Laki-laki">
-                        Laki-laki</option>
-                    <option value="Perempuan">
-                        Perempuan</option>
+                    <option value="" disabled {{ old('jeniskelamin_identitaslulusan', optional($dataPenggunaLulusan)->jeniskelamin_identitaslulusan) ? '' : 'selected' }}>
+                        Jenis Kelamin
+                    </option>
+                    <option value="Laki-laki"
+                        {{ old('jeniskelamin_identitaslulusan', optional($dataPenggunaLulusan)->jeniskelamin_identitaslulusan) == 'Laki-laki' ? 'selected' : '' }}>
+                        Laki-laki
+                    </option>
+                    <option value="Perempuan"
+                        {{ old('jeniskelamin_identitaslulusan', optional($dataPenggunaLulusan)->jeniskelamin_identitaslulusan) == 'Perempuan' ? 'selected' : '' }}>
+                        Perempuan
+                    </option>
                 </select>
 
                 <label for="jabatan_identitaslulusan">Jabatan <span class="text-danger">*</span> <span><small id="jabatan_identitaslulusan-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <input type="text" class="form-control form-control-user" id="jabatan_identitaslulusan"
-                    name="jabatan_identitaslulusan" placeholder="Jabatan" required>
+                    name="jabatan_identitaslulusan" placeholder="Jabatan" value="{{ old('jabatan_identitaslulusan', optional($dataPenggunaLulusan)->jabatan_identitaslulusan) }}" required>
 
                 <label for="latarbelakang_identitaslulusan">Latar Belakang Pendidikan <span class="text-danger">*</span> <span><small id="latarbelakang_identitaslulusan-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <select class="form-control form-control-user" id="latarbelakang_identitaslulusan"
                     name="latarbelakang_identitaslulusan" required>
-                    <option value="" disabled selected>Latar Belakang Pendidikan</option>
-                    <option value="Diploma III">
-                        Diploma III</option>
-                    <option value="Diploma IV/S1">
-                        Diploma IV/S1</option>
-                    <option value="Profesi">
-                        Profesi</option>
-                    <option value="S2">S2
+                    <option value="" disabled
+                        {{ old('latarbelakang_identitaslulusan', optional($dataPenggunaLulusan)->latarbelakang_identitaslulusan) ? '' : 'selected' }}>
+                        Latar Belakang Pendidikan
                     </option>
-                    <option value="S3">S3
+                    <option value="Diploma III"
+                        {{ old('latarbelakang_identitaslulusan', optional($dataPenggunaLulusan)->latarbelakang_identitaslulusan) == 'Diploma III' ? 'selected' : '' }}>
+                        Diploma III
+                    </option>
+                    <option value="Diploma IV/S1"
+                        {{ old('latarbelakang_identitaslulusan', optional($dataPenggunaLulusan)->latarbelakang_identitaslulusan) == 'Diploma IV/S1' ? 'selected' : '' }}>
+                        Diploma IV/S1
+                    </option>
+                    <option value="Profesi"
+                        {{ old('latarbelakang_identitaslulusan', optional($dataPenggunaLulusan)->latarbelakang_identitaslulusan) == 'Profesi' ? 'selected' : '' }}>
+                        Profesi
+                    </option>
+                    <option value="S2"
+                        {{ old('latarbelakang_identitaslulusan', optional($dataPenggunaLulusan)->latarbelakang_identitaslulusan) == 'S2' ? 'selected' : '' }}>
+                        S2
+                    </option>
+                    <option value="S3"
+                        {{ old('latarbelakang_identitaslulusan', optional($dataPenggunaLulusan)->latarbelakang_identitaslulusan) == 'S3' ? 'selected' : '' }}>
+                        S3
                     </option>
                 </select>
+
 
                 <label for="lamabekerja_identitaslulusan">Total Lama Bekerja(Tahun) <span class="text-danger">*</span> <span><small id="lamabekerja_identitaslulusan-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <input type="number" class="form-control form-control-user" id="lamabekerja_identitaslulusan"
-                    name="lamabekerja_identitaslulusan" placeholder="Lama bekerja Lulusan :" required>
+                    name="lamabekerja_identitaslulusan" placeholder="Lama bekerja Lulusan :" value="{{ old('lamabekerja_identitaslulusan', optional($dataPenggunaLulusan)->lamabekerja_identitaslulusan) }}"
+                    required>
 
                 <label for="lamabekerjadiinstansisaatini">Lama Bekerja di Instansi Saat Ini(Tahun) <span
                         class="text-danger">*</span> <span><small id="lamabekerjadiinstansisaatini-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <input type="number" class="form-control form-control-user" id="lamabekerjadiinstansisaatini"
-                    name="lamabekerjadiinstansisaatini" placeholder="Lama Bekerja di Instansi Saat Ini(Tahun)" required>
+                    name="lamabekerjadiinstansisaatini" placeholder="Lama Bekerja di Instansi Saat Ini(Tahun)" value="{{ old('lamabekerjadiinstansisaatini', optional($dataPenggunaLulusan)->lamabekerjadiinstansisaatini) }}" required>
 
                 <label for="saranmasukkan">Saran dan Masukan</label> <span><small id="saranmasukkan-count" class="text-muted">0 / 255 karakter</small></span> <span><small id="saranmasukkan-error" class="invalid-feedback" style="display:none;"></small>
                 </span>
                 <textarea class="form-control form-control-user" id="saranmasukkan" name="saranmasukkan"
-                    placeholder="Saran dan Masukan"></textarea>
+                    placeholder="Saran dan Masukan">{{ old('saranmasukkan', optional($dataPenggunaLulusan)->saranmasukkan) }}</textarea>
+
                 <br>
                 <img src="{{ asset('assets/img/ikm.png') }}" class="img-hr" alt="Pembatas HR1"
                     style="width: 100%; height: auto;">

@@ -14,18 +14,48 @@ class FormPenggunalulusanController extends Controller
     {
         $pertanyaanPenggunalulusan = PertanyaanPenggunalulusan::all();
         $pertanyaanMasyarakat = PertanyaanMasyarakat::all();
- {
-            return view('admin.pages.form.formpenggunalulusan', compact('pertanyaanPenggunalulusan', 'pertanyaanMasyarakat',));
+
+        $responses = [];
+        $responsesu = [];
+
+        $email = session('dataPenggunaLulusan');
+
+        $dataPenggunaLulusan = null;
+
+        if ($email) {
+            for ($i = 1; $i <= 21; $i++) {
+                $responses[$i] = $email->{'p' . $i};
+            }
+
+            for ($i = 1; $i <= 9; $i++) {
+                $responsesu[$i] = $email->{'u' . $i};
+            }
         }
+
+        return view('admin.pages.form.formpenggunalulusan', compact(
+            'pertanyaanPenggunalulusan',
+            'pertanyaanMasyarakat',
+            'responses',
+            'responsesu',
+            'dataPenggunaLulusan'
+        ));
     }
+
 
     public function store(Request $request)
     {
-            $penggunalulusan = new Penggunalulusan();
+        $email = $request->input('email');
 
+        // Cari data lama berdasarkan email
+        $penggunalulusan = Penggunalulusan::where('email', $email)->first();
+
+        // Kalau belum ada, buat baru
+        if (!$penggunalulusan) {
+            $penggunalulusan = new Penggunalulusan();
+            $penggunalulusan->status = 1;
+        }
 
         // Set nilai properti model dari request
-        $penggunalulusan->status = 1;
         $penggunalulusan->nama_identitaspenilai = $request->input('nama_identitaspenilai');
         $penggunalulusan->usia_identitaspenilai = $request->input('usia_identitaspenilai');
         $penggunalulusan->alamat_identitaspenilai = $request->input('alamat_identitaspenilai');
@@ -41,6 +71,8 @@ class FormPenggunalulusanController extends Controller
         $penggunalulusan->lamabekerja_identitaslulusan = $request->input('lamabekerja_identitaslulusan');
         $penggunalulusan->lamabekerjadiinstansisaatini = $request->input('lamabekerjadiinstansisaatini');
         $penggunalulusan->saranmasukkan = $request->input('saranmasukkan');
+        $penggunalulusan->email = $email;
+
 
 
         foreach ($request->input('pertanyaan', []) as $id => $value) {
@@ -58,11 +90,12 @@ class FormPenggunalulusanController extends Controller
             }
         }
 
-        // Simpan model ke database
         $penggunalulusan->save();
 
+        $message = $penggunalulusan->wasRecentlyCreated
+            ? 'Data pengguna lulusan berhasil ditambahkan!'
+            : 'Data pengguna lulusan berhasil diperbarui!';
 
-        // Redirect atau tampilkan pesan sukses
-        return redirect()->back()->with('success', 'Your response has been recorded!');
+        return redirect()->back()->with('success', $message);
     }
 }

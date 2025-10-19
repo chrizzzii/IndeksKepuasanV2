@@ -13,37 +13,66 @@ class FormMitraController extends Controller
     public function formmitra()
     {
         $pertanyaanMitra = PertanyaanMitra::all();
-        $pertanyaanMasyarakat = PertanyaanMasyarakat::all(); {
-            return view('admin.pages.form.formmitra', compact('pertanyaanMitra', 'pertanyaanMasyarakat'));
+        $pertanyaanMasyarakat = PertanyaanMasyarakat::all();
+
+        $responses = [];
+        $responsesu = [];
+
+        // Ambil email dari session (redirect after submitCluster)
+        $email = session('dataMitra'); // ganti sesuai session kamu
+
+        if ($email) {
+            // p1-p10
+            for ($i = 1; $i <= 10; $i++) {
+                $responses[$i] = $email->{'p' . $i};
+            }
+
+            // u1-u9
+            for ($i = 1; $i <= 9; $i++) {
+                $responsesu[$i] = $email->{'u' . $i};
+            }
         }
+
+        return view('admin.pages.form.formmitra', compact(
+            'pertanyaanMitra',
+            'pertanyaanMasyarakat',
+            'responses',
+            'responsesu'
+        ));
     }
+
 
 
     public function store(Request $request)
     {
-        $mitra = new Mitra();
+        $email = $request->input('email');
 
-        // Set nilai properti model dari request
-        $mitra->status = 1;
+        // Cek apakah Mitra sudah ada berdasarkan email
+        $mitra = Mitra::where('email', $email)->first();
+
+        if (!$mitra) {
+            $mitra = new Mitra();
+            $mitra->status = 1;
+
+            // Set no_responden baru jika create
+            $maxNoResponden = Mitra::max('no_responden');
+            $mitra->no_responden = $maxNoResponden ? $maxNoResponden + 1 : 1;
+        }
+
+        // Set data umum
         $mitra->nama = $request->input('nama');
-
-        $maxNoResponden = Mitra::max('no_responden');
-        $mitra->no_responden = $maxNoResponden ? $maxNoResponden + 1 : 1;
-
         $mitra->jabatan = $request->input('jabatan');
         $mitra->nama_instansi = $request->input('nama_instansi');
         $mitra->alamat = $request->input('alamat');
-        $mitra->email = $request->input('email');
+        $mitra->email = $email;
         $mitra->nomor_telepon = $request->input('nomor_telepon');
+
+        // Bidang kerjasama
         if ($request->input('bidang_kerjasama') === 'other') {
-            // Gunakan nilai dari input "otherbidangkerjasama"
             $mitra->bidang_kerjasama = $request->input('otherbidangkerjasama');
         } else {
-            // Gunakan nilai dari input "bidang_kerjasama"
             $mitra->bidang_kerjasama = $request->input('bidang_kerjasama');
         }
-
-
 
         // Update nilai pertanyaan untuk Mitra
         foreach ($request->input('pertanyaan', []) as $id => $value) {
@@ -57,22 +86,16 @@ class FormMitraController extends Controller
             $mitra->$column = $value; // Mengupdate nilai kolom
         }
 
-
-
-
         $mitra->rencana = $request->input('rencana');
         $mitra->kota = $request->input('kota');
         $mitra->tanggal = $request->input('tanggal');
         $mitra->saranmasukkan = $request->input('saranmasukkan');
 
-        ($mitra);
-
-        // Simpan model ke database
+        // Simpan
         $mitra->save();
 
-        // Redirect atau tampilkan pesan sukses
+        $message = $mitra->wasRecentlyCreated ? 'Data Mitra berhasil ditambahkan!' : 'Data Mitra berhasil diperbarui!';
 
-        // Redirect ke halaman login setelah logout
-        return redirect('/');
+        return redirect()->back()->with('success', $message);
     }
 }

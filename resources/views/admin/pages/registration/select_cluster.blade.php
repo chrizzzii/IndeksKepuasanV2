@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Pilih Kluster</title>
+    <title>Pilih Peran</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -50,6 +50,7 @@
                                             <select name="cluster" id="cluster" class="form-control">
                                                 <option value="alumni">Alumni</option>
                                                 <option value="penggunalulusan">Pengguna Lulusan</option>
+                                                <option value="orangtua">Orang Tua - Wali</option>
                                                 <option value="mahasiswa">Mahasiswa</option>
                                                 <option value="tendik">Tendik</option>
                                                 <option value="dosen">Dosen</option>
@@ -57,6 +58,12 @@
                                                 <option value="mitra">Mitra</option>
                                             </select>
                                         </div>
+
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="email" class="form-control" id="email" name="email" required>
+                                        </div>
+
                                         <button type="submit" class="btn btn-primary btn-user btn-block" style=" margin-bottom: 10px;">Pilih</button>
                                         <a class="btn btn-secondary btn-user" href="login" style="flex: 1; display: flex; justify-content: center; align-items: center;">Login Admin</a>
                                     </form>

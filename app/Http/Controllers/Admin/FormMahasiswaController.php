@@ -17,14 +17,44 @@ class FormMahasiswaController extends Controller
 
         $programStudi = config('programstudi');  // Mengambil data dari config/jurusan.php
 
-        {
-            return view('admin.pages.form.formmahasiswa', compact('programStudi', 'pertanyaanMahasiswa', 'pertanyaanMasyarakat'));
+        $responses = [];
+        $responsesu = [];
+
+        // Ambil data dari session (redirect after submitCluster)
+        $email = session('dataMahasiswa'); // sesuai session kamu
+
+        if ($email) {
+            // p1–p90
+            for ($i = 1; $i <= 90; $i++) {
+                $responses[$i] = $email->{'p' . $i} ?? null;
+            }
+
+            // u1–u9
+            for ($i = 1; $i <= 9; $i++) {
+                $responsesu[$i] = $email->{'u' . $i} ?? null;
+            }
         }
+
+        return view('admin.pages.form.formmahasiswa', compact(
+            'pertanyaanMahasiswa',
+            'pertanyaanMasyarakat',
+            'programStudi',
+            'responses',
+            'responsesu'
+        ));
     }
 
     public function store(Request $request)
     {
-        $mahasiswa = new Mahasiswa();
+        $email = $request->input('email');
+
+        // Cek apakah data mahasiswa dengan email ini sudah ada
+        $mahasiswa = Mahasiswa::where('email', $email)->first();
+
+        if (!$mahasiswa) {
+            $mahasiswa = new Mahasiswa();
+            $mahasiswa->email = $email;
+        }
 
         // Set nilai properti model dari request
         $mahasiswa->status = 1;
@@ -36,6 +66,7 @@ class FormMahasiswaController extends Controller
         $mahasiswa->nomor_telepon = $request->input('nomor_telepon');
         $mahasiswa->saranmasukkan = $request->input('saranmasukkan');
         $mahasiswa->prodi = $request->input('prodi');
+
 
         foreach ($request->input('pertanyaan', []) as $id => $value) {
             $column = 'p' . ($id); // ID 2 menjadi p1, ID 3 menjadi p2, dst.
@@ -56,6 +87,7 @@ class FormMahasiswaController extends Controller
         $mahasiswa->save();
 
         // Redirect atau tampilkan pesan sukses
-        return redirect()->back()->with('success', 'Your response has been recorded!');
+        $message = $mahasiswa->wasRecentlyCreated ? 'Data mahasiswa berhasil ditambahkan!' : 'Data mahasiswa berhasil diperbarui!';
+        return redirect()->back()->with('success', $message);
     }
 }

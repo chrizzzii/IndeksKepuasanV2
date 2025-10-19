@@ -5,12 +5,14 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\IndexAlumniController;
+use App\Http\Controllers\Admin\IndexOrangtuaController;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 use App\Exports\MitraExport;
 use App\Exports\AlumniExport;
 use App\Exports\DosenExport;
+use App\Http\Controllers\Admin\FormOrangtuaController;
 use App\Exports\MahasiswaExport;
 use App\Exports\MasyarakatExport;
 use App\Exports\TendikExport;
@@ -31,12 +33,12 @@ Route::get('logout', [AuthController::class, 'logout']);
 // Akses dashboard hanya untuk admin
 Route::get('dashboard', [DashboardController::class, 'index']);
 
-// Register
+// Register // Pemilihan Kluster
 Route::get('register', [AuthController::class, 'selectCluster'])->name('register.select');
-Route::post('register/select-cluster', [AuthController::class, 'submitCluster'])->name('register.select.submit');
-// Pemilihan Kluster
-Route::get('register/select-cluster', [AuthController::class, 'selectCluster'])->name('register.cluster');
 Route::post('register/select-cluster', [AuthController::class, 'submitCluster'])->name('register.submit.cluster');
+// Route::get('register/select-cluster', [AuthController::class, 'selectCluster'])->name('register.cluster');
+// Route::post('register/select-cluster', [AuthController::class, 'submitCluster'])->name('register.select.submit');
+
 
 
 // Formulir registrasi untuk masing-masing kluster
@@ -61,6 +63,7 @@ Route::group(['prefix' => 'register'], function () {
 
 Route::get('indexalumni', [IndexAlumniController::class, 'indexalumni']);
 Route::get('indexdosen', [\App\Http\Controllers\Admin\IndexDosenController::class, 'indexdosen']);
+Route::get('indexorangtua', [\App\Http\Controllers\Admin\IndexOrangtuaController::class, 'indexorangtua']);
 Route::get('indexmahasiswa', [\App\Http\Controllers\Admin\IndexMahasiswaController::class, 'indexmahasiswa']);
 Route::get('indexmitra', [\App\Http\Controllers\Admin\IndexMitraController::class, 'indexmitra']);
 Route::get('indextendik', [\App\Http\Controllers\Admin\IndexTendikController::class, 'indextendik']);
@@ -84,6 +87,9 @@ Route::post('/submit-formalumni', [\App\Http\Controllers\Admin\FormAlumniControl
 
 Route::get('formdosen', [\App\Http\Controllers\Admin\FormDosenController::class, 'formdosen']);
 Route::post('/submit-formdosen', [\App\Http\Controllers\Admin\FormDosenController::class, 'store'])->name('form.storedosen');
+
+Route::get('formorangtua', [\App\Http\Controllers\Admin\FormOrangtuaController::class, 'formorangtua']);
+Route::post('/submit-formorangtua', [\App\Http\Controllers\Admin\FormOrangtuaController::class, 'store'])->name('form.storeorangtua');
 
 Route::get('formmahasiswa', [\App\Http\Controllers\Admin\FormMahasiswaController::class, 'formmahasiswa']);
 Route::post('/submit-formmahasiswa', [\App\Http\Controllers\Admin\FormMahasiswaController::class, 'store'])->name('form.storemahasiswa');

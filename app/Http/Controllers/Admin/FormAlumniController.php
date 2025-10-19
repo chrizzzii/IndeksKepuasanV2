@@ -11,25 +11,74 @@ use App\Models\Alumni;
 class FormAlumniController extends Controller
 {
 
-    public function formalumni()
+    public function formalumni(Request $request)
     {
-        // Ambil semua data dari tabel pertanyaanAlumni
         $pertanyaanAlumni = PertanyaanAlumni::all();
         $pertanyaanMasyarakat = PertanyaanMasyarakat::all();
-        $programStudi = config('programstudi');  // Mengambil data dari config/jurusan.php
+        $programStudi = config('programstudi');
+        $email = session('dataAlumni');
 
-        // Kirimkan kedua data ke view
-        return view('admin.pages.form.formalumni', compact('programStudi', 'pertanyaanAlumni', 'pertanyaanMasyarakat',));
+        $responses = [];
+        $responsesu = [];
+        if ($email) {
+            $mappingP = [
+                12 => 'p1',
+                13 => 'p2',
+                14 => 'p3',
+                15 => 'p4',
+                16 => 'p5',
+                17 => 'p6',
+                18 => 'p7',
+                19 => 'p8',
+                20 => 'p9',
+            ];
+
+            foreach ($mappingP as $pertanyaan_id => $column) {
+                if (isset($email->{$column})) {
+                    $responses[$pertanyaan_id] = $email->{$column};
+                }
+            }
+
+            $mappingU = [
+                1 => 'u1',
+                2 => 'u2',
+                3 => 'u3',
+                4 => 'u4',
+                5 => 'u5',
+                6 => 'u6',
+                7 => 'u7',
+                8 => 'u8',
+                9 => 'u9',
+            ];
+            foreach ($mappingU as $pertanyaan_id => $column) {
+                if (isset($email->{$column})) {
+                    $responsesu[$pertanyaan_id] = $email->{$column};
+                }
+            }
+        }
+
+
+        return view('admin.pages.form.formalumni', compact(
+            'programStudi',
+            'pertanyaanAlumni',
+            'pertanyaanMasyarakat',
+            'responsesu',
+            'responses',
+            'email'
+        ));
     }
-
 
     public function store(Request $request)
     {
-        $alumni = new Alumni();
+        $email = $request->input('email');
 
+        $alumni = Alumni::where('email', $email)->first();
 
-        // Set nilai properti model dari request
-        $alumni->status = 1;
+        if (!$alumni) {
+            $alumni = new Alumni();
+            $alumni->status = 1;
+        }
+
         $alumni->nama = $request->input('nama');
         $alumni->usia = $request->input('usia');
         $alumni->jeniskelamin = $request->input('jeniskelamin');
@@ -41,32 +90,31 @@ class FormAlumniController extends Controller
         $alumni->pekerjaan = $request->input('pekerjaan');
         $alumni->kesesuaian = $request->input('kesesuaian');
         $alumni->waktu = $request->input('waktu');
+        $alumni->jenistempatkerja = $request->input('jenistempatkerja');
         $alumni->instansi = $request->input('instansi');
         $alumni->tempat_kerja = $request->input('tempat_kerja');
         $alumni->penghasilan = $request->input('penghasilan');
         $alumni->cara = $request->input('cara');
         $alumni->studi_lanjut = $request->input('studi_lanjut');
+        $alumni->email = $email;
 
-        // Update nilai pertanyaan
         foreach ($request->input('pertanyaan', []) as $id => $value) {
-            $column = 'p' . ($id - 11); // Menggunakan id - 11 karena p1 dimulai dari pertanyaan_id 12
+            $column = 'p' . ($id - 11);
             if ($column >= 'p1' && $column <= 'p9') {
                 $alumni->$column = $value;
             }
         }
 
-        foreach ($request->input('pertanyaanu', []) as $id => $value) { // Tetap menggunakan 'pertanyaanu'
-            $column = 'u' . ($id);
+        foreach ($request->input('pertanyaanu', []) as $id => $value) {
+            $column = 'u' . $id;
             if ($column >= 'u1' && $column <= 'u9') {
                 $alumni->$column = $value;
             }
         }
 
-
-        // Simpan model ke database
         $alumni->save();
 
-        // Redirect atau tampilkan pesan sukses
-        return redirect()->back()->with('success', 'Your response has been recorded!');
+        $message = $alumni->wasRecentlyCreated ? 'Data alumni berhasil ditambahkan!' : 'Data alumni berhasil diperbarui!';
+        return redirect()->back()->with('success', $message);
     }
 }
