@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Mitra;
 use App\Models\Alumni;
 use App\Models\Tendik;
-use App\Models\OrangTua;
+use App\Models\Orangtua;
 use App\Models\Mahasiswa;
 use App\Models\Penggunalulusan;
 use App\Models\Dosen;
@@ -31,7 +31,7 @@ class DashboardController extends Controller
 
         $alumniDatafilter = Alumni::where('status', 1)->where('prodi', $selectedProdi)->count();
         $tendikDatafilter = Tendik::where('status', 1)->where('prodi', $selectedProdi)->count();
-        $orangtuaDatafilter = OrangTua::where('status', 1)->where('prodi', $selectedProdi)->count();
+        $orangtuaDatafilter = Orangtua::where('status', 1)->where('prodi', $selectedProdi)->count();
         $mahasiswaDatafilter = Mahasiswa::where('status', 1)->where('prodi', $selectedProdi)->count();
         $dosenDatafilter = Dosen::where('status', 1)
             ->where(function ($query) use ($selectedProdi) {
@@ -48,7 +48,7 @@ class DashboardController extends Controller
         $mitraData = Mitra::where('status', 1)->count();
         $alumniData = Alumni::where('status', 1)->count();
         $tendikData = Tendik::where('status', 1)->count();
-        $orangtuaData = OrangTua::where('status', 1)->count();
+        $orangtuaData = Orangtua::where('status', 1)->count();
         $mahasiswaData = Mahasiswa::where('status', 1)->count();
         $penggunalulusanData = Penggunalulusan::where('status', 1)->count();
 
@@ -85,7 +85,7 @@ class DashboardController extends Controller
         $mitraU1 = Mitra::where('status', 1)->sum('u1') / $mitraData;
         $alumniU1 = Alumni::where('status', 1)->sum('u1') / $alumniData;
         $tendikU1 = Tendik::where('status', 1)->sum('u1') / $tendikData;
-        $orangtuaU1 = OrangTua::where('status', 1)->sum('u1') / $orangtuaData;
+        $orangtuaU1 = Orangtua::where('status', 1)->sum('u1') / $orangtuaData;
         $mahasiswaU1 = Mahasiswa::where('status', 1)->sum('u1') / $mahasiswaData;
         $penggunalulusanU1 = Penggunalulusan::where('status', 1)->sum('u1') / $penggunalulusanData;
         $dosenU1 = Dosen::where('status', 1)->sum('u1') / $totalDosen;
@@ -94,7 +94,7 @@ class DashboardController extends Controller
         $mitraU2 = Mitra::where('status', 1)->sum('u2') / $mitraData;
         $alumniU2 = Alumni::where('status', 1)->sum('u2') / $alumniData;
         $tendikU2 = Tendik::where('status', 1)->sum('u2') / $tendikData;
-        $orangtuaU2 = OrangTua::where('status', 1)->sum('u1') / $orangtuaData;
+        $orangtuaU2 = Orangtua::where('status', 1)->sum('u1') / $orangtuaData;
         $mahasiswaU2 = Mahasiswa::where('status', 1)->sum('u2') / $mahasiswaData;
         $penggunalulusanU2 = Penggunalulusan::where('status', 1)->sum('u2') / $penggunalulusanData;
         $dosenU2 = Dosen::where('status', 1)->sum('u2') / $totalDosen;
@@ -103,7 +103,7 @@ class DashboardController extends Controller
         $mitraU3 = Mitra::where('status', 1)->sum('u3') / $mitraData;
         $alumniU3 = Alumni::where('status', 1)->sum('u3') / $alumniData;
         $tendikU3 = Tendik::where('status', 1)->sum('u3') / $tendikData;
-        $orangtuaU3 = OrangTua::where('status', 1)->sum('u1') / $orangtuaData;
+        $orangtuaU3 = Orangtua::where('status', 1)->sum('u1') / $orangtuaData;
         $mahasiswaU3 = Mahasiswa::where('status', 1)->sum('u3') / $mahasiswaData;
         $penggunalulusanU3 = Penggunalulusan::where('status', 1)->sum('u3') / $penggunalulusanData;
         $dosenU3 = Dosen::where('status', 1)->sum('u3') / $totalDosen;
@@ -112,7 +112,7 @@ class DashboardController extends Controller
         $mitraU4 = Mitra::where('status', 1)->sum('u4') / $mitraData;
         $alumniU4 = Alumni::where('status', 1)->sum('u4') / $alumniData;
         $tendikU4 = Tendik::where('status', 1)->sum('u4') / $tendikData;
-        $orangtuaU4 = OrangTua::where('status', 1)->sum('u1') / $orangtuaData;
+        $orangtuaU4 = Orangtua::where('status', 1)->sum('u1') / $orangtuaData;
         $mahasiswaU4 = Mahasiswa::where('status', 1)->sum('u4') / $mahasiswaData;
         $penggunalulusanU4 = Penggunalulusan::where('status', 1)->sum('u4') / $penggunalulusanData;
         $dosenU4 = Dosen::where('status', 1)->sum('u4') / $totalDosen;
@@ -121,7 +121,7 @@ class DashboardController extends Controller
         $mitraU5 = Mitra::where('status', 1)->sum('u5') / $mitraData;
         $alumniU5 = Alumni::where('status', 1)->sum('u5') / $alumniData;
         $tendikU5 = Tendik::where('status', 1)->sum('u5') / $tendikData;
-        $orangtuaU5 = OrangTua::where('status', 1)->sum('u1') / $orangtuaData;
+        $orangtuaU5 = Orangtua::where('status', 1)->sum('u1') / $orangtuaData;
         $mahasiswaU5 = Mahasiswa::where('status', 1)->sum('u5') / $mahasiswaData;
         $penggunalulusanU5 = Penggunalulusan::where('status', 1)->sum('u5') / $penggunalulusanData;
         $dosenU5 = Dosen::where('status', 1)->sum('u5') / $totalDosen;
@@ -130,7 +130,7 @@ class DashboardController extends Controller
         $mitraU6 = Mitra::where('status', 1)->sum('u6') / $mitraData;
         $alumniU6 = Alumni::where('status', 1)->sum('u6') / $alumniData;
         $tendikU6 = Tendik::where('status', 1)->sum('u6') / $tendikData;
-        $orangtuaU6 = OrangTua::where('status', 1)->sum('u1') / $orangtuaData;
+        $orangtuaU6 = Orangtua::where('status', 1)->sum('u1') / $orangtuaData;
         $mahasiswaU6 = Mahasiswa::where('status', 1)->sum('u6') / $mahasiswaData;
         $penggunalulusanU6 = Penggunalulusan::where('status', 1)->sum('u6') / $penggunalulusanData;
         $dosenU6 = Dosen::where('status', 1)->sum('u6') / $totalDosen;
@@ -139,7 +139,7 @@ class DashboardController extends Controller
         $mitraU7 = Mitra::where('status', 1)->sum('u7') / $mitraData;
         $alumniU7 = Alumni::where('status', 1)->sum('u7') / $alumniData;
         $tendikU7 = Tendik::where('status', 1)->sum('u7') / $tendikData;
-        $orangtuaU7 = OrangTua::where('status', 1)->sum('u1') / $orangtuaData;
+        $orangtuaU7 = Orangtua::where('status', 1)->sum('u1') / $orangtuaData;
         $mahasiswaU7 = Mahasiswa::where('status', 1)->sum('u7') / $mahasiswaData;
         $penggunalulusanU7 = Penggunalulusan::where('status', 1)->sum('u7') / $penggunalulusanData;
         $dosenU7 = Dosen::where('status', 1)->sum('u7') / $totalDosen;
@@ -148,7 +148,7 @@ class DashboardController extends Controller
         $mitraU8 = Mitra::where('status', 1)->sum('u8') / $mitraData;
         $alumniU8 = Alumni::where('status', 1)->sum('u8') / $alumniData;
         $tendikU8 = Tendik::where('status', 1)->sum('u8') / $tendikData;
-        $orangtuaU8 = OrangTua::where('status', 1)->sum('u1') / $orangtuaData;
+        $orangtuaU8 = Orangtua::where('status', 1)->sum('u1') / $orangtuaData;
         $mahasiswaU8 = Mahasiswa::where('status', 1)->sum('u8') / $mahasiswaData;
         $penggunalulusanU8 = Penggunalulusan::where('status', 1)->sum('u8') / $penggunalulusanData;
         $dosenU8 = Dosen::where('status', 1)->sum('u8') / $totalDosen;
@@ -157,7 +157,7 @@ class DashboardController extends Controller
         $mitraU9 = Mitra::where('status', 1)->sum('u9') / $mitraData;
         $alumniU9 = Alumni::where('status', 1)->sum('u9') / $alumniData;
         $tendikU9 = Tendik::where('status', 1)->sum('u9') / $tendikData;
-        $orangtuaU9 = OrangTua::where('status', 1)->sum('u1') / $orangtuaData;
+        $orangtuaU9 = Orangtua::where('status', 1)->sum('u1') / $orangtuaData;
         $mahasiswaU9 = Mahasiswa::where('status', 1)->sum('u9') / $mahasiswaData;
         $penggunalulusanU9 = Penggunalulusan::where('status', 1)->sum('u9') / $penggunalulusanData;
         $dosenU9 = Dosen::where('status', 1)->sum('u9') / $totalDosen;

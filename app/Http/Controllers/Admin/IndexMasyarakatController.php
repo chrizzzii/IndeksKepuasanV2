@@ -12,6 +12,6 @@ class IndexMasyarakatController extends Controller
     {
         $masyarakatData = Masyarakat::where('status', 1)->count();
 
-        return view('admin.pages.dashboard.IndexMasyarakat', compact('masyarakatData'));;
+        return view('admin.pages.dashboard.indexmasyarakat', compact('masyarakatData'));;
     }
 }

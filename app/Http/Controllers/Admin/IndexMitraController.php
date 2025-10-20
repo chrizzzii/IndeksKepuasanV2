@@ -31,7 +31,7 @@ class IndexMitraController extends Controller
         $mitraUU9 = Mitra::where('status', 1)->sum('u9');
         $mitraU9 = $mitraUU9 / $mitraData;
 
-        return view('admin.pages.dashboard.IndexMitra', compact(
+        return view('admin.pages.dashboard.indexmitra', compact(
             'mitraData',
             'mitraU1',
             'mitraU2',

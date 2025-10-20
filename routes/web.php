@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 use App\Exports\MitraExport;
+use App\Exports\OrangtuaExport;
 use App\Exports\AlumniExport;
 use App\Exports\DosenExport;
 use App\Http\Controllers\Admin\FormOrangtuaController;
@@ -130,6 +131,11 @@ Route::get('/export-mitra', function () {
     $export = new MitraExport();
     return $export->export();
 })->name('export.mitra');
+
+Route::get('/export-orangtua', function () {
+    $export = new OrangtuaExport();
+    return $export->export();
+})->name('export.orangtua');
 
 Route::get('/export-tendik', function () {
     $export = new TendikExport();

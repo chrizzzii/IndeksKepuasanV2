@@ -258,6 +258,9 @@
                                                 <a href="{{ route('export.mitra') }}" class="btn btn-success mx-2 mb-2">
                                                     <i class="fas fa-file-excel"></i> Download Data Mitra
                                                 </a>
+                                                <a href="{{ route('export.orangtua') }}" class="btn btn-success mx-2 mb-2">
+                                                    <i class="fas fa-file-excel"></i> Download Data Orang Tua / Wali
+                                                </a>
                                                 <a href="{{ route('export.alumni') }}" class="btn btn-success mx-2 mb-2">
                                                     <i class="fas fa-file-excel"></i> Download Data Alumni
                                                 </a>

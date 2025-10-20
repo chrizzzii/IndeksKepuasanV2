@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\OrangTua;
+use App\Models\Orangtua;
 
 class IndexOrangtuaController extends Controller
 {
@@ -16,31 +16,31 @@ class IndexOrangtuaController extends Controller
         $tableData = [];
         // Ambil data dari config
         $programStudi = config('programstudi');
-        $orangtuaData = OrangTua::where('status', 1)->count();
+        $orangtuaData = Orangtua::where('status', 1)->count();
 
-        $orangtuaUU1 = OrangTua::where('status', 1)->sum('u1');
+        $orangtuaUU1 = Orangtua::where('status', 1)->sum('u1');
         $orangtuaU1 = $orangtuaUU1 / $orangtuaData;
-        $orangtuaUU2 = OrangTua::where('status', 1)->sum('u2');
+        $orangtuaUU2 = Orangtua::where('status', 1)->sum('u2');
         $orangtuaU2 = $orangtuaUU2 / $orangtuaData;
-        $orangtuaUU3 = OrangTua::where('status', 1)->sum('u3');
+        $orangtuaUU3 = Orangtua::where('status', 1)->sum('u3');
         $orangtuaU3 = $orangtuaUU3 / $orangtuaData;
-        $orangtuaUU4 = OrangTua::where('status', 1)->sum('u4');
+        $orangtuaUU4 = Orangtua::where('status', 1)->sum('u4');
         $orangtuaU4 = $orangtuaUU4 / $orangtuaData;
-        $orangtuaUU5 = OrangTua::where('status', 1)->sum('u5');
+        $orangtuaUU5 = Orangtua::where('status', 1)->sum('u5');
         $orangtuaU5 = $orangtuaUU5 / $orangtuaData;
-        $orangtuaUU6 = OrangTua::where('status', 1)->sum('u6');
+        $orangtuaUU6 = Orangtua::where('status', 1)->sum('u6');
         $orangtuaU6 = $orangtuaUU6 / $orangtuaData;
-        $orangtuaUU7 = OrangTua::where('status', 1)->sum('u7');
+        $orangtuaUU7 = Orangtua::where('status', 1)->sum('u7');
         $orangtuaU7 = $orangtuaUU7 / $orangtuaData;
-        $orangtuaUU8 = OrangTua::where('status', 1)->sum('u8');
+        $orangtuaUU8 = Orangtua::where('status', 1)->sum('u8');
         $orangtuaU8 = $orangtuaUU8 / $orangtuaData;
-        $orangtuaUU9 = OrangTua::where('status', 1)->sum('u9');
+        $orangtuaUU9 = Orangtua::where('status', 1)->sum('u9');
         $orangtuaU9 = $orangtuaUU9 / $orangtuaData;
 
         $jumlahOrangtuaPerProdi = [];
         foreach ($programStudi as $jurusan => $prodiList) {
             foreach ($prodiList as $prodi) {
-                $jumlahOrangtuaPerProdi[$prodi] = OrangTua::where('prodi', $prodi)->count();
+                $jumlahOrangtuaPerProdi[$prodi] = Orangtua::where('prodi', $prodi)->count();
             }
         }
 
@@ -85,7 +85,7 @@ class IndexOrangtuaController extends Controller
     private function countRespondents($prodi)
     {
         // Hitung jumlah responden dari setiap tabel
-        $orangtuaCount = OrangTua::where('prodi', $prodi)->count();
+        $orangtuaCount = Orangtua::where('prodi', $prodi)->count();
 
         return $orangtuaCount;
     }

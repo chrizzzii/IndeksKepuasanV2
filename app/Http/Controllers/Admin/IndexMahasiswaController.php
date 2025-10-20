@@ -66,7 +66,7 @@ class IndexMahasiswaController extends Controller
             $totalCounts[$jurusan] += $data['responden'];
         }
 
-        return view('admin.pages.dashboard.indexMahasiswa', compact(
+        return view('admin.pages.dashboard.indexmahasiswa', compact(
             'mahasiswaData',
             'jumlahMahasiswaPerProdi',
             'tableData',

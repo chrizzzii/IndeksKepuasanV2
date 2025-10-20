@@ -67,7 +67,7 @@ class IndexDosenController extends Controller
             $totalCounts[$jurusan] += $data['responden'];
         }
 
-        return view('admin.pages.dashboard.IndexDosen', compact(
+        return view('admin.pages.dashboard.indexdosen', compact(
             'dosenData',
             'jumlahDosenPerProdi',
             'tableData',
