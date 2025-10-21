@@ -3,7 +3,7 @@ $(document).ready(function () {
 
     const fields = [
         { id: '#nama', pesan: 'Nama wajib diisi.' },
-        { id: '#nip', pesan: 'Nomor Identitas Pegawai Negeri Sipil wajib diisi.' },
+        { id: '#nip', pesan: 'Nomor Identitas Pegawai Negeri Sipil harus berupa 18 digit angka.' },
         { id: '#usia', pesan: 'Usia wajib diisi.' },
         { id: '#jeniskelamin', pesan: 'Pilih jenis kelamin.' },
         { id: '#alamat', pesan: 'Alamat wajib diisi.' },
@@ -53,18 +53,16 @@ $(document).ready(function () {
     function cekValidasi(id) {
         const val = $(id).val()?.trim();
 
-        if (id === '#nip') {
-            if (!val) return false;
-            return /^[0-9]{18}$/.test(val);
-        }
-
         if (id === '#saranmasukkan') {
             if (val === '') return true;
             return val.length <= 255;
         }
 
-        if (!val) return false;
-
+        if (!val) {
+            // Semua field lain tetap harus diisi, kecuali NIP
+            if (id === '#nip') return true; // NIP kosong dianggap valid
+            return false;
+        }
         switch (id) {
 
             case '#usia':
@@ -72,6 +70,10 @@ $(document).ready(function () {
 
             case '#nomor_telepon':
                 return /^[0-9]{10,13}$/.test(val);
+
+            case '#nip':
+                if (val === '') return true; // NIP kosong valid
+                return /^[0-9]{18}$/.test(val);
 
             default:
                 return true;
@@ -84,8 +86,16 @@ $(document).ready(function () {
         const val = $(id).val()?.trim();
 
         if (id === '#nip') {
-            if (!val) pesanAkhir = 'Nomor Identitas Pegawai Negeri Sipil wajib diisi.';
-            else if (!/^[0-9]{18}$/.test(val)) pesanAkhir = 'Nomor Identitas Pegawai Negeri Sipil harus berupa 18 digit angka.';
+            if (val === '') {
+                sembunyikanError(id); // kosong = valid
+                return;
+            }
+            if (!/^[0-9]{18}$/.test(val)) {
+                pesanAkhir = 'Nomor Identitas Pegawai Negeri Sipil harus berupa 18 digit angka.';
+            } else {
+                sembunyikanError(id);
+                return;
+            }
         }
 
         if (id === '#usia') {

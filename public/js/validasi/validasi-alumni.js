@@ -8,6 +8,7 @@ $(document).ready(function () {
         { id: '#alamat', pesan: 'Alamat wajib diisi.' },
         { id: '#nomor_telepon', pesan: 'Nomor telepon wajib diisi.' },
         { id: '#saranmasukkan', pesan: '| Saran dan masukan maksimal 255 karakter. |' },
+        { id: '#jalurmasuk', pesan: 'Kolom ini wajib diisi.' },
         { id: '#prodi', pesan: 'Pilih program studi.' },
         { id: '#tahun_lulus', pesan: 'Tahun lulus wajib diisi.' },
         { id: '#pekerjaan', pesan: 'Pilih status pekerjaan.' },

@@ -42,10 +42,10 @@
                 <input type="text" class="form-control form-control-user" id="nama" name="nama"
                     placeholder="Nama" value="{{ old('nama', optional($dataTendik)->nama) }}" required>
 
-                <label for="nip">Nomor Identitas Pegawai Negeri Sipil <span><small id="nip-error" class="invalid-feedback" style="display:none;"></small>
+                <label for="nip">NIP bagi PNS. Bagi yang bukan PNS tidak perlu diisi <span><small id="nip-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <input type="text" class="form-control form-control-user" id="nip" name="nip"
-                    placeholder="Nomor Identitas Pegawai Negeri Sipil" value="{{ old('nip', optional($dataTendik)->nip) }}">
+                    placeholder="NIP bagi PNS. Bagi yang bukan PNS tidak perlu diisi" value="{{ old('nip', optional($dataTendik)->nip) }}">
 
                 <label for="usia">Usia (Tahun) <span class="text-danger">*</span> <span><small id="usia-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
@@ -77,16 +77,10 @@
                     value="{{ old('nomor_telepon', optional($dataTendik)->nomor_telepon) }}"
                     required>
 
-
-                <label for="saranmasukkan">Saran dan Masukan</label> <span><small id="saranmasukkan-count" class="text-muted">0 / 255 karakter</small></span> <span><small id="saranmasukkan-error" class="invalid-feedback" style="display:none;"></small>
-                </span>
-                <textarea class="form-control form-control-user" id="saranmasukkan" name="saranmasukkan"
-                    placeholder="Saran dan Masukan">{{ old('saranmasukkan', optional($dataTendik)->saranmasukkan) }}</textarea>
-
-                <label for="prodi">Program Studi <span class="text-danger">*</span> <span><small id="prodi-error" class="invalid-feedback" style="display:none;"></small>
+                <label for="prodi">Program Studi (Pilih Program Studi yang Menjadi Homebase) <span class="text-danger">*</span> <span><small id="prodi-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <select class="form-control form-control-user" id="prodi" name="prodi" required>
-                    <option value="" disabled {{ old('prodi', optional($dataTendik)->prodi) ? '' : 'selected' }}>Pilih Program Studi</option>
+                    <option value="" disabled {{ old('prodi', optional($dataTendik)->prodi) ? '' : 'selected' }}>Program Studi (Pilih Program Studi yang Menjadi Homebase)</option>
                     @foreach ($programStudi as $jurusan => $prodis)
                     <optgroup label="{{ $jurusan }}">
                         @foreach ($prodis as $prodi)
@@ -99,6 +93,10 @@
                     @endforeach
                 </select>
 
+                <label for="saranmasukkan">Saran dan Masukan</label> <span><small id="saranmasukkan-count" class="text-muted">0 / 255 karakter</small></span> <span><small id="saranmasukkan-error" class="invalid-feedback" style="display:none;"></small>
+                </span>
+                <textarea class="form-control form-control-user" id="saranmasukkan" name="saranmasukkan"
+                    placeholder="Saran dan Masukan">{{ old('saranmasukkan', optional($dataTendik)->saranmasukkan) }}</textarea>
 
                 <br>
 

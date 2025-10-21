@@ -9,6 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>IKM - @yield('title')</title>
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -63,7 +65,7 @@
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
             <!-- Logo -->
-            <div id="logoKemenkes" class="text-center mb-2" style="border-bottom: 6px white solid;">
+            <div id="logoKemenkes" class="text-center mb-2" style="border-bottom: 14px white solid;">
                 <img src="{{ asset('assets/img/logokemenkes.png') }}" alt="Logo Poltekkes"
                     style="width: 100%; height: auto;">
             </div>
@@ -72,92 +74,6 @@
                 <div class="sidebar-brand-text mx-3" style="font-weight: bold;">Kepuasan Layanan dan Indeks Kepuasan
                     Masyarakat</div>
             </a>
-
-            <!-- Divider -->
-            @if (Session::get('user_role') === 'admin')
-            <hr class="sidebar-divider my-0">
-
-            <div class="sidebar-heading">
-                Index Menu
-            </div>
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
-                    aria-expanded="true" aria-controls="collapseOne">
-                    <i class="fas fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
-                </a>
-                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="dashboard">Indeks Keseluruhan</a>
-                        <a class="collapse-item" href="/indexalumni">Indeks Alumni</a>
-                        <a class="collapse-item" href="/indexdosen">Indeks Dosen</a>
-                        <a class="collapse-item" href="/indexorangtua">Indeks Orang Tua / Wali</a>
-                        <a class="collapse-item" href="/indexmahasiswa">Indeks Mahasiswa</a>
-                        <a class="collapse-item" href="/indexmitra">Indeks Mitra Kerjasama</a>
-                        <a class="collapse-item" href="/indextendik">Indeks Tendik</a>
-                        <a class="collapse-item" href="/indexpengguna">Indeks Pengguna Lulusan</a>
-                    </div>
-                </div>
-            </li>
-            @endif
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            @if (Session::get('user_role') !== 'admin')
-            <div class="sidebar-heading">Form Menu</div>
-
-            <!-- Nav Item - Forms -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-table"></i>
-                    <span>Form Survei</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        @if (Session::get('user_role') === 'alumni')
-                        <a class="collapse-item" href="formalumni">Survei Alumni</a>
-                        @endif
-                        @if (Session::get('user_role') === 'dosen')
-                        <a class="collapse-item" href="formdosen">Survei Dosen</a>
-                        @endif
-                        @if (Session::get('user_role') === 'mahasiswa')
-                        <a class="collapse-item" href="formmahasiswa">Survei Mahasiswa</a>
-                        @endif
-                        @if (Session::get('user_role') === 'mitra')
-                        <a class="collapse-item" href="formmitra">Survei Mitra Kerjasama</a>
-                        @endif
-                        @if (Session::get('user_role') === 'tendik')
-                        <a class="collapse-item" href="formtendik">Survei Tendik</a>
-                        @endif
-                        @if (Session::get('user_role') === null)
-                        <a class="collapse-item" href="formmasyarakat">Survei Masyarakat</a>
-                        @endif
-                    </div>
-                </div>
-            </li>
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-            @endif
-
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-                <script>
-                    document.getElementById('sidebarToggle').addEventListener('click', function() {
-                        var logo = document.getElementById('logoKemenkes');
-                        if (logo) {
-                            logo.style.display = logo.style.display === 'none' ? 'block' : 'none';
-                        }
-                    });
-                </script>
-            </div>
-
         </ul>
         <!-- End of Sidebar -->
 

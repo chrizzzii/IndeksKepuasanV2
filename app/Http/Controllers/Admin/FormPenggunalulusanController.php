@@ -70,6 +70,7 @@ class FormPenggunalulusanController extends Controller
         $penggunalulusan->latarbelakang_identitaslulusan = $request->input('latarbelakang_identitaslulusan');
         $penggunalulusan->lamabekerja_identitaslulusan = $request->input('lamabekerja_identitaslulusan');
         $penggunalulusan->lamabekerjadiinstansisaatini = $request->input('lamabekerjadiinstansisaatini');
+        $penggunalulusan->pertanyaanterbuka = $request->input('pertanyaanterbuka');
         $penggunalulusan->saranmasukkan = $request->input('saranmasukkan');
         $penggunalulusan->email = $email;
 

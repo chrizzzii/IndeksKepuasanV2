@@ -13,6 +13,56 @@
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('assets/js/sb-admin-2.min.js') }}"></script>
+
+    <style>
+        /* Wrapper untuk area checkbox */
+        .checkbox-wrapper {
+            background: #f8f9fa;
+            /* warna abu lembut */
+            border: 1px solid #dee2e6;
+            /* garis halus */
+            border-radius: 0.5rem;
+            /* sudut membulat */
+            padding: 1rem 1.25rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Atur kolom dan jarak antar item */
+        .form-group {
+            column-count: 2;
+            column-gap: 2rem;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Setiap item checkbox */
+        .form-check {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.6rem;
+            break-inside: avoid;
+        }
+
+        /* Kotak checkbox */
+        .form-check-input {
+            margin-right: 0.5rem;
+            margin-top: 0;
+        }
+
+        /* Teks label */
+        .form-check-label {
+            font-size: 0.95rem;
+            color: #333;
+        }
+
+        /* Responsif: jadi 1 kolom di layar kecil */
+        @media (max-width: 768px) {
+            .form-group {
+                column-count: 1;
+            }
+        }
+    </style>
+
 </head>
 
 <body>
@@ -22,7 +72,24 @@
     <div class="row">
         <div class="container">
             <div class="container-fluid">
-                <h1 class="h3 mb-4 text-gray-800">Form Mitra</h1>
+                <h1 class="h3 mb-4 text-gray-800 text-center">Form Mitra</h1>
+
+                <section class="mb-4 p-4 bg-light rounded shadow-sm mx-auto" style="max-width: 850px; text-align: justify; text-justify: inter-word;">
+                    <p class="mb-4">
+                        Kami menyampaikan terima kasih dan penghargaan yang sebesar-besarnya atas kesediaan Bapak/Ibu
+                        untuk menjadi mitra kerjasama Poltekkes Kemenkes Semarang. Dalam upaya peningkatan kualitas pelayanan
+                        kerjasama, kami mohon kesediaan Bapak/Ibu untuk mengisi kuesioner ini. Hasil isian kuesioner ini akan
+                        kami gunakan bagi pengembangan dan peningkatan mutu pelayanan kami. Salam sehat, Sehat Indonesia, Bersyukur. Terima kasih.
+                    </p>
+
+                    <p class="text-muted mb-0">
+                        <em>(We express our deepest gratitude and appreciation for your willingness to become partners in cooperation.
+                            In order to improve the cooperation services of the Health Polytechnic of Semarang, we ask for your willingness
+                            to fill out this questionnaire. The results of this questionnaire will be used for the development and
+                            improvement of the quality of our services. Greetings healthy, Healthy Indonesia, Grateful. Thank you.)</em>
+                    </p>
+                </section>
+
                 @yield('content')
             </div>
 
@@ -40,7 +107,7 @@
                     placeholder="Jabatan / Bagian (Position)" value="{{ old('jabatan', optional($dataMitra)->jabatan) }}"
                     required>
 
-                <label for="nama_instansi">Nama Instansi / Agency Name <span class="text-danger">*</span> <span><small id="nama_instansi-error" class="invalid-feedback" style="display:none;"></small>
+                <label for="nama_instansi">Nama Instansi / Name of Institution or Company <span class="text-danger">*</span> <span><small id="nama_instansi-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <input type="text" class="form-control form-control-user" id="nama_instansi" name="nama_instansi"
                     placeholder="Nama Instansi / Institusi (Name of Institution/Company)" value="{{ old('nama_instansi', optional($dataMitra)->nama_instansi) }}"
@@ -64,142 +131,79 @@
                     placeholder="Nomor Telepon" value="{{ old('nomor_telepon', optional($dataMitra)->nomor_telepon) }}"
                     required>
 
-                <label for="bidang_kerjasama">Bidang Kerjasama / Field of Cooperation <span
-                        class="text-danger">*</span> <span><small id="bidang_kerjasama-error" class="invalid-feedback" style="display:none;"></small>
-                    </span></label>
-                <select class="form-control form-control-user" id="bidang_kerjasama" name="bidang_kerjasama"
-                    onchange="checkBidangKerjasama(this)" required>
-                    <option value="" disabled {{ old('bidang_kerjasama', optional($dataMitra)->bidang_kerjasama) ? '' : 'selected' }}>
-                        Bidang Kerjasama (Field of Cooperation)
-                    </option>
-                    <option value="Pendidikan (Praktek Klinik / PBL / PKL / Magang) / ( Education / Internship)"
-                        {{ old('bidang_kerjasama', optional($dataMitra)->bidang_kerjasama) == "Pendidikan (Praktek Klinik / PBL / PKL / Magang) / ( Education / Internship)" ? 'selected' : '' }}>
-                        Pendidikan (Praktek Klinik / PBL / PKL / Magang) / ( Education / Internship)
-                    </option>
-                    <option value="Penelitian (Research)"
-                        {{ old('bidang_kerjasama', optional($dataMitra)->bidang_kerjasama) == "Penelitian (Research)" ? 'selected' : '' }}>
-                        Penelitian (Research)
-                    </option>
-                    <option value="Pengabdian Kepada Masyarakat (Community Service Program)"
-                        {{ old('bidang_kerjasama', optional($dataMitra)->bidang_kerjasama) == "Pengabdian Kepada Masyarakat (Community Service Program)" ? 'selected' : '' }}>
-                        Pengabdian Kepada Masyarakat (Community Service Program)
-                    </option>
-                    <option value="Pendayagunaan Lulusan (Graduate's Absorption)"
-                        {{ old('bidang_kerjasama', optional($dataMitra)->bidang_kerjasama) == "Pendayagunaan Lulusan (Graduate's Absorption)" ? 'selected' : '' }}>
-                        Pendayagunaan Lulusan (Graduate's Absorption)
-                    </option>
-                    <option value="Penyelenggaraan Sertifikasi Dosen (Implementation of Lecturer Certification)"
-                        {{ old('bidang_kerjasama', optional($dataMitra)->bidang_kerjasama) == "Penyelenggaraan Sertifikasi Dosen (Implementation of Lecturer Certification)" ? 'selected' : '' }}>
-                        Penyelenggaraan Sertifikasi Dosen (Implementation of Lecturer Certification)
-                    </option>
-                    <option value="Terbitan Karya Ilmiah (Published Scientific Paper)"
-                        {{ old('bidang_kerjasama', optional($dataMitra)->bidang_kerjasama) == "Terbitan Karya Ilmiah (Published Scientific Paper)" ? 'selected' : '' }}>
-                        Terbitan Karya Ilmiah (Published Scientific Paper)
-                    </option>
-                    <option value="Perbankan (Banking)"
-                        {{ old('bidang_kerjasama', optional($dataMitra)->bidang_kerjasama) == "Perbankan (Banking)" ? 'selected' : '' }}>
-                        Perbankan (Banking)
-                    </option>
-                    <option value="Pengembangan SDM (Development of Human Resource)"
-                        {{ old('bidang_kerjasama', optional($dataMitra)->bidang_kerjasama) == "Pengembangan SDM (Development of Human Resource)" ? 'selected' : '' }}>
-                        Pengembangan SDM (Development of Human Resource)
-                    </option>
-                    <option value="other"
-                        {{ !in_array(old('bidang_kerjasama', optional($dataMitra)->bidang_kerjasama), [
-    "Pendidikan (Praktek Klinik / PBL / PKL / Magang) / ( Education / Internship)",
-    "Penelitian (Research)",
-    "Pengabdian Kepada Masyarakat (Community Service Program)",
-    "Pendayagunaan Lulusan (Graduate's Absorption)",
-    "Penyelenggaraan Sertifikasi Dosen (Implementation of Lecturer Certification)",
-    "Terbitan Karya Ilmiah (Published Scientific Paper)",
-    "Perbankan (Banking)",
-    "Pengembangan SDM (Development of Human Resource)"
-]) ? 'selected' : '' }}>
-                        Lainnya (Other)
-                    </option>
-                </select>
+                <label for="bidang_kerjasama">Bidang Kerjasama / Field of Cooperation
+                    <span class="text-danger">*</span> <span><small id="bidang_kerjasama-error" class="invalid-feedback" style="display:none;"></small>
+                    </span>
+                </label>
 
-                @if (old('bidang_kerjasama', optional($dataMitra)->bidang_kerjasama) == 'other')
-                <input type="text" id="otherbidangkerjasama" name="otherbidangkerjasama"
-                    value="{{ old('otherbidangkerjasama', optional($dataMitra)->bidang_kerjasama) }}"
-                    class="form-control mt-2" placeholder="Tuliskan bidang kerjasama lainnya">
-                @endif
+                <!-- Wrapper Bidang Kerjasama -->
+                <div class="checkbox-wrapper">
+                    <div class="form-group" id="bidang_kerjasama">
 
+                        @php
+                        $opsiBidang = [
+                        "Pendidikan (Praktek Klinik / PBL / PKL / Magang) / ( Education / Internship)",
+                        "Penelitian (Research)",
+                        "Pengabdian Kepada Masyarakat (Community Service Program)",
+                        "Pendayagunaan Lulusan (Graduate's Absorption)",
+                        "Penyelenggaraan Sertifikasi Dosen (Implementation of Lecturer Certification)",
+                        "Terbitan Karya Ilmiah (Published Scientific Paper)",
+                        "Perbankan (Banking)",
+                        "Pengembangan SDM (Development of Human Resource)",
+                        ];
 
-                <!-- Input untuk opsi lainnya -->
-                @php
-                $opsiUtama = [
-                "Pendidikan (Praktek Klinik / PBL / PKL / Magang) / ( Education / Internship)",
-                "Penelitian (Research)",
-                "Pengabdian Kepada Masyarakat (Community Service Program)",
-                "Pendayagunaan Lulusan (Graduate's Absorption)",
-                "Penyelenggaraan Sertifikasi Dosen (Implementation of Lecturer Certification)",
-                "Terbitan Karya Ilmiah (Published Scientific Paper)",
-                "Perbankan (Banking)",
-                "Pengembangan SDM (Development of Human Resource)"
-                ];
+                        $selectedBidang = old('bidang_kerjasama', json_decode(optional($dataMitra)->bidang_kerjasama ?? '[]', true));
 
-                $isOther = !in_array(optional($dataMitra)->bidang_kerjasama, $opsiUtama);
-                @endphp
+                        // ambil nilai 'lainnya' yang tidak ada di daftar utama
+                        $otherValue = collect($selectedBidang)
+                        ->first(fn($item) => !in_array($item, $opsiBidang));
+                        @endphp
 
-                <input
-                    type="text"
-                    class="form-control form-control-user mt-2"
-                    id="otherbidangkerjasama"
-                    name="otherbidangkerjasama"
-                    value="{{ old('otherbidangkerjasama', $isOther ? optional($dataMitra)->bidang_kerjasama : '') }}"
-                    placeholder="Tulis bidang kerjasama lainnya / Write down other areas of collaboration"
-                    @if($isOther)
-                    style="display:block;"
-                    @else
-                    style="display:none;"
-                    @endif>
+                        <!-- Daftar checkbox -->
+                        @foreach ($opsiBidang as $item)
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="bidang_kerjasama[]"
+                                value="{{ $item }}" id="{{ Str::slug($item, '-') }}"
+                                {{ in_array($item, $selectedBidang) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="{{ Str::slug($item, '-') }}">{{ $item }}</label>
+                        </div>
+                        @endforeach
+
+                        <!-- Checkbox Lainnya -->
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="bidang_other" name="bidang_kerjasama[]" value="other"
+                                {{ $otherValue ? 'checked' : '' }}>
+                            <label class="form-check-label" for="bidang_other">Lainnya (Other)</label>
+                        </div>
+
+                        <!-- Input text untuk Lainnya -->
+                        <input type="text" id="otherbidangkerjasama" name="otherbidangkerjasama"
+                            value="{{ old('otherbidangkerjasama', $otherValue) }}"
+                            class="form-control mt-2"
+                            placeholder="Tuliskan bidang kerjasama lainnya / Write down other areas of collaboration"
+                            style="{{ $otherValue ? 'display:block;' : 'display:none;' }}">
+
+                    </div>
+                </div>
 
                 <script>
-                    function checkBidangKerjasama(selectElement) {
-                        var otherInput = document.getElementById('otherbidangkerjasama');
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const otherCheckbox = document.getElementById('bidang_other');
+                        const otherInput = document.getElementById('otherbidangkerjasama');
 
-                        if (selectElement.value === 'other') {
-                            otherInput.style.display = 'block';
-                            otherInput.required = true;
-                        } else {
-                            otherInput.style.display = 'none';
-                            otherInput.required = false;
-                            otherInput.value = '';
-                        }
-
-                    }
-
-                    // Jalankan fungsi ini ketika form disubmit
-                    document.querySelector('form').addEventListener('submit', function(e) {
-                        var selectElement = document.getElementById('bidang_kerjasama');
-                        var otherInput = document.getElementById('otherbidangkerjasama');
-
-                        // Jika opsi "Lainnya" dipilih, ganti nilai select dengan input manual jika ada nilai
-                        if (selectElement.value === 'other') {
-                            if (otherInput.value.trim() === '') {
-                                e.preventDefault();
-                                alert('Harap isi bidang kerjasama lain jika memilih "Lainnya".');
-                                return false;
+                        // Toggle input ketika "Lainnya" diklik
+                        otherCheckbox.addEventListener('change', function() {
+                            if (this.checked) {
+                                otherInput.style.display = 'block';
+                                otherInput.required = true;
+                            } else {
+                                otherInput.style.display = 'none';
+                                otherInput.required = false;
                             }
-                            // Biarkan name="otherbidangkerjasama" yang dikirim
-                        }
-
+                        });
                     });
-
-
-
-                    // Jalankan fungsi ini ketika halaman pertama kali dimuat
-                    window.onload = function() {
-                        checkBidangKerjasama(document.getElementById('bidang_kerjasama'));
-                    };
                 </script>
 
-                <label for="kota">Kota / City <span class="text-danger">*</span> <span><small id="kota-error" class="invalid-feedback" style="display:none;"></small>
-                    </span></label>
-                <input type="text" class="form-control form-control-user" id="kota" name="kota"
-                    placeholder="Kota" value="{{ old('kota', optional($dataMitra)->kota) }}"
-                    required>
 
                 <label for="tanggal">Tanggal/Bulan/Tahun (Date/Month/Year) <span
                         class="text-danger">*</span> <span><small id="tanggal-error" class="invalid-feedback" style="display:none;"></small>
@@ -211,44 +215,6 @@
                 <br>
                 <img src="{{ asset('assets/img/ikm.png') }}" class="img-hr" alt="Pembatas HR1"
                     style="width: 100%; height: auto;">
-
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Uraian</th>
-                            <th>Tingkat Kepuasan</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php $no = 1; @endphp <!-- Variabel untuk nomor urut -->
-                        @foreach ($pertanyaanMitra as $pertanyaan)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $pertanyaan->pertanyaan }}</td>
-                            <td style="text-align:center;">
-                                @foreach ([1,2,3,4] as $value)
-                                <input type="radio"
-                                    id="pertanyaan_{{ $pertanyaan->pertanyaan_id }}_{{ $value }}"
-                                    name="pertanyaan[{{ $pertanyaan->pertanyaan_id }}]"
-                                    value="{{ $value }}"
-                                    {{ isset($responses[$pertanyaan->pertanyaan_id]) && $responses[$pertanyaan->pertanyaan_id] == $value ? 'checked' : '' }}
-                                    required>
-                                <label for="pertanyaan_{{ $pertanyaan->pertanyaan_id }}_{{ $value }}">{{ $value }}</label>
-                                @endforeach
-                            </td>
-                        </tr>
-                        @endforeach
-
-                    </tbody>
-                </table>
-
-                <table></table>
-                <img src="{{ asset('assets/img/skl.png') }}" class="img-hr" alt="Pembatas HR2"
-                    style="width: 100%; height: auto;">
-
-
 
                 <table>
                     <thead>
@@ -273,6 +239,42 @@
                                     {{ isset($responsesu[$pertanyaan->pertanyaan_id]) && $responsesu[$pertanyaan->pertanyaan_id] == $value ? 'checked' : '' }}
                                     required>
                                 <label for="pertanyaanu_{{ $pertanyaan->pertanyaan_id }}_{{ $value }}">{{ $value }}</label>
+                                @endforeach
+                            </td>
+                        </tr>
+                        @endforeach
+
+                    </tbody>
+                </table>
+
+                <br>
+
+                <img src="{{ asset('assets/img/skl.png') }}" class="img-hr" alt="Pembatas HR2"
+                    style="width: 100%; height: auto;">
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Uraian</th>
+                            <th>Tingkat Kepuasan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php $no = 1; @endphp <!-- Variabel untuk nomor urut -->
+                        @foreach ($pertanyaanMitra as $pertanyaan)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $pertanyaan->pertanyaan }}</td>
+                            <td style="text-align:center;">
+                                @foreach ([1,2,3,4] as $value)
+                                <input type="radio"
+                                    id="pertanyaan_{{ $pertanyaan->pertanyaan_id }}_{{ $value }}"
+                                    name="pertanyaan[{{ $pertanyaan->pertanyaan_id }}]"
+                                    value="{{ $value }}"
+                                    {{ isset($responses[$pertanyaan->pertanyaan_id]) && $responses[$pertanyaan->pertanyaan_id] == $value ? 'checked' : '' }}
+                                    required>
+                                <label for="pertanyaan_{{ $pertanyaan->pertanyaan_id }}_{{ $value }}">{{ $value }}</label>
                                 @endforeach
                             </td>
                         </tr>
@@ -317,6 +319,35 @@
         </div>
     </div>
     </div>
+
+    <!-- Modal Sukses -->
+    <div class="modal fade" id="successModal" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">Thank You</h5>
+                </div>
+                <div class="modal-body">
+                    {{ session('success') }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if(session('success'))
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(document).on('show.bs.modal', '#successModal', function() {
+                $(this).appendTo('body');
+            });
+            $('#successModal').modal('show');
+        });
+    </script>
+    @endif
+
 </body>
 
 @include('admin.layouts.footer')

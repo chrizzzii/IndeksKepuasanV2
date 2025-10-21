@@ -8,8 +8,6 @@ $(document).ready(function () {
         { id: '#alamat', pesan: 'Alamat wajib diisi.' },
         { id: '#email', pesan: 'Email wajib diisi.' },
         { id: '#nomor_telepon', pesan: 'Nomor telepon wajib diisi.' },
-        { id: '#bidang_kerjasama', pesan: 'Bidang kerjasama wajib diisi.' },
-        { id: '#kota', pesan: 'Kota wajib diisi.' },
         { id: '#tanggal', pesan: 'Kolom ini wajib diisi.' },
         { id: '#rencana', pesan: 'Kolom ini wajib diisi.' },
         { id: '#saranmasukkan', pesan: '| Saran dan masukan maksimal 255 karakter. |' },
@@ -29,6 +27,19 @@ $(document).ready(function () {
                 }
             }
         });
+    });
+
+    function cekBidangKerjasama() {
+        const checked = $('input[name="bidang_kerjasama[]"]:checked').length;
+        return checked > 0;
+    }
+
+    $('input[name="bidang_kerjasama[]"]').on('change', function () {
+        if (cekBidangKerjasama()) {
+            $('#bidang_kerjasama-error').hide();
+        } else {
+            $('#bidang_kerjasama-error').text('Bidang kerjasama wajib diisi.').show();
+        }
     });
 
     $('#saranmasukkan').on('input', function () {
@@ -114,6 +125,15 @@ $(document).ready(function () {
                 sembunyikanError(id);
             }
         });
+
+        if (!cekBidangKerjasama()) {
+            valid = false;
+            $('#bidang_kerjasama-error').text('Bidang kerjasama wajib diisi.').show();
+
+            $('html, body').animate({
+                scrollTop: $('#bidang_kerjasama').offset().top - 100
+            }, 500);
+        }
 
         if (!valid) {
             e.preventDefault();

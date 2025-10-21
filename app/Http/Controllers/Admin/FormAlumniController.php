@@ -85,6 +85,7 @@ class FormAlumniController extends Controller
         $alumni->alamat = $request->input('alamat');
         $alumni->nomor_telepon = $request->input('nomor_telepon');
         $alumni->saranmasukkan = $request->input('saranmasukkan');
+        $alumni->jalurmasuk = $request->input('jalurmasuk');
         $alumni->prodi = $request->input('prodi');
         $alumni->tahun_lulus = $request->input('tahun_lulus');
         $alumni->pekerjaan = $request->input('pekerjaan');

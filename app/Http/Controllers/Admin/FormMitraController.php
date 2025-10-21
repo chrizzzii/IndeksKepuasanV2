@@ -67,12 +67,24 @@ class FormMitraController extends Controller
         $mitra->email = $email;
         $mitra->nomor_telepon = $request->input('nomor_telepon');
 
-        // Bidang kerjasama
-        if ($request->input('bidang_kerjasama') === 'other') {
-            $mitra->bidang_kerjasama = $request->input('otherbidangkerjasama');
-        } else {
-            $mitra->bidang_kerjasama = $request->input('bidang_kerjasama');
+        // Ambil array dari checkbox (bisa kosong kalau belum diisi)
+        $bidangKerjasama = $request->input('bidang_kerjasama', []);
+
+        // Jika user memilih "Lainnya" dan menulis teks tambahan
+        if (in_array('other', $bidangKerjasama)) {
+            $other = trim($request->input('otherbidangkerjasama'));
+            if (!empty($other)) {
+                // Ganti 'other' dengan teks yang ditulis user
+                $index = array_search('other', $bidangKerjasama);
+                $bidangKerjasama[$index] = $other;
+            } else {
+                // Jika "other" dicentang tapi tidak diisi, hapus saja nilainya
+                $bidangKerjasama = array_diff($bidangKerjasama, ['other']);
+            }
         }
+
+        // Simpan semua ke satu kolom (TEXT / JSON)
+        $mitra->bidang_kerjasama = json_encode(array_values($bidangKerjasama));
 
         // Update nilai pertanyaan untuk Mitra
         foreach ($request->input('pertanyaan', []) as $id => $value) {
@@ -87,7 +99,6 @@ class FormMitraController extends Controller
         }
 
         $mitra->rencana = $request->input('rencana');
-        $mitra->kota = $request->input('kota');
         $mitra->tanggal = $request->input('tanggal');
         $mitra->saranmasukkan = $request->input('saranmasukkan');
 

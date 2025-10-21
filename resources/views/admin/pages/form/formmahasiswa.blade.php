@@ -77,12 +77,6 @@
                 <input type="number" class="form-control form-control-user" id="nomor_telepon" name="nomor_telepon"
                     placeholder="Nomor Telepon" value="{{ old('nomor_telepon', optional($dataMahasiswa)->nomor_telepon) }}" required>
 
-                <label for="saranmasukkan">Saran dan Masukan</label> <span><small id="saranmasukkan-count" class="text-muted">0 / 255 karakter</small></span> <span><small id="saranmasukkan-error" class="invalid-feedback" style="display:none;"></small>
-                </span>
-                <textarea class="form-control form-control-user" id="saranmasukkan" name="saranmasukkan"
-                    placeholder="Saran dan Masukan" value="{{ old('saranmasukkan', optional($dataMahasiswa)->saranmasukkan) }}"></textarea>
-
-
                 <label for="prodi">Program Studi <span class="text-danger">*</span> <span><small id="prodi-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <select class="form-control form-control-user" id="prodi" name="prodi" required>
@@ -100,6 +94,11 @@
                     </optgroup>
                     @endforeach
                 </select>
+
+                <label for="saranmasukkan">Saran dan Masukan</label> <span><small id="saranmasukkan-count" class="text-muted">0 / 255 karakter</small></span> <span><small id="saranmasukkan-error" class="invalid-feedback" style="display:none;"></small>
+                </span>
+                <textarea class="form-control form-control-user" id="saranmasukkan" name="saranmasukkan"
+                    placeholder="Saran dan Masukan" value="{{ old('saranmasukkan', optional($dataMahasiswa)->saranmasukkan) }}"></textarea>
 
                 <br />
                 <img src="{{ asset('assets/img/ikm.png') }}" class="img-hr" alt="Pembatas HR1"

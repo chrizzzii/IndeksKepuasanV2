@@ -39,7 +39,7 @@
                 <input type="hidden" name="email" value="{{ old('email', optional($dataPenggunaLulusan)->email) }}">
 
                 <div style="background-color: #f0f0f0; padding: 10px; font-weight: bold;">
-                    A. IDENTITAS PENILAI
+                    A. IDENTITAS PENGGUNA LULUSAN (PENILAI)
                 </div>
                 <label for="nama_identitaspenilai">Nama <span class="text-danger">*</span> <span><small id="nama_identitaspenilai-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
@@ -90,6 +90,12 @@
                     </span></label>
                 <input type="text" class="form-control form-control-user" id="jabatan_identitaspenilai"
                     name="jabatan_identitaspenilai" placeholder="Jabatan" value="{{ old('jabatan_identitaspenilai', optional($dataPenggunaLulusan)->jabatan_identitaspenilai) }}" required>
+
+                <label for="lamabekerjadiinstansisaatini">Lama Bekerja di Instansi Saat Ini(Tahun) <span
+                        class="text-danger">*</span> <span><small id="lamabekerjadiinstansisaatini-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
+                <input type="number" class="form-control form-control-user mb-3" id="lamabekerjadiinstansisaatini"
+                    name="lamabekerjadiinstansisaatini" placeholder="Lama Bekerja di Instansi Saat Ini(Tahun)" value="{{ old('lamabekerjadiinstansisaatini', optional($dataPenggunaLulusan)->lamabekerjadiinstansisaatini) }}" required>
 
                 <label for="lamabekerjadenganlulusan">Lama Bekerja Dengan Lulusan(Tahun) <span class="text-danger">*</span> <span><small id="lamabekerjadenganlulusan-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
@@ -157,18 +163,15 @@
                     </option>
                 </select>
 
-
-                <label for="lamabekerja_identitaslulusan">Total Lama Bekerja(Tahun) <span class="text-danger">*</span> <span><small id="lamabekerja_identitaslulusan-error" class="invalid-feedback" style="display:none;"></small>
+                <label for="lamabekerja_identitaslulusan">Lama Bekerja Lulusan (Tahun) <span class="text-danger">*</span> <span><small id="lamabekerja_identitaslulusan-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
-                <input type="number" class="form-control form-control-user" id="lamabekerja_identitaslulusan"
+                <input type="number" class="form-control form-control-user mb-3" id="lamabekerja_identitaslulusan"
                     name="lamabekerja_identitaslulusan" placeholder="Lama bekerja Lulusan :" value="{{ old('lamabekerja_identitaslulusan', optional($dataPenggunaLulusan)->lamabekerja_identitaslulusan) }}"
                     required>
 
-                <label for="lamabekerjadiinstansisaatini">Lama Bekerja di Instansi Saat Ini(Tahun) <span
-                        class="text-danger">*</span> <span><small id="lamabekerjadiinstansisaatini-error" class="invalid-feedback" style="display:none;"></small>
-                    </span></label>
-                <input type="number" class="form-control form-control-user" id="lamabekerjadiinstansisaatini"
-                    name="lamabekerjadiinstansisaatini" placeholder="Lama Bekerja di Instansi Saat Ini(Tahun)" value="{{ old('lamabekerjadiinstansisaatini', optional($dataPenggunaLulusan)->lamabekerjadiinstansisaatini) }}" required>
+                <label for="pertanyaanterbuka">Apakah kompetensi/softskill yang diharapkan oleh Institusi Bapak/Ibu?</label>
+                <textarea class="form-control form-control-user" id="pertanyaanterbuka" name="pertanyaanterbuka"
+                    placeholder="Apakah kompetensi/softskill yang diharapkan oleh Institusi Bapak/Ibu?">{{ old('pertanyaanterbuka', optional($dataPenggunaLulusan)->pertanyaanterbuka) }}</textarea>
 
                 <label for="saranmasukkan">Saran dan Masukan</label> <span><small id="saranmasukkan-count" class="text-muted">0 / 255 karakter</small></span> <span><small id="saranmasukkan-error" class="invalid-feedback" style="display:none;"></small>
                 </span>

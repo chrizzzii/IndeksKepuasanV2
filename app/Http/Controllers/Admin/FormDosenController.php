@@ -51,6 +51,7 @@ class FormDosenController extends Controller
 
         // Jika data sudah ada, update. Jika belum, buat baru.
         $dosen = Dosen::where('email', $email)->first();
+        
         if (!$dosen) {
             $dosen = new Dosen();
             $dosen->status = 1;

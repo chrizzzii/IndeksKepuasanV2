@@ -75,11 +75,21 @@
                 <input type="number" class="form-control form-control-user" id="nomor_telepon" name="nomor_telepon"
                     placeholder="Nomor Telepon" value="{{ old('nomor_telepon', optional($dataAlumni)->nomor_telepon) }}" required>
 
-                <label for="saranmasukkan">Saran dan Masukan</label> <span><small id="saranmasukkan-count" class="text-muted">0 / 255 karakter</small></span> <span><small id="saranmasukkan-error" class="invalid-feedback" style="display:none;"></small>
-                </span>
-                <textarea class="form-control form-control-user" id="saranmasukkan" name="saranmasukkan"
-                    placeholder="Saran dan Masukan" value="{{ old('saranmasukkan', optional($dataAlumni)->saranmasukkan) }}"></textarea>
-
+                <label for="jalurmasuk">Jalur Masuk Mahasiswa <span class="text-danger">*</span> <span><small id="jalurmasuk-error" class="invalid-feedback" style="display:none;"></small>
+                    </span></label>
+                <select class="form-control form-control-user" id="jalurmasuk" name="jalurmasuk" required>
+                    <option value="" disabled {{ old('jalurmasuk', optional($dataAlumni)->jalurmasuk) ? '' : 'selected' }}>
+                        Pilih Jalur Masuk Mahasiswa
+                    </option>
+                    <option value="Peserta didik baru"
+                        {{ old('jalurmasuk', optional($dataAlumni)->jalurmasuk) == 'Peserta didik baru' ? 'selected' : '' }}>
+                        Peserta didik baru
+                    </option>
+                    <option value="Jalur alih jenjang/ RPL"
+                        {{ old('jalurmasuk', optional($dataAlumni)->jalurmasuk) == 'Jalur alih jenjang/ RPL' ? 'selected' : '' }}>
+                        Jalur alih jenjang / RPL
+                    </option>
+                </select>
 
                 <label for="prodi">Program Studi <span class="text-danger">*</span>
                     <span><small id="prodi-error" class="invalid-feedback" style="display:none;"></small></span>
@@ -182,6 +192,10 @@
                     <option value="Laboratorium" {{ old('instansi', optional($dataAlumni)->instansi) == 'Laboratorium' ? 'selected' : '' }}>Laboratorium</option>
                     <option value="Praktek Mandiri" {{ old('instansi', optional($dataAlumni)->instansi) == 'Praktek Mandiri' ? 'selected' : '' }}>Praktek Mandiri</option>
                     <option value="Lainnya" {{ old('instansi', optional($dataAlumni)->instansi) == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
+
+                    <option value="Instansi pemerintah/BUMN" {{ old('instansi', optional($dataAlumni)->instansi) == 'Instansi pemerintah/BUMN' ? 'selected' : '' }}>Instansi pemerintah/BUMN</option>
+                    <option value="Swasta" {{ old('instansi', optional($dataAlumni)->instansi) == 'Swasta' ? 'selected' : '' }}>Swasta</option>
+                    <option value="Perusahaan di Luar Negeri" {{ old('instansi', optional($dataAlumni)->instansi) == 'Perusahaan di Luar Negeri' ? 'selected' : '' }}>Perusahaan di Luar Negeri</option>
                 </select>
 
                 <label for="tempat_kerja">Nama Instansi <span class="text-danger">*</span> <span><small id="tempat_kerja-error" class="invalid-feedback" style="display:none;"></small>
@@ -201,7 +215,10 @@
                     <option value="2 - 3,5 juta" {{ old('penghasilan', optional($dataAlumni)->penghasilan) == '2 - 3,5 juta' ? 'selected' : '' }}>2 - 3,5 juta</option>
                     <option value="3,5 - 5 juta" {{ old('penghasilan', optional($dataAlumni)->penghasilan) == '3,5 - 5 juta' ? 'selected' : '' }}>3,5 - 5 juta</option>
                     <option value="5 - 6,5 juta" {{ old('penghasilan', optional($dataAlumni)->penghasilan) == '5 - 6,5 juta' ? 'selected' : '' }}>5 - 6,5 juta</option>
-                    <option value="> 6,5 juta" {{ old('penghasilan', optional($dataAlumni)->penghasilan) == '> 6,5 juta' ? 'selected' : '' }}>> 6,5 juta</option>
+
+                    <option value="6,5 - 10 juta" {{ old('penghasilan', optional($dataAlumni)->penghasilan) == '6,5 - 10 juta' ? 'selected' : '' }}>6,5 - 10 juta</option>
+                    <option value="> 10 juta" {{ old('penghasilan', optional($dataAlumni)->penghasilan) == '> 10 juta' ? 'selected' : '' }}>> 10 juta</option>
+
                 </select>
 
                 <label for="cara">Cara Mendapatkan Pekerjaan <span class="text-danger">*</span> <span><small id="cara-error" class="invalid-feedback" style="display:none;"></small>
@@ -247,6 +264,11 @@
                     <option value="Biaya sendiri" {{ old('studi_lanjut', optional($dataAlumni)->studi_lanjut) == 'Biaya sendiri' ? 'selected' : '' }}>Biaya sendiri</option>
                     <option value="Beasiswa" {{ old('studi_lanjut', optional($dataAlumni)->studi_lanjut) == 'Beasiswa' ? 'selected' : '' }}>Beasiswa</option>
                 </select>
+
+                <label for="saranmasukkan">Saran dan Masukan</label> <span><small id="saranmasukkan-count" class="text-muted">0 / 255 karakter</small></span> <span><small id="saranmasukkan-error" class="invalid-feedback" style="display:none;"></small>
+                </span>
+                <textarea class="form-control form-control-user" id="saranmasukkan" name="saranmasukkan"
+                    placeholder="Saran dan Masukan" value="{{ old('saranmasukkan', optional($dataAlumni)->saranmasukkan) }}"></textarea>
 
                 <img src="{{ asset('assets/img/ikm.png') }}" class="img-hr" alt="Pembatas HR1"
                     style="width: 100%; height: auto;">

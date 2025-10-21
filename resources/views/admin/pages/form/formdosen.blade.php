@@ -73,9 +73,9 @@
                 <input type="text" class="form-control form-control-user" id="nama" name="nama"
                     placeholder="Nama" value="{{ old('nama', optional($dataDosen)->nama) }}" required>
 
-                <label for="nip">Nomor Identitas Pegawai Negeri Sipil <span class="text-danger">*</span> <span><small id="nip-error" class="invalid-feedback" style="display:none;"></small>
+                <label for="nip">NIP bagi PNS. Bagi yang bukan PNS tidak perlu diisi <span><small id="nip-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
-                <input type="text" class="form-control form-control-user" id="nip" name="nip" placeholder="Nomor Identitas Pegawai Negeri Sipil" value="{{ old('nip', optional($dataDosen)->nip) }}" required>
+                <input type="text" class="form-control form-control-user" id="nip" name="nip" placeholder="NIP bagi PNS. Bagi yang bukan PNS tidak perlu diisi" value="{{ old('nip', optional($dataDosen)->nip) }}">
 
                 <label for="usia">Usia (Tahun) <span class="text-danger">*</span> <span><small id="usia-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
@@ -106,20 +106,15 @@
 
                 <label for="nomor_telepon">Nomor Telepon <span class="text-danger">*</span> <span><small id="nomor_telepon-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
-                <input type="number" class="form-control form-control-user" id="nomor_telepon" name="nomor_telepon"
+                <input type="number" class="form-control form-control-user mb-3" id="nomor_telepon" name="nomor_telepon"
                     placeholder="Nomor Telepon" value="{{ old('nomor_telepon', optional($dataDosen)->nomor_telepon) }}" required>
 
-                <label for="saranmasukkan">Saran dan Masukan</label> <span><small id="saranmasukkan-count" class="text-muted">0 / 255 karakter</small></span> <span><small id="saranmasukkan-error" class="invalid-feedback" style="display:none;"></small>
-                </span>
-                <textarea class="form-control form-control-user" id="saranmasukkan" name="saranmasukkan"
-                    placeholder="Saran dan Masukan" value="{{ old('saranmasukkan', optional($dataDosen)->saranmasukkan) }}"></textarea>
-
                 <!--PRODI 1-->
-                <label for="prodi">Program Studi <span class="text-danger">*</span> <span><small id="prodi-error" class="invalid-feedback" style="display:none;"></small>
+                <label for="prodi">Program Studi (Pilih Program Studi yang Menjadi Homebase) <span class="text-danger">*</span> <span><small id="prodi-error" class="invalid-feedback" style="display:none;"></small>
                     </span></label>
                 <select class="form-control form-control-user" id="prodi" name="prodi" required>
                     <option value="" disabled {{ old('prodi', optional($dataDosen)->prodi) ? '' : 'selected' }}>
-                        Pilih Program Studi
+                        Program Studi (Pilih Program Studi yang Menjadi Homebase)
                     </option>
                     @foreach ($programStudi as $jurusan => $prodis)
                     <optgroup label="{{ $jurusan }}">
@@ -133,88 +128,10 @@
                     @endforeach
                 </select>
 
-
-                <!-- Checkbox untuk menambah program studi -->
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="tambahProdiCheckbox" onclick="toggleProdiFields()">
-                    <label class="form-check-label" for="tambahProdiCheckbox">Tambah Program Studi</label>
-                </div>
-
-                <!-- Container untuk program studi tambahan -->
-                <div id="additionalProdiFields" style="display: none;">
-                    <!--PRODI 2-->
-                    <label for="prodi2">Program Studi ke-2</label>
-                    <select class="form-control form-control-user" id="prodi2" name="prodi2">
-                        <option value="" disabled {{ old('prodi2', optional($dataDosen)->prodi2) ? '' : 'selected' }}>Pilih Program Studi</option>
-                        <option value="">Kosongkan bagian ini</option>
-                        @foreach ($programStudi as $jurusan => $prodis)
-                        <optgroup label="{{ $jurusan }}">
-                            @foreach ($prodis as $prodi)
-                            <option value="{{ $prodi }}" {{ old('prodi2', optional($dataDosen)->prodi2) == $prodi ? 'selected' : '' }}>
-                                {{ $prodi }}
-                            </option>
-                            @endforeach
-                        </optgroup>
-                        @endforeach
-                    </select>
-
-                    <!--PRODI 3-->
-                    <label for="prodi3">Program Studi ke-3</label>
-                    <select class="form-control form-control-user" id="prodi3" name="prodi3">
-                        <option value="" disabled {{ old('prodi3', optional($dataDosen)->prodi3) ? '' : 'selected' }}>Pilih Program Studi</option>
-                        <option value="">Kosongkan bagian ini</option>
-                        @foreach ($programStudi as $jurusan => $prodis)
-                        <optgroup label="{{ $jurusan }}">
-                            @foreach ($prodis as $prodi)
-                            <option value="{{ $prodi }}" {{ old('prodi3', optional($dataDosen)->prodi3) == $prodi ? 'selected' : '' }}>
-                                {{ $prodi }}
-                            </option>
-                            @endforeach
-                        </optgroup>
-                        @endforeach
-                    </select>
-
-                    <!--PRODI 4-->
-                    <label for="prodi4">Program Studi ke-4</label>
-                    <select class="form-control form-control-user" id="prodi4" name="prodi4">
-                        <option value="" disabled {{ old('prodi4', optional($dataDosen)->prodi4) ? '' : 'selected' }}>Pilih Program Studi</option>
-                        <option value="">Kosongkan bagian ini</option>
-                        @foreach ($programStudi as $jurusan => $prodis)
-                        <optgroup label="{{ $jurusan }}">
-                            @foreach ($prodis as $prodi)
-                            <option value="{{ $prodi }}" {{ old('prodi4', optional($dataDosen)->prodi4) == $prodi ? 'selected' : '' }}>
-                                {{ $prodi }}
-                            </option>
-                            @endforeach
-                        </optgroup>
-                        @endforeach
-                    </select>
-
-                    <!--PRODI 5-->
-                    <label for="prodi5">Program Studi ke-5</label>
-                    <select class="form-control form-control-user" id="prodi5" name="prodi5">
-                        <option value="" disabled {{ old('prodi5', optional($dataDosen)->prodi5) ? '' : 'selected' }}>Pilih Program Studi</option>
-                        <option value="">Kosongkan bagian ini</option>
-                        @foreach ($programStudi as $jurusan => $prodis)
-                        <optgroup label="{{ $jurusan }}">
-                            @foreach ($prodis as $prodi)
-                            <option value="{{ $prodi }}" {{ old('prodi5', optional($dataDosen)->prodi5) == $prodi ? 'selected' : '' }}>
-                                {{ $prodi }}
-                            </option>
-                            @endforeach
-                        </optgroup>
-                        @endforeach
-                    </select>
-                </div>
-
-                <script>
-                    function toggleProdiFields() {
-                        const additionalFields = document.getElementById('additionalProdiFields');
-                        const checkbox = document.getElementById('tambahProdiCheckbox');
-
-                        additionalFields.style.display = checkbox.checked ? 'block' : 'none';
-                    }
-                </script>
+                <label for="saranmasukkan">Saran dan Masukan</label> <span><small id="saranmasukkan-count" class="text-muted">0 / 255 karakter</small></span> <span><small id="saranmasukkan-error" class="invalid-feedback" style="display:none;"></small>
+                </span>
+                <textarea class="form-control form-control-user" id="saranmasukkan" name="saranmasukkan"
+                    placeholder="Saran dan Masukan" value="{{ old('saranmasukkan', optional($dataDosen)->saranmasukkan) }}"></textarea>
 
                 <br>
                 <img src="{{ asset('assets/img/ikm.png') }}" class="img-hr" alt="Pembatas HR1"
@@ -307,6 +224,7 @@
                     </tbody>
                 </table>
 
+                <br>
 
                 <button type="submit" class="btn btn-primary">KIRIM</button>
             </form>

@@ -22,7 +22,6 @@
                 @yield('content')
             </div>
 
-
             <form method="POST" action="{{ route('form.storemitra') }}">
                 @csrf
                 @if ($mitra)
