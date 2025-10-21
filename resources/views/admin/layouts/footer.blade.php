@@ -3,7 +3,7 @@
 <footer class="bg-black" style="height: 60px; padding: 0;">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Diponegoro Smart Solution {{ date('Y') }}</span>
+            <span>Copyright &copy; CV Knowlexa Indonesia {{ date('Y') }}</span>
         </div>
     </div>
 </footer>

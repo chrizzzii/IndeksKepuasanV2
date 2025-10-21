@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\PertanyaanOrangTua;
+use App\Models\PertanyaanOrangtua;
 use App\Models\PertanyaanMasyarakat;
 use App\Models\Orangtua;
 
@@ -11,7 +11,7 @@ class FormOrangtuaController extends Controller
 {
     public function formorangtua()
     {
-        $pertanyaanOrangtua = PertanyaanOrangTua::all();
+        $pertanyaanOrangtua = PertanyaanOrangtua::all();
         $pertanyaanMasyarakat = PertanyaanMasyarakat::all();
 
         $programStudi = config('programstudi');
