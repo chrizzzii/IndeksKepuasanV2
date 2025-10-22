@@ -27,10 +27,6 @@ class DosenExport
             'nomor_telepon',
             'saranmasukkan',
             'Program Studi 1', // Mengganti kolom "prodi" menjadi "Program Studi 1" di Excel
-            'Program Studi 2', // Program Studi 2
-            'Program Studi 3', // Program Studi 3
-            'Program Studi 4', // Program Studi 4
-            'Program Studi 5', // Program Studi 5
             'Pertanyaan 1', // Mengganti u1 menjadi Pertanyaan 1
             'Pertanyaan 2', // Mengganti u2 menjadi Pertanyaan 2
             'Pertanyaan 3', // Mengganti u3 menjadi Pertanyaan 3
@@ -67,17 +63,12 @@ class DosenExport
                 if ($field == 'Program Studi 1') {
                     $sheet->setCellValue($columnLetter . $row, $item->prodi); // Isi data dari prodi
                 }
-                // Jika kolom adalah "Program Studi X" (Program Studi 2, Program Studi 3, dst.)
-                elseif (strpos($field, 'Program Studi') === 0) {
-                    // Ambil angka setelah "Program Studi" untuk menentukan prodi2, prodi3, dst.
-                    $prodiNumber = substr($field, -1); // Mengambil angka, misalnya "2" dari "Program Studi 2"
-                    $prodiField = 'prodi' . $prodiNumber; // Ambil dari prodi2, prodi3, dst.
-                    $sheet->setCellValue($columnLetter . $row, $item->$prodiField); // Isi data dari prodi2, prodi3, dst.
-                }
                 // Jika kolom adalah "Pertanyaan X" (misal Pertanyaan 1, Pertanyaan 2, dst.)
                 elseif (strpos($field, 'Pertanyaan') === 0) {
                     // Ambil angka setelah "Pertanyaan" untuk menentukan u1, u2, dst.
-                    $questionNumber = substr($field, -2); // Mengambil angka, misalnya "10" dari "Pertanyaan 10"
+                    preg_match('/\d+/', $field, $matches);
+                    $questionNumber = intval($matches[0]);
+                    // Mengambil angka, misalnya "10" dari "Pertanyaan 10"
 
                     // Jika angkanya kurang dari atau sama dengan 9, maka ambil dari u1, u2, dst.
                     if (intval($questionNumber) <= 9) {

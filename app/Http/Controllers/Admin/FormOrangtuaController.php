@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\PertanyaanOrangtua;
@@ -22,7 +23,7 @@ class FormOrangtuaController extends Controller
         $email = session('dataOrangtua');
 
         if ($email) {
-            for ($i = 2; $i <= 28; $i++) {
+            for ($i = 2; $i <= 22; $i++) {
                 $responses[$i] = $email->{'p' . $i};
             }
 

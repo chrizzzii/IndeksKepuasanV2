@@ -21,6 +21,7 @@ class OrangTua extends Model
         'status',
         'no_responden',
         'nama',
+        'namamahasiswa',
         'role',
         'usia',
         'jeniskelamin',

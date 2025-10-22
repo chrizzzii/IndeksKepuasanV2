@@ -8,7 +8,6 @@ $(document).ready(function () {
         { id: '#alamat', pesan: 'Alamat wajib diisi.' },
         { id: '#email', pesan: 'Email wajib diisi.' },
         { id: '#nomor_telepon', pesan: 'Nomor telepon wajib diisi.' },
-        { id: '#tanggal', pesan: 'Kolom ini wajib diisi.' },
         { id: '#rencana', pesan: 'Kolom ini wajib diisi.' },
         { id: '#saranmasukkan', pesan: '| Saran dan masukan maksimal 255 karakter. |' },
     ];

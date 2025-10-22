@@ -25,7 +25,7 @@ class OrangtuaExport
             'alamat',
             'nomor_telepon',
             'saranmasukkan',
-            'Nama Mahasiswa',
+            'namamahasiswa',
             'Program Studi', // Mengganti 'prodi' dengan 'Program Studi'
             'status',
             'pekerjaan',

@@ -150,6 +150,7 @@
                         "Terbitan Karya Ilmiah (Published Scientific Paper)",
                         "Perbankan (Banking)",
                         "Pengembangan SDM (Development of Human Resource)",
+                        "Penggunaan fasilitas tertentu (Certain Facilities Usage)",
                         ];
 
                         $selectedBidang = old('bidang_kerjasama', json_decode(optional($dataMitra)->bidang_kerjasama ?? '[]', true));
@@ -203,14 +204,6 @@
                         });
                     });
                 </script>
-
-
-                <label for="tanggal">Tanggal/Bulan/Tahun (Date/Month/Year) <span
-                        class="text-danger">*</span> <span><small id="tanggal-error" class="invalid-feedback" style="display:none;"></small>
-                    </span></label>
-                <input type="date" class="form-control form-control-user" id="tanggal" name="tanggal"
-                    placeholder="Tanggal" value="{{ old('tanggal', optional($dataMitra)->tanggal) }}"
-                    required>
 
                 <br>
                 <img src="{{ asset('assets/img/ikm.png') }}" class="img-hr" alt="Pembatas HR1"

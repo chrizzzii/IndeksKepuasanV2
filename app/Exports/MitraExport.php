@@ -23,9 +23,8 @@ class MitraExport
             'jabatan',
             'nama_instansi',
             'alamat',
-            'no_telepon',
+            'nomor_telepon',
             'bidang_kerjasama',
-            'kota', // Pastikan kolom ini ada di tabel mitra
             'tanggal', // Pastikan kolom ini ada di tabel mitra
             'Pertanyaan 1',  // Ganti p1 menjadi Pertanyaan 1
             'Pertanyaan 2',  // Ganti p2 menjadi Pertanyaan 2

@@ -24,6 +24,10 @@
 </head>
 
 <body class="bg-gradient-primary">
+    @php
+    $path = public_path('assets/img/poltekkes.jpg');
+    $poltekkesImg = asset('assets/img/poltekkes.jpg') . '?v=' . (file_exists($path) ? filemtime($path) : time());
+    @endphp
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
         <!-- Outer Row -->
         <div class="row justify-content-center">
@@ -33,7 +37,7 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg-6">
-                                <img src="{{ asset('assets/img/poltekkes.jpg') }}" class="img-fluid" alt="Poltekkes Image">
+                                <img src="{{ $poltekkesImg }}" class="img-fluid" alt="Poltekkes Image">
                             </div>
 
                             <div class="col-lg-6">
